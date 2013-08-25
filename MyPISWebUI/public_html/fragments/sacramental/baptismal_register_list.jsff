@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" topHeight="auto">
+    <f:facet name="center">
+      <af:panelCollection id="pc1" featuresOff="statusBar" styleClass="AFStretchWidth">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="statusbar"/>
+        <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
+                  value="#{viewScope.baptismalRegisterListForm.lazyDataModel}" scrollPolicy="page" fetchSize="30"
+                  autoHeightRows="0" rowSelection="single" columnSelection="multiple"
+                  binding="#{viewScope.baptismalRegisterListForm.baptismalRegisterTable}">
+          <af:column sortable="false" headerText="Register Id" align="end" id="c1" width="50">
+            <af:link text="#{row.registerId}" id="l1" actionListener="#{viewScope.baptismalRegisterListForm.edit}"/>
+          </af:column>
+          <af:column sortable="true" headerText="Volume" align="end" id="c2" width="50" sortProperty="volume">
+            <af:outputText value="#{row.volume}" id="ot2"/>
+          </af:column>
+          <af:column sortable="true" headerText="Page" align="end" id="c3" width="50" sortProperty="page">
+            <af:outputText value="#{row.page}" id="ot3"/>
+          </af:column>
+          <af:column sortable="true" headerText="Line" align="end" id="c4" width="50" sortProperty="line">
+            <af:outputText value="#{row.line}" id="ot4"/>
+          </af:column>
+          <af:column sortable="true" headerText="Last Name" align="start" id="c5" sortProperty="lastName">
+            <af:outputText value="#{row.lastName}" id="ot5"/>
+          </af:column>
+          <af:column sortable="true" headerText="First Name" align="start" id="c6" sortProperty="firstName">
+            <af:outputText value="#{row.firstName}" id="ot6"/>
+          </af:column>
+          <af:column sortable="false" headerText="Middle Name" align="start" id="c7">
+            <af:outputText value="#{row.middleName}" id="ot7"/>
+          </af:column>
+          <af:column sortable="false" headerText="Suffix" align="start" id="c8">
+            <af:outputText value="#{row.suffix}" id="ot8"/>
+          </af:column>
+          <af:column sortable="false" headerText="Baptismal Date" align="start" id="c9">
+            <af:outputText value="#{row.baptismalDate}" id="ot9"/>
+          </af:column>
+          <af:column sortable="false" headerText="Birth Date" align="start" id="c10">
+            <af:outputText value="#{row.birthDate}" id="ot10"/>
+          </af:column>
+          <af:column sortable="false" headerText="Birth Place" align="start" id="c11">
+            <af:outputText value="#{row.birthPlace}" id="ot11"/>
+          </af:column>
+          <af:column sortable="false" headerText="Age" align="end" id="c12">
+            <af:outputText value="#{row.age}" id="ot12"/>
+          </af:column>
+          <af:column sortable="false" headerText="Father" align="start" id="c13">
+            <af:outputText value="#{row.father}" id="ot13"/>
+          </af:column>
+          <af:column sortable="false" headerText="Father Birth Place" align="start" id="c14">
+            <af:outputText value="#{row.fatherBirthPlace}" id="ot14"/>
+          </af:column>
+          <af:column sortable="false" headerText="Legitimacy" align="start" id="c15">
+            <af:outputText value="#{row.legitimacy}" id="ot15"/>
+          </af:column>
+          <af:column sortable="false" headerText="Minister" align="start" id="c16">
+            <af:outputText value="#{row.minister}" id="ot16"/>
+          </af:column>
+          <af:column sortable="false" headerText="Mother" align="start" id="c17">
+            <af:outputText value="#{row.mother}" id="ot17"/>
+          </af:column>
+          <af:column sortable="false" headerText="Mother Birth Place" align="start" id="c18">
+            <af:outputText value="#{row.motherBirthPlace}" id="ot18"/>
+          </af:column>
+          <af:column sortable="false" headerText="Remarks" align="start" id="c19">
+            <af:outputText value="#{row.remarks}" id="ot19"/>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+    </f:facet>
+    <f:facet name="top">
+      <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.baptismalRegisterListForm.queryModel}"
+                value="#{viewScope.baptismalRegisterListForm.queryModel.currentDescriptor}" resultComponentId="::pc1:t1"
+                queryListener="#{viewScope.baptismalRegisterListForm.tableFilter}"/>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

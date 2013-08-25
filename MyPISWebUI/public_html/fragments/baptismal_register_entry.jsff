@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelFormLayout id="pfl1">
+    <af:inputText label="Volume" id="it1" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.volume}"/>
+    <af:inputText label="Page" id="it2" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.page}"/>
+    <af:inputText label="Line" id="it3" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.line}"/>
+    <af:inputText label="Last Name" id="it4"
+                  value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.lastName}"/>
+    <af:inputText label="First Name" id="it5"
+                  value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.firstName}"/>
+    <af:inputText label="Middle Name" id="it6"
+                  value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.middleName}"/>
+    <f:facet name="footer"/>
+  </af:panelFormLayout>
+</ui:composition>

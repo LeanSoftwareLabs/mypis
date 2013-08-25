@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="baptismal-register-list">
+    <default-activity>baptismal_register_list</default-activity>
+    <input-parameter-definition id="__3">
+      <name>eventHandler</name>
+      <value>#{pageFlowScope.eventHandler}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>detailTaskFlowId</name>
+      <value>#{pageFlowScope.detailTaskFlowId}</value>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>baptismalRegisterListForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.BaptismalRegisterListForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="baptismal_register_list">
+      <page>/fragments/sacramental/baptismal_register_list.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

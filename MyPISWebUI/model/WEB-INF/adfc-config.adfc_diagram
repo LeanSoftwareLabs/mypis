@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View3">
+      <property
+         name="activityId">mypis_shell</property>
+      <property
+         name="page">/pages/mypis_shell.jsf</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>mypis_shell&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">229.19531</property>
+      <property
+         name="x">353.0</property>
+   </View>
+</SDM>

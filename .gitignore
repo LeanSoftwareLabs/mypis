@@ -1,0 +1,21 @@
+# ignore  directories
+*/classes
+*.class
+*/.data/*
+.data/*
+*/deploy
+*/deploy/
+*/temp/adf/*
+*/WEB-INF/temp/*
+*/*/WEB-INF/temp/*
+
+
+# ignore auto generated file 
+*.sso
+*.sso.lck
+*.rdf
+
+# package files
+*.jar
+*.war
+*.ear
