@@ -9,16 +9,108 @@
       <property
          name="page">/fragments/baptismal_register_entry.jsff</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>baptismal_register_entry&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>baptismal_register_entry&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">212.59766</property>
-      <property
-         name="x">430.0</property>
+         name="y">239.5459</property>
       <property
          name="pageFragment">true</property>
+      <property
+         name="x">528.0</property>
    </View>
+   <Router
+      id="Router3">
+      <property
+         name="activityId">editMode</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>editMode&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">237.59766</property>
+      <property
+         name="x">191.0</property>
+   </Router>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="Router3"
+      to="View2">
+      <property
+         name="fromOutcome">toEntry</property>
+      <property
+         name="sdm:polyPoints">R50,232.0,237.24707,485.82706,242.69531,L54</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall5">
+      <property
+         name="activityId">prepareEditing</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>prepareEditing&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">101.5459</property>
+      <property
+         name="x">376.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="Router3"
+      to="MethodCall5">
+      <property
+         name="fromOutcome">prepare</property>
+      <property
+         name="sdm:polyPoints">T50,191.0,183.24707,335.0,101.19531,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="MethodCall5"
+      to="View2">
+      <property
+         name="fromOutcome">toEntry</property>
+      <property
+         name="sdm:polyPoints">B50,376.0,155.19531,487.0,235.69531,L46</property>
+   </ControlFlowCase>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule8">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">354.59766</property>
+      <property
+         name="x">274.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowReturn
+      id="TaskFlowReturn9">
+      <property
+         name="activityId">taskFlowReturn1</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">357.89648</property>
+      <property
+         name="x">480.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase10"
+      from="WildcardControlFlowRule8"
+      to="TaskFlowReturn9">
+      <property
+         name="fromOutcome">done</property>
+      <property
+         name="sdm:polyPoints">R50,310.0,354.74707,439.0,357.5459,L50</property>
+   </ControlFlowCase>
 </SDM>

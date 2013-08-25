@@ -5,22 +5,28 @@
     <f:facet name="center">
       <af:panelCollection id="pc1" featuresOff="statusBar" styleClass="AFStretchWidth">
         <f:facet name="menus"/>
-        <f:facet name="toolbar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:button text="Create New Baptismal Entry" id="b1"
+                       actionListener="#{viewScope.baptismalRegisterListForm.create}"/>
+          </af:toolbar>
+        </f:facet>
         <f:facet name="statusbar"/>
         <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
                   value="#{viewScope.baptismalRegisterListForm.lazyDataModel}" scrollPolicy="page" fetchSize="30"
                   autoHeightRows="0" rowSelection="single" columnSelection="multiple"
                   binding="#{viewScope.baptismalRegisterListForm.baptismalRegisterTable}">
-          <af:column sortable="false" headerText="Register Id" align="end" id="c1" width="50">
-            <af:link text="#{row.registerId}" id="l1" actionListener="#{viewScope.baptismalRegisterListForm.edit}"/>
+          <af:column sortable="false" headerText="Register Id" align="end" id="c1" width="30">
+            <af:link text="#{row.registerId}" id="l1"
+                     actionListener="#{viewScope.baptismalRegisterListForm.viewDetails}"/>
           </af:column>
-          <af:column sortable="true" headerText="Volume" align="end" id="c2" width="50" sortProperty="volume">
+          <af:column sortable="true" headerText="Volume" align="end" id="c2" width="30" sortProperty="volume">
             <af:outputText value="#{row.volume}" id="ot2"/>
           </af:column>
-          <af:column sortable="true" headerText="Page" align="end" id="c3" width="50" sortProperty="page">
+          <af:column sortable="true" headerText="Page" align="end" id="c3" width="30" sortProperty="page">
             <af:outputText value="#{row.page}" id="ot3"/>
           </af:column>
-          <af:column sortable="true" headerText="Line" align="end" id="c4" width="50" sortProperty="line">
+          <af:column sortable="true" headerText="Line" align="end" id="c4" width="30" sortProperty="line">
             <af:outputText value="#{row.line}" id="ot4"/>
           </af:column>
           <af:column sortable="true" headerText="Last Name" align="start" id="c5" sortProperty="lastName">
@@ -32,7 +38,7 @@
           <af:column sortable="false" headerText="Middle Name" align="start" id="c7">
             <af:outputText value="#{row.middleName}" id="ot7"/>
           </af:column>
-          <af:column sortable="false" headerText="Suffix" align="start" id="c8">
+          <af:column sortable="false" headerText="Suffix" align="start" id="c8" width="40">
             <af:outputText value="#{row.suffix}" id="ot8"/>
           </af:column>
           <af:column sortable="false" headerText="Baptismal Date" align="start" id="c9">
@@ -44,7 +50,7 @@
           <af:column sortable="false" headerText="Birth Place" align="start" id="c11">
             <af:outputText value="#{row.birthPlace}" id="ot11"/>
           </af:column>
-          <af:column sortable="false" headerText="Age" align="end" id="c12">
+          <af:column sortable="false" headerText="Age" align="end" id="c12" width="30">
             <af:outputText value="#{row.age}" id="ot12"/>
           </af:column>
           <af:column sortable="false" headerText="Father" align="start" id="c13">

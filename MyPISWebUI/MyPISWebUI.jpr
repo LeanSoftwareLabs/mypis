@@ -177,8 +177,8 @@
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
-      <value n="j2eeWebAppName" v="MyPIS-MyPISWebUI-webapp"/>
-      <value n="j2eeWebContextRoot" v="MyPIS-MyPISWebUI-context-root"/>
+      <value n="j2eeWebAppName" v="MyPIS"/>
+      <value n="j2eeWebContextRoot" v="MyPIS"/>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">

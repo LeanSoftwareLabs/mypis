@@ -17,7 +17,13 @@
                 <f:facet name="status"/>
                 <f:facet name="globalToolbar"/>
                 <f:facet name="globalSearch"/>
-                <f:facet name="globalTabs"/>
+                <f:facet name="globalTabs">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Tasks" id="cni3"/>
+                        <af:commandNavigationItem text="Sacramental Registers" id="cni1"/>
+                        <af:commandNavigationItem text="Settings" id="cni2"/>
+                    </af:navigationPane>
+                </f:facet>
                 <f:facet name="welcome"/>
                 <f:facet name="innerToolbar"/>
                 <f:facet name="branding"/>

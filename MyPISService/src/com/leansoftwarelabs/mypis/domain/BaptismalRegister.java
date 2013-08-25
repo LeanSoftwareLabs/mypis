@@ -12,6 +12,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @NamedQueries({@NamedQuery(name = "findBaptismalRegisterById", query = "Select o from BaptismalRegister o where o.registerId = :registerId")
                
     })
@@ -19,10 +23,12 @@ import javax.persistence.TemporalType;
 @Table(name = "\"baptismal_register\"")
 public class BaptismalRegister implements Serializable {
     private static final long serialVersionUID = -5121524341036104901L;
-    private int age;
+    private Integer age;
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "BAPTISMAL_DATE")
     private Date baptismalDate;
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
@@ -31,62 +37,46 @@ public class BaptismalRegister implements Serializable {
     private String father;
     @Column(name = "FATHER_BIRTH_PLACE")
     private String fatherBirthPlace;
+    @NotNull
+    @Size(min = 2, max = 45)
     @Column(name = "FIRST_NAME")
     private String firstName;
+    @Size(min = 2, max = 45)
     @Column(name = "LAST_NAME")
     private String lastName;
     private String legitimacy;
     @Column(nullable = false)
-    private int line;
+    private Integer line;
     @Column(name = "MIDDLE_NAME")
     private String middleName;
+    @NotNull
     private String minister;
+    @NotNull
+    @Size(min = 2, max = 60)
     private String mother;
     @Column(name = "MOTHER_BIRTH_PLACE")
     private String motherBirthPlace;
+    @NotNull
     @Column(nullable = false)
-    private int page;
+    private Integer page;
     @Id
     @Column(name = "BAPTISMAL_REGISTER_ID", nullable = false)
-    private int registerId;
+    private Integer registerId;
     private String remarks;
     private String suffix;
+    @NotNull
     @Column(nullable = false)
-    private int volume;
+    private Integer volume;
 
     public BaptismalRegister() {
     }
 
-    public BaptismalRegister(int age, Date baptismalDate, Date birthDate, String birthPlace, String father,
-                             String fatherBirthPlace, String firstName, String lastName, String legitimacy, int line,
-                             String middleName, String minister, String mother, String motherBirthPlace, int page,
-                             int registerId, String remarks, String suffix, int volume) {
-        this.age = age;
-        this.baptismalDate = baptismalDate;
-        this.birthDate = birthDate;
-        this.birthPlace = birthPlace;
-        this.father = father;
-        this.fatherBirthPlace = fatherBirthPlace;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.legitimacy = legitimacy;
-        this.line = line;
-        this.middleName = middleName;
-        this.minister = minister;
-        this.mother = mother;
-        this.motherBirthPlace = motherBirthPlace;
-        this.page = page;
-        this.registerId = registerId;
-        this.remarks = remarks;
-        this.suffix = suffix;
-        this.volume = volume;
-    }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -154,11 +144,11 @@ public class BaptismalRegister implements Serializable {
         this.legitimacy = legitimacy;
     }
 
-    public int getLine() {
+    public Integer getLine() {
         return line;
     }
 
-    public void setLine(int line) {
+    public void setLine(Integer line) {
         this.line = line;
     }
 
@@ -194,19 +184,19 @@ public class BaptismalRegister implements Serializable {
         this.motherBirthPlace = motherBirthPlace;
     }
 
-    public int getPage() {
+    public Integer getPage() {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
     }
 
-    public int getRegisterId() {
+    public Integer getRegisterId() {
         return registerId;
     }
 
-    public void setRegisterId(int registerId) {
+    public void setRegisterId(Integer registerId) {
         this.registerId = registerId;
     }
 
@@ -226,11 +216,11 @@ public class BaptismalRegister implements Serializable {
         this.suffix = suffix;
     }
 
-    public int getVolume() {
+    public Integer getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(Integer volume) {
         this.volume = volume;
     }
 }

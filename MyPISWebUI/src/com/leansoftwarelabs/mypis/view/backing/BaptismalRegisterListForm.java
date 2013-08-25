@@ -86,22 +86,34 @@ public class BaptismalRegisterListForm {
         this.lazyDataModel.setFilterCriteria(event.getDescriptor().getConjunctionCriterion());
     }
 
-    public void edit(ActionEvent ev) {
+    public void viewDetails(ActionEvent ev) {
         BaptismalRegister baptismalRegister = (BaptismalRegister) getBaptismalRegisterTable().getSelectedRowData();
+        Integer registerId = baptismalRegister.getRegisterId();
+        String title =
+            "Baptismal: " + baptismalRegister.getRegisterId() + ":" + baptismalRegister.getLastName() + ", " +
+            baptismalRegister.getFirstName();
+        launchActivity(registerId, title);
+    }
+
+    private void launchActivity(Integer registerId, String title) {
         Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("title", "Baptismal: " + baptismalRegister.getRegisterId()+ ":"+ baptismalRegister.getLastName());
+        payload.put("title", title);
         payload.put("taskFlowId", "/WEB-INF/taskflows/baptismal-register-entry.xml#baptismal-register-entry");
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("registerId", baptismalRegister.getRegisterId());
-        parameters.put("KEY", baptismalRegister.getRegisterId());
+        parameters.put("registerId", registerId);
+        parameters.put("KEY", registerId);
         payload.put("parameters", parameters);
         payload.put("newTab", true);
         raiseEvent("launchActivity", payload);
     }
 
+    public void create(ActionEvent ev) {
+        launchActivity(-1, "New Baptismal Entry");
+    }
+
     private static void raiseEvent(String eventName, Map<String, Object> payload) {
         EventHandler eventHandler = (EventHandler) ADFUtils.getPageFlowScope().get("eventHandler");
-        eventHandler.handleEvent("launchActivity", payload);
+        eventHandler.handleEvent(eventName, payload);
     }
 
     public void setBaptismalRegisterTable(RichTable baptismalRegisterTable) {
