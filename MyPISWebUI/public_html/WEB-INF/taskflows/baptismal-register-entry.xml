@@ -21,10 +21,6 @@
       <page>/fragments/baptismal_register_entry.jsff</page>
     </view>
     <router id="gate">
-      <case id="__7">
-        <expression>#{not security:hasPermission('baptismal-register-entry:read')}</expression>
-        <outcome>unauthorize</outcome>
-      </case>
       <case id="__8">
         <expression>#{pageFlowScope.registerId eq -1}</expression>
         <outcome>prepare</outcome>
@@ -51,10 +47,6 @@
       <control-flow-case id="__9">
         <from-outcome>prepare</from-outcome>
         <to-activity-id>prepareEditing</to-activity-id>
-      </control-flow-case>
-      <control-flow-case id="__6">
-        <from-outcome>unauthorize</from-outcome>
-        <to-activity-id>taskFlowReturn1</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__10">
