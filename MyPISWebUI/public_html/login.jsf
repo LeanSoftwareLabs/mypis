@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="login.jsf" id="d1">
+        <af:form id="f1" defaultCommand="log">
+            <af:decorativeBox id="db1">
+                <f:facet name="center">
+                    <af:panelFormLayout id="pfl1">
+                        <af:inputText label="User Name" id="username" value="#{loginForm.userName}" showRequired="true"
+                                      required="true"/>
+                        <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"
+                                      required="true" showRequired="true"/>
+                        <af:selectBooleanCheckbox text="Remember Me" label="Remember Me" id="rememberMe"
+                                                  value="#{loginForm.remember}"/>
+                        <f:facet name="footer">
+                            <af:panelBorderLayout id="pbl1">
+                                <f:facet name="end">
+                                    <af:button text="Login" id="log" partialSubmit="false" action="#{loginForm.login}"/>
+                                </f:facet>
+                                <af:spacer width="10" height="10" id="s1"/>
+                            </af:panelBorderLayout>
+                        </f:facet>
+                    </af:panelFormLayout>
+                </f:facet>
+                <f:facet name="top">
+                    <af:messages id="m1" inline="true"/>
+                </f:facet>
+            </af:decorativeBox>
+        </af:form>
+    </af:document>
+</f:view>

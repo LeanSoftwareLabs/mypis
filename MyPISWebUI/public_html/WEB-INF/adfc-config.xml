@@ -3,9 +3,6 @@
   <view id="login">
     <page>/login.jsf</page>
   </view>
-  <view id="logout">
-    <page>/logout.jsf</page>
-  </view>
   <control-flow-rule id="__3">
     <from-activity-id>*</from-activity-id>
     <control-flow-case id="__4">

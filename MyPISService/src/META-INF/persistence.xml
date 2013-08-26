@@ -10,6 +10,8 @@
     <properties>
       <property name="eclipselink.target-server" value="WebLogic_10"/>
       <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.logger" value="JavaLogger"/>
     </properties>
   </persistence-unit>
 </persistence>

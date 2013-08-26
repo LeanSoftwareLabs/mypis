@@ -36,19 +36,4 @@
       <property
          name="sdm:polyPoints">R50,183.0,195.74707,323.0,193.94824,L50</property>
    </ControlFlowCase>
-   <View
-      id="View6">
-      <property
-         name="activityId">logout</property>
-      <property
-         name="page">/logout.jsf</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>logout&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">193.89648</property>
-      <property
-         name="x">478.0</property>
-   </View>
 </SDM>

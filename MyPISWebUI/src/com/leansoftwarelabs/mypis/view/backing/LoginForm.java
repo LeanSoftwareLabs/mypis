@@ -1,0 +1,82 @@
+package com.leansoftwarelabs.mypis.view.backing;
+
+
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
+import java.io.IOException;
+
+import java.net.URL;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
+
+public class LoginForm {
+    private String userName;
+    private String password;
+    private boolean remember;
+    public static final String HOME_URL = "/faces/pages/mypis_shell.jsf";
+    public static final String LOGIN_URL = "/faces/login.jsf";
+
+    public LoginForm() {
+        super();
+    }
+
+    public String login() {
+        try {
+            SecurityUtils.getSubject().login(new UsernamePasswordToken(userName, password, remember));
+            HttpServletRequest request =
+                (HttpServletRequest) (FacesContext.getCurrentInstance().getExternalContext().getRequest());
+            SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
+            ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+            if (savedRequest != null) {
+                System.out.println("SavedRequest URL:" + savedRequest.getRequestUrl());
+            }
+            ctx.redirect(savedRequest != null ? savedRequest.getRequestUrl() : ctx.getRequestContextPath() + HOME_URL);
+        } catch (Exception e) {
+            FacesMessage msg =
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry, failed to validate you. Please try again", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        return "";
+    }
+    
+
+
+    public void logout() throws IOException {
+        SecurityUtils.getSubject().logout();
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+        ctx.redirect(ctx.getRequestContextPath() + LOGIN_URL);
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setRemember(boolean remember) {
+        this.remember = remember;
+    }
+
+    public boolean isRemember() {
+        return remember;
+    }
+}
