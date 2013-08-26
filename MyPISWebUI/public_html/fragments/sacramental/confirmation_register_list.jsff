@@ -28,10 +28,7 @@
           </af:column>
           <af:column sortable="true" headerText="Line" align="end" id="c4" width="30" sortProperty="line">
             <af:outputText value="#{row.line}" id="ot4"/>
-          </af:column>
-          
-  
-             
+          </af:column>     
         </af:table>
       </af:panelCollection>
     </f:facet>

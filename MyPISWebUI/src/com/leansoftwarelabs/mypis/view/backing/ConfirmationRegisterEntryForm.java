@@ -62,7 +62,7 @@ public class ConfirmationRegisterEntryForm {
 
     public String cancel() {
         editing(false);
-        if(confirmationRegister.getConfirmationRegisterId() == 0){
+        if(confirmationRegister.getRegisterId() == 0){
             return "done";
         }
         return null;

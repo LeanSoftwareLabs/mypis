@@ -39,8 +39,8 @@ public class ConfirmationRegisterListForm {
         attributes.put("line", new AttributeDef("line", Integer.class, null, AttributeDef.INPUT_TEXT));
         attributes.put("lastName", new AttributeDef("lastName", String.class, null, AttributeDef.INPUT_TEXT));
         attributes.put("firstName", new AttributeDef("firstName", String.class, null, AttributeDef.INPUT_TEXT));
-        
- 
+
+
         queryModel = new QueryModelImpl("confirmationRegisterQuery", attributes, null, null);
     }
 
@@ -81,17 +81,17 @@ public class ConfirmationRegisterListForm {
         ConfirmationRegister confirmationRegister =
             (ConfirmationRegister) getConfirmationRegisterTable().getSelectedRowData();
         Integer registerId = confirmationRegister.getRegisterId();
-        
+
         String title =
             "Confirmation: " + confirmationRegister.getRegisterId() + ":" + confirmationRegister.getLastName() + ", " +
-           confirmationRegister.getFirstName();
+            confirmationRegister.getFirstName();
         launchActivity(registerId, title);
     }
 
     private void launchActivity(Integer registerId, String title) {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("title", title);
-        payload.put("taskFlowId", "/WEB-INF/taskflows/baptismal-register-entry.xml#baptismal-register-entry");
+        payload.put("taskFlowId", "/WEB-INF/taskflows/confirmation-register-entry.xml#confirmation-register-entry");
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("registerId", registerId);
         parameters.put("KEY", registerId);
@@ -113,8 +113,8 @@ public class ConfirmationRegisterListForm {
         this.confirmationRegisterTable = confirmationRegisterTable;
     }
 
-  
 
-    private RichTable getConfirmationRegisterTable(){
-    return confirmationRegisterTable;    }
+    public RichTable getConfirmationRegisterTable() {
+        return confirmationRegisterTable;
+    }
 }

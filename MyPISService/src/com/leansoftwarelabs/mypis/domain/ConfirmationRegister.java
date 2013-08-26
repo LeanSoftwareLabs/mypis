@@ -12,13 +12,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@NamedQueries({@NamedQuery(name = "findConfirmationRegisterById", query = "Select o from ConfirmationRegister o where o.registerId = :registerId")
-               
+@NamedQueries({ @NamedQuery(name = "findConfirmationRegisterById", query = "Select o from ConfirmationRegister o where o.registerId = :registerId")
     })
 @Entity
-@Table(name = "\"confirmation_register\"")
+@Table(name = "confirmation_register")
 public class ConfirmationRegister implements Serializable {
-   
+
 
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +35,7 @@ public class ConfirmationRegister implements Serializable {
     private String lastName;
     @Column(name = "MIDDLE_NAME")
     private String middleName;
+
     @NotNull
 
     public ConfirmationRegister() {
@@ -70,13 +70,15 @@ public class ConfirmationRegister implements Serializable {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-   
+
     public String getLastName() {
         return lastName;
     }
@@ -84,6 +86,7 @@ public class ConfirmationRegister implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String getMiddleName() {
         return middleName;
     }
@@ -91,5 +94,5 @@ public class ConfirmationRegister implements Serializable {
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
-  
+
 }
