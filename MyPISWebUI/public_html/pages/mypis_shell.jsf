@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html>
-<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:security="http://leansoftwarelabs.com/ext/security">
     <af:document title="mypis_shell.jsf" id="d1">
         <af:messages id="m1"/>
         <af:form id="f1">
@@ -9,15 +10,14 @@
                 <f:facet name="about"/>
                 <f:facet name="navigation">
                     <af:panelList id="pl1">
-                    
                         <af:link text="Baptismal Register" id="l1"
-                                 actionListener="#{viewScope.launcher.launchBaptismalRegister}"/>
-                                  </af:panelList>
-                                  
-                                 <af:panelList id="pl2">
+                                 actionListener="#{viewScope.launcher.launchBaptismalRegister}"
+                                 rendered="#{security:hasPermission('baptismal-register-list')}"/>
+                    </af:panelList>
+                    <af:panelList id="pl2">
                         <af:link text="Confirmation Register" id="l2"
                                  actionListener="#{viewScope.launcher.launchConfirmationRegister}"/>
-                     </af:panelList>
+                    </af:panelList>
                 </f:facet>
                 <f:facet name="globalLinks"/>
                 <f:facet name="status"/>
@@ -33,7 +33,11 @@
                 <f:facet name="welcome"/>
                 <f:facet name="innerToolbar"/>
                 <f:facet name="branding"/>
-                <f:facet name="globalMenu"/>
+                <f:facet name="globalMenu">
+                    <af:toolbar id="t1">
+                        <af:link text="Log Out" id="l3" action="#{loginForm.logout}"/>
+                    </af:toolbar>
+                </f:facet>
                 <f:attribute name="tabContext" value="#{viewScope.tabContext}"/>
             </af:pageTemplate>
         </af:form>

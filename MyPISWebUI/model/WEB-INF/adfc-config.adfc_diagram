@@ -5,16 +5,50 @@
    <View
       id="View3">
       <property
-         name="activityId">mypis_shell</property>
+         name="activityId">login</property>
       <property
-         name="page">/pages/mypis_shell.jsf</property>
+         name="page">/login.jsf</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>mypis_shell&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>login&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">229.19531</property>
+         name="y">194.29883</property>
       <property
-         name="x">353.0</property>
+         name="x">364.0</property>
+   </View>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule4">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">195.59766</property>
+      <property
+         name="x">147.0</property>
+   </WildcardControlFlowRule>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="WildcardControlFlowRule4"
+      to="View3">
+      <property
+         name="fromOutcome">logout</property>
+      <property
+         name="sdm:polyPoints">R50,183.0,195.74707,323.0,193.94824,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View6">
+      <property
+         name="activityId">logout</property>
+      <property
+         name="page">/logout.jsf</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>logout&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">193.89648</property>
+      <property
+         name="x">478.0</property>
    </View>
 </SDM>

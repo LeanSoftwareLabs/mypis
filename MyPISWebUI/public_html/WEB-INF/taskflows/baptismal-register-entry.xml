@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1252" ?>
-<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2" xmlns:security="http://leansoftwarelabs.com/ext/security">
   <task-flow-definition id="baptismal-register-entry">
-    <default-activity>editMode</default-activity>
+    <default-activity>gate</default-activity>
     <input-parameter-definition id="__2">
       <name>registerId</name>
       <value>#{pageFlowScope.registerId}</value>
@@ -20,7 +20,11 @@
     <view id="baptismal_register_entry">
       <page>/fragments/baptismal_register_entry.jsff</page>
     </view>
-    <router id="editMode">
+    <router id="gate">
+      <case id="__7">
+        <expression>#{not security:hasPermission('baptismal-register-entry:read')}</expression>
+        <outcome>unauthorize</outcome>
+      </case>
       <case id="__8">
         <expression>#{pageFlowScope.registerId eq -1}</expression>
         <outcome>prepare</outcome>
@@ -39,7 +43,7 @@
       </outcome>
     </task-flow-return>
     <control-flow-rule id="__4">
-      <from-activity-id>editMode</from-activity-id>
+      <from-activity-id>gate</from-activity-id>
       <control-flow-case id="__5">
         <from-outcome>toEntry</from-outcome>
         <to-activity-id>baptismal_register_entry</to-activity-id>
@@ -47,6 +51,10 @@
       <control-flow-case id="__9">
         <from-outcome>prepare</from-outcome>
         <to-activity-id>prepareEditing</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>unauthorize</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__10">
