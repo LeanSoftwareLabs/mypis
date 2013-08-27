@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "\"baptismal_register\"")
 public class BaptismalRegister implements Serializable {
-    private static final long serialVersionUID = -5121524341036104901L;
+   
     private Integer age;
     @NotNull
     @Temporal(TemporalType.DATE)

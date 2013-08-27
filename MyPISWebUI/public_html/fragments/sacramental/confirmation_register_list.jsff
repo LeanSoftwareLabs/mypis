@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" topHeight="auto">
+    <f:facet name="center">
+      <af:panelCollection id="pc1" featuresOff="statusBar" styleClass="AFStretchWidth">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:button text="Create New Confirmation Entry" id="b1"
+                       actionListener="#{viewScope.confirmationRegisterListForm.create}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="statusbar"/>
+        <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
+                  value="#{viewScope.confirmationRegisterListForm.lazyDataModel}" scrollPolicy="page" fetchSize="30"
+                  autoHeightRows="0" rowSelection="single" columnSelection="multiple"
+                  binding="#{viewScope.confirmationRegisterListForm.confirmationRegisterTable}">
+          <af:column sortable="false" headerText="Register Id" align="end" id="c1" width="30">
+            <af:link text="#{row.registerId}" id="l1"
+                     actionListener="#{viewScope.confirmationRegisterListForm.viewDetails}"/>
+          </af:column>
+          <af:column sortable="true" headerText="Volume" align="end" id="c2" width="30" sortProperty="volume">
+            <af:outputText value="#{row.volume}" id="ot2"/>
+          </af:column>
+          <af:column sortable="true" headerText="Page" align="end" id="c3" width="30" sortProperty="page">
+            <af:outputText value="#{row.page}" id="ot3"/>
+          </af:column>
+          <af:column sortable="true" headerText="Line" align="end" id="c4" width="30" sortProperty="line">
+            <af:outputText value="#{row.line}" id="ot4"/>
+          </af:column>
+          
+  
+             
+        </af:table>
+      </af:panelCollection>
+    </f:facet>
+    <f:facet name="top">
+      <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.confirmationRegisterListForm.queryModel}"
+                value="#{viewScope.confirmationRegisterListForm.queryModel.currentDescriptor}" resultComponentId="::pc1:t1"
+                queryListener="#{viewScope.confirmationRegisterListForm.tableFilter}"/>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>
