@@ -5,6 +5,7 @@
     <input-parameter-definition id="__3">
       <name>eventHandler</name>
       <value>#{pageFlowScope.eventHandler}</value>
+      <required/>
     </input-parameter-definition>
     <input-parameter-definition id="__4">
       <name>detailTaskFlowId</name>

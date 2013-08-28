@@ -1,6 +1,7 @@
 package com.leansoftwarelabs.mypis.view.backing;
 
 import com.leansoftwarelabs.ext.adf.EventHandler;
+import com.leansoftwarelabs.ext.shiro.SecurityContext;
 import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
 import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeLocal;
 
@@ -22,12 +23,18 @@ public class BaptismalRegisterEntryForm {
 
     @PostConstruct
     public void init() {
-        Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
-        if (registerId == -1) {
-            baptismalRegister = new BaptismalRegister();
-        } else {
-            baptismalRegister = getService().findBaptismalRegisterById(registerId);
+        
+    }
+    
+    public String prepare(){
+        if(!SecurityContext.hasPermission("baptismal-register-entry:read")){
+            return "unathorized";
         }
+        Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
+        if(registerId == -1){
+            editing(true);
+        }
+        return "toEntry";
     }
 
     public void setBaptismalRegister(BaptismalRegister baptismalRegister) {
@@ -35,6 +42,14 @@ public class BaptismalRegisterEntryForm {
     }
 
     public BaptismalRegister getBaptismalRegister() {
+        if(baptismalRegister == null){
+            Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
+            if (registerId == -1) {
+                baptismalRegister = new BaptismalRegister();
+            } else {
+                baptismalRegister = getService().findBaptismalRegisterById(registerId);
+            }
+        }
         return baptismalRegister;
     }
 
@@ -60,6 +75,8 @@ public class BaptismalRegisterEntryForm {
         editing(false);
         if(baptismalRegister.getRegisterId() == null){
             return "done";
+        }else{
+            baptismalRegister = null;// reset to focer requery upon call to get
         }
         return null;
     }

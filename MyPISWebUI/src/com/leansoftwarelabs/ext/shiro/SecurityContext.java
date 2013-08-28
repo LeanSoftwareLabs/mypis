@@ -5,9 +5,9 @@ import java.util.Collection;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
-public final class ShiroSecurityContext {
+public final class SecurityContext {
     
-    private ShiroSecurityContext(){
+    private SecurityContext(){
         
     }
     public static boolean hasPermission(String permission){

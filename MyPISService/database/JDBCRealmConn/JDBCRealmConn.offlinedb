@@ -3,6 +3,6 @@
    <hash n="dataTypeSettings">
       <value n="sourceKey" v="oracle.javatools.db.mysql.MySQL5"/>
    </hash>
-   <value n="id" v="b8684cf4-dcea-4653-a0a2-e99a6315d13a"/>
-   <value n="name" v="MyPISConn"/>
+   <value n="id" v="59f02408-e3ff-4b32-8da7-f3b7977042e5"/>
+   <value n="name" v="JDBCRealmConn"/>
 </ProviderSettings>

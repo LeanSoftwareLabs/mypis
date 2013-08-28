@@ -15,60 +15,27 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">239.5459</property>
+         name="y">243.84473</property>
+      <property
+         name="x">571.0</property>
       <property
          name="pageFragment">true</property>
-      <property
-         name="x">528.0</property>
    </View>
-   <Router
-      id="Router3">
-      <property
-         name="activityId">gate</property>
-      <property
-         name="start">true</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>gate&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">237.59766</property>
-      <property
-         name="x">191.0</property>
-   </Router>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase4"
-      from="Router3"
-      to="View2">
-      <property
-         name="fromOutcome">toEntry</property>
-      <property
-         name="sdm:polyPoints">R54,233.31429,240.74707,487.0,239.19531,L50</property>
-   </ControlFlowCase>
    <MethodCall
       id="MethodCall5">
       <property
-         name="activityId">prepareEditing</property>
+         name="activityId">prepare</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>prepareEditing&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>prepare&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">94.84473</property>
+         name="y">239.0918</property>
       <property
-         name="x">434.0</property>
+         name="x">261.0</property>
    </MethodCall>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase6"
-      from="Router3"
-      to="MethodCall5">
-      <property
-         name="fromOutcome">prepare</property>
-      <property
-         name="sdm:polyPoints">R46,232.0,233.74707,393.0,94.49414,L50</property>
-   </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase7"
@@ -77,7 +44,7 @@
       <property
          name="fromOutcome">toEntry</property>
       <property
-         name="sdm:polyPoints">B50,434.0,149.19531,528.0,185.19531,T50</property>
+         name="sdm:polyPoints">R54,302.0,242.24121,530.0,243.49414,L50</property>
    </ControlFlowCase>
    <WildcardControlFlowRule
       id="WildcardControlFlowRule8">
@@ -112,5 +79,32 @@
          name="fromOutcome">done</property>
       <property
          name="sdm:polyPoints">R50,310.0,354.74707,439.0,357.5459,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View11">
+      <property
+         name="activityId">authorizationErrorPage</property>
+      <property
+         name="page">/authorizationErrorPage.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>authorizationErrorPage&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">90.896484</property>
+      <property
+         name="x">519.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase12"
+      from="MethodCall5"
+      to="View11">
+      <property
+         name="fromOutcome">unathorized</property>
+      <property
+         name="sdm:polyPoints">R46,302.0,235.24121,478.0,90.5459,L50</property>
    </ControlFlowCase>
 </SDM>

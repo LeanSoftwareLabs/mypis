@@ -35,6 +35,9 @@ public class ConfirmationRegister implements Serializable {
     private String lastName;
     @Column(name = "MIDDLE_NAME")
     private String middleName;
+    @NotNull
+    @Column(name = "TENANT_ID", nullable = false)
+    private Integer tenantId;
 
     @NotNull
 

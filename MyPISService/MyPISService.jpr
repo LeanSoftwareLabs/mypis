@@ -56,7 +56,6 @@
    </list>
    <value n="defaultPackage" v="com.leansoftwarelabs.mypis"/>
    <hash n="ejbModuleContainer">
-      <value n="dbConnection" v="MyPISConn"/>
       <value n="ejbMetaDataPrefs" v="PREFASANNON"/>
       <value n="ejbVersion" v="3.0"/>
       <value n="ejbVersionMinor" v="0.1"/>
@@ -136,7 +135,24 @@
             <value n="id" v="Oracle XML Parser v2"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Shiro-all-1.2.2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
+      <hash n="internalDefinitions">
+         <list n="libraryDefinitions">
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../leansoftwarelabs/lib/shiro-all-1.2.2.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Shiro-all-1.2.2.jar"/>
+               <value n="id" v="Shiro-all-1.2.2.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+         </list>
+      </hash>
       <list n="libraryReferences">
          <hash>
             <value n="id" v="Java EE"/>
@@ -150,6 +166,10 @@
             <value n="id" v="Oracle XML Parser v2"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Shiro-all-1.2.2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
@@ -159,6 +179,9 @@
       <hash n="persistence-list">
          <value n="jpa-version" v="2.0"/>
          <hash n="src$META-INF$persistence.xml">
+            <hash n="JDBCRealm">
+               <value n="development-database" v="JDBCRealmConn"/>
+            </hash>
             <hash n="MyPISService">
                <value n="development-database" v="MyPISConn"/>
             </hash>

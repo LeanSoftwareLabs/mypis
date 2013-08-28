@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="roles-permissions">
+    <default-activity>roles_permissions</default-activity>
+    <input-parameter-definition id="__2">
+      <name>eventHandler</name>
+      <value>#{pageFlowScope.eventHandler}</value>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>rolesPermissionsForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.RolesPermissionsForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="roles_permissions">
+      <page>/fragments/admin/roles_permissions.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

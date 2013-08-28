@@ -2,21 +2,23 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
         xmlns:security="http://leansoftwarelabs.com/ext/security">
-    <af:document title="mypis_shell.jsf" id="d1">
+    <af:document title="My Parish Information Sytem" id="d1">
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:pageTemplate viewId="/templates/dynamicShell/shell.jsf" id="pt1" value="#{bindings.ptb1}">
                 <f:facet name="copyright"/>
                 <f:facet name="about"/>
                 <f:facet name="navigation">
-                    <af:panelList id="pl1">
+                    <af:panelList id="pl1" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}">
                         <af:link text="Baptismal Register" id="l1"
                                  actionListener="#{viewScope.launcher.launchBaptismalRegister}"
                                  rendered="#{security:hasPermission('baptismal-register-list')}"/>
-                    </af:panelList>
-                    <af:panelList id="pl2">
                         <af:link text="Confirmation Register" id="l2"
                                  actionListener="#{viewScope.launcher.launchConfirmationRegister}"/>
+                    </af:panelList>
+                    <af:panelList id="pl2" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}">
+                        <af:link text="Manage Users" id="l4" actionListener="#{viewScope.launcher.launchUserRolesAdministration}"/>
+                        <af:link text="Manage Roles and Permissions" id="l5" actionListener="#{viewScope.launcher.launchRolesPermissions}"/>
                     </af:panelList>
                 </f:facet>
                 <f:facet name="globalLinks"/>
@@ -25,9 +27,18 @@
                 <f:facet name="globalSearch"/>
                 <f:facet name="globalTabs">
                     <af:navigationPane id="np1">
-                        <af:commandNavigationItem text="Tasks" id="cni3"/>
-                        <af:commandNavigationItem text="Sacramental Registers" id="cni1"/>
-                        <af:commandNavigationItem text="Settings" id="cni2"/>
+                        <af:commandNavigationItem text="Tasks" id="tasks" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'tasks'}"
+                                               immediate="true"
+                                               partialSubmit="true"/>
+                        <af:commandNavigationItem text="Sacramental Registers" id="registers" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}"
+                                               immediate="true"
+                                               partialSubmit="true"/>
+                        <af:commandNavigationItem text="Administration" id="admin" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}"
+                                               immediate="true"
+                                               partialSubmit="true"/>
                     </af:navigationPane>
                 </f:facet>
                 <f:facet name="welcome"/>

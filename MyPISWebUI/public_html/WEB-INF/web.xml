@@ -197,6 +197,19 @@
         <local>com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeLocal</local>
         <ejb-link>ConfirmationRegisterFacade</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/UsersRolesPermissionsFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeLocal</local>
+        <ejb-link>UsersRolesPermissionsFacade</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/ResourceFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.realm.service.ResourceFacadeLocal</local>
+        <ejb-link>ResourceFacade</ejb-link>
+    </ejb-local-ref>
+    
     <listener>
         <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
     </listener>

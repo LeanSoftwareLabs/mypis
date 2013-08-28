@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter id="ps1" orientation="vertical" partialTriggers="b2 b1 b3">
+        <f:facet name="first">
+            <af:table var="row" rowBandingInterval="0" id="t1" value="#{viewScope.userRolesAdminForm.userDataModel}"
+                      filterVisible="true" filterModel="#{viewScope.userRolesAdminForm.descriptor}"
+                      queryListener="#{viewScope.userRolesAdminForm.handleFilter}"
+                      binding="#{viewScope.userRolesAdminForm.userTable}" rowSelection="single"
+                      selectionListener="#{viewScope.userRolesAdminForm.handleUserRowSelection}">
+                <af:column sortable="true" headerText="Username" align="start" id="c1" sortProperty="username"
+                           filterable="true">
+                    <af:outputText value="#{row.username}" id="ot1"/>
+                </af:column>
+                <af:column sortable="true" headerText="Full Name" align="start" id="c2" filterable="true"
+                           sortProperty="fullName">
+                    <af:outputText value="#{row.fullName}" id="ot2"/>
+                </af:column>
+                <af:column sortable="true" headerText="Email" align="start" id="c3" filterable="true"
+                           sortProperty="email">
+                    <af:outputText value="#{row.email}" id="ot3"/>
+                </af:column>
+                <af:column sortable="true" headerText="Tenant" align="start" id="c4">
+                    <af:outputText value="#{row.tenant}" id="ot4"/>
+                </af:column>
+            </af:table>
+        </f:facet>
+        <f:facet name="second">
+            <af:panelGroupLayout id="pgl1" layout="vertical"
+                                 binding="#{viewScope.userRolesAdminForm.userInfoPanelGroup}">
+                <af:switcher facetName="#{viewScope.userRolesAdminForm.selectedUser ne null}" defaultFacet="false">
+                    <f:facet name="true">
+                        <af:panelHeader text="User Details/ Assigned Roles" id="ph0" size="1" headerLevel="1">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:button text="Edit" id="b2" rendered="#{not pageFlowScope.editMode}"
+                                               action="#{viewScope.userRolesAdminForm.editUser}"/>
+                                    <af:button text="Cancel" id="b1" rendered="#{pageFlowScope.editMode}" action="#{viewScope.userRolesAdminForm.cancel}">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:button text="Apply" id="b3" rendered="#{pageFlowScope.editMode}"
+                                               action="#{viewScope.userRolesAdminForm.saveUser}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:panelGridLayout id="pgl2">
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+                                    <af:gridCell marginStart="5px" width="50%" id="gc1">
+                                        <af:panelFormLayout id="pfl1">
+                                            <af:inputText label="Username"
+                                                          value="#{viewScope.userRolesAdminForm.selectedUser.username}"
+                                                          id="it1" disabled="#{not pageFlowScope.editMode}"/>
+                                            <af:inputText label="Password" id="it2"
+                                                          value="#{viewScope.userRolesAdminForm.selectedUser.password}"
+                                                          disabled="#{not pageFlowScope.editMode}" secret="true"/>
+                                            <af:inputText label="Confirm Password" id="it3"
+                                                          value="#{viewScope.userRolesAdminForm.confirmPassword}"
+                                                          disabled="#{not pageFlowScope.editMode}" secret="true"/>
+                                            <af:inputText label="Full Name" id="it4"
+                                                          value="#{viewScope.userRolesAdminForm.selectedUser.fullName}"
+                                                          readOnly="false" disabled="#{not pageFlowScope.editMode}"/>
+                                            <af:inputText label="Email" id="it5"
+                                                          value="#{viewScope.userRolesAdminForm.selectedUser.email}"
+                                                          disabled="#{not pageFlowScope.editMode}"/>
+                                        </af:panelFormLayout>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+                                        <af:button text="Refresh" id="b4"
+                                                   action="#{viewScope.userRolesAdminForm.refreshRoleItems}"/>
+                                        <af:selectManyShuttle label="Roles" id="sms1" disabled="#{not pageFlowScope.editMode}"
+                                                    value="#{viewScope.userRolesAdminForm.selectedUser.roleList}"
+                                                              autoSubmit="#{not pageFlowScope.editMode}"
+                                                              partialTriggers="b4">
+                                            <f:selectItems value="#{viewScope.userRolesAdminForm.roleItems}"
+                                                           id="si1"/>
+                                        </af:selectManyShuttle>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                        </af:panelHeader>
+                    </f:facet>
+                    <f:facet name="false"/>
+                </af:switcher>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

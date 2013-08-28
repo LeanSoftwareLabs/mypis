@@ -10,7 +10,9 @@
         <af:button text="Edit" id="b1"
                    rendered="#{not pageFlowScope.editMode}" action="#{viewScope.baptismalRegisterEntryForm.edit}"/>
         <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
-                   action="#{viewScope.baptismalRegisterEntryForm.cancel}" immediate="true"/>
+                   action="#{viewScope.baptismalRegisterEntryForm.cancel}" immediate="true">
+          <af:resetActionListener/>
+        </af:button>
         <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
                    action="#{viewScope.baptismalRegisterEntryForm.save}"/>
         <af:button text="Close" id="b4" rendered="#{not pageFlowScope.editMode}" action="done"/>

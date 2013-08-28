@@ -14,4 +14,17 @@
       <property name="eclipselink.logging.logger" value="JavaLogger"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="JDBCRealm">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>java:/app/jdbc/jdbc/JDBCRealmConnDS</jta-data-source>
+    <class>com.leansoftwarelabs.realm.domain.Role</class>
+    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+    <class>com.leansoftwarelabs.realm.domain.User</class>
+    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+    <class>com.leansoftwarelabs.realm.domain.Resource</class>
+    <properties>
+      <property name="eclipselink.target-server" value="WebLogic_10"/>
+      <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/JDBCRealmConnDS"/>
+    </properties>
+  </persistence-unit>
 </persistence>

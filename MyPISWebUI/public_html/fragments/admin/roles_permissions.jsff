@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter id="ps1" orientation="vertical" partialTriggers="b5 b6 b7">
+        <f:facet name="first">
+            <af:panelCollection id="pc1">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t2">
+                        <af:button text="Create New Role" id="b1"
+                                   action="#{viewScope.rolesPermissionsForm.createRole}"/>
+                        <af:button text="Delete Role" id="b2" action="#{viewScope.rolesPermissionsForm.deleteRole}"/>
+                    </af:toolbar>
+                </f:facet>
+                <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
+                          value="#{viewScope.rolesPermissionsForm.roleList}"
+                          binding="#{viewScope.rolesPermissionsForm.roleTable}" rowSelection="single"
+                          selectionListener="#{viewScope.rolesPermissionsForm.handleRoleSelection}">
+                    <af:column id="c3" width="20">
+                        <af:outputText value="#{vs.index + 1}" id="ot3"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Role Name" align="start" id="c1">
+                        <af:link text="#{row.roleName}" id="l1"
+                                 actionListener="#{viewScope.rolesPermissionsForm.editRole}">
+                            <af:setPropertyListener from="#{row}" to="#{viewScope.rolesPermissionsForm.role}"
+                                                    type="action"/>
+                        </af:link>
+                    </af:column>
+                    <af:column sortable="false" headerText="Description" align="start" id="c2" width="200">
+                        <af:outputText value="#{row.description}" id="ot2"/>
+                    </af:column>
+                </af:table>
+                <f:facet name="statusbar"/>
+            </af:panelCollection>
+        </f:facet>
+        <f:facet name="second">
+            <af:panelSplitter id="ps2" binding="#{viewScope.rolesPermissionsForm.rolePermissionPanelSplitter}">
+                <f:facet name="first">
+                    <af:panelHeader text="Grants/ Permissions" id="ph1" headerLevel="1" size="1">
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t6">
+                                <af:button text="Edit Grants/ Permissions" id="b5"
+                                           actionListener="#{viewScope.rolesPermissionsForm.editPermissions}"
+                                           rendered="#{not pageFlowScope.editMode}"/>
+                                <af:button text="Cancel" id="b6"
+                                           actionListener="#{viewScope.rolesPermissionsForm.cancel}"
+                                           rendered="#{pageFlowScope.editMode}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button text="Apply" id="b7"
+                                           actionListener="#{viewScope.rolesPermissionsForm.savePermissions}"
+                                           rendered="#{pageFlowScope.editMode}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t4">
+                                    <af:button text="Add Permission" id="b3" rendered="#{pageFlowScope.editMode}">
+                                        <af:showPopupBehavior triggerType="action" popupId="::p2"/>
+                                    </af:button>
+                                    <af:button text="Remove" id="b4" rendered="#{pageFlowScope.editMode}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table var="row" rowBandingInterval="0" id="t3"
+                                      value="#{viewScope.rolesPermissionsForm.selectedRole.permissionList}"
+                                      rowSelection="single">
+                                <af:column sortable="false" headerText="Resource Name" align="start" id="c4"
+                                           width="200">
+                                    <af:outputText value="#{row.resource.name}" id="ot1"/>
+                                </af:column>
+                                <af:column sortable="false" headerText="Resource Description" id="c5" width="300">
+                                    <af:outputText value="#{row.resource.description}" id="ot4"/>
+                                </af:column>
+                                <af:column sortable="false" headerText="Create" align="start" id="c6" width="30">
+                                    <af:selectBooleanCheckbox label="Create" id="sbc1"
+                                                              disabled="#{not pageFlowScope.editMode}"
+                                                              value="#{row.create}"/>
+                                </af:column>
+                                <af:column sortable="false" headerText="Read" align="start" id="c7" width="30">
+                                    <af:selectBooleanCheckbox label="Read" id="sbc2" value="#{row.read}"
+                                                              disabled="#{not pageFlowScope.editMode}"/>
+                                </af:column>
+                                <af:column sortable="false" headerText="Update" align="start" id="c8" width="30">
+                                    <af:selectBooleanCheckbox label="Update" id="sbc3" value="#{row.update}"
+                                                              disabled="#{not pageFlowScope.editMode}"/>
+                                </af:column>
+                                <af:column sortable="false" headerText="Delete" align="start" id="c9" width="30">
+                                    <af:selectBooleanCheckbox label="Delete" id="sbc4" value="#{row.delete}"
+                                                              disabled="#{not pageFlowScope.editMode}"/>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                    </af:panelHeader>
+                </f:facet>
+                <f:facet name="second"/>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+              binding="#{viewScope.rolesPermissionsForm.rolePopup}" contentDelivery="lazyUncached">
+        <af:dialog id="d1" dialogListener="#{viewScope.rolesPermissionsForm.handleRoleDialogReturn}">
+            <af:panelFormLayout id="pfl1" rendered="#{viewScope.rolesPermissionsForm.role ne null}">
+                <af:inputText label="Role Name" id="it1" value="#{viewScope.rolesPermissionsForm.role.roleName}"
+                              disabled="#{viewScope.rolesPermissionsForm.role.tenant ne null}"/>
+                <af:inputText label="Description" id="it2" rows="5"
+                              value="#{viewScope.rolesPermissionsForm.role.description}"/>
+            </af:panelFormLayout>
+        </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="lazyUncached">
+        <af:dialog id="d2" dialogListener="#{viewScope.rolesPermissionsForm.handleResourceDialogReturn}"
+                   affirmativeTextAndAccessKey="Add Resources" contentWidth="600" contentHeight="500" resize="on"
+                   title="Select Resources to Add Permission">
+            <af:panelStretchLayout id="psl1" topHeight="auto" dimensionsFrom="children">
+                <f:facet name="center">
+                    <af:table var="row" rowBandingInterval="0" id="t5" rowSelection="multiple" varStatus="vs"
+                              value="#{viewScope.rolesPermissionsForm.lazyDataModel}"
+                              binding="#{viewScope.rolesPermissionsForm.resourceTable}">
+                        <af:column id="c13" width="20">
+                            <af:outputText value="#{vs.index +1}" id="ot8"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Name" align="start" id="c10">
+                            <af:outputText value="#{row.name}" id="ot5"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Description" align="start" id="c11" width="200">
+                            <af:outputText value="#{row.description}" id="ot6"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Value" align="start" id="c12" width="200">
+                            <af:outputText value="#{row.value}" id="ot7"/>
+                        </af:column>
+                    </af:table>
+                </f:facet>
+                <f:facet name="top">
+                    <af:query headerText="Search" disclosed="true" id="q1"
+                              model="#{viewScope.rolesPermissionsForm.queryModel}"
+                              value="#{viewScope.rolesPermissionsForm.queryModel.currentDescriptor}"
+                              resultComponentId="::t5" queryListener="#{viewScope.rolesPermissionsForm.tableFilter}"/>
+                </f:facet>
+            </af:panelStretchLayout>
+        </af:dialog>
+    </af:popup>
+</ui:composition>

@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
-    <af:document title="login.jsf" id="d1">
+    <af:document title="login.jsf" id="d1" initialFocusId="username">
         <af:form id="f1" defaultCommand="log">
             <af:decorativeBox id="db1">
                 <f:facet name="center">
                     <af:panelFormLayout id="pfl1">
                         <af:inputText label="User Name" id="username" value="#{loginForm.userName}" showRequired="true"
-                                      required="true"/>
+                                      required="true" clientComponent="true"/>
                         <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"
                                       required="true" showRequired="true"/>
                         <af:selectBooleanCheckbox text="Remember Me" label="Remember Me" id="rememberMe"
