@@ -63,6 +63,7 @@
    </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
+         <string v="CDI"/>
          <string v="Database"/>
          <string v="Database-Modeling"/>
          <string v="EJB"/>
@@ -139,6 +140,10 @@
             <value n="id" v="Shiro-all-1.2.2.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Contexts and Dependency Injection"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -168,6 +173,10 @@
          </hash>
          <hash>
             <value n="id" v="Shiro-all-1.2.2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Contexts and Dependency Injection"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

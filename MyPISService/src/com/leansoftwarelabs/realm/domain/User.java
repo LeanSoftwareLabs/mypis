@@ -30,7 +30,7 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "password_salt")
-    private String passwordSalt;
+    private byte[] passwordSalt;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "tenant_id", nullable = false)
@@ -112,13 +112,6 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String password, String password_salt, Tenant tenant, String username) {
-        this.password = password;
-        this.passwordSalt = password_salt;
-        this.tenant = tenant;
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -127,11 +120,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getPasswordSalt() {
+    public byte[] getPasswordSalt() {
         return passwordSalt;
     }
 
-    public void setPasswordSalt(String password_salt) {
+    public void setPasswordSalt(byte[] password_salt) {
         this.passwordSalt = password_salt;
     }
 

@@ -1,29 +1,40 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter id="ps1" orientation="vertical" partialTriggers="b2 b1 b3">
+    <af:panelSplitter id="ps1" orientation="vertical" partialTriggers="b2 b1 b3 pc1:b5 pc1:b6">
         <f:facet name="first">
-            <af:table var="row" rowBandingInterval="0" id="t1" value="#{viewScope.userRolesAdminForm.userDataModel}"
-                      filterVisible="true" filterModel="#{viewScope.userRolesAdminForm.descriptor}"
-                      queryListener="#{viewScope.userRolesAdminForm.handleFilter}"
-                      binding="#{viewScope.userRolesAdminForm.userTable}" rowSelection="single"
-                      selectionListener="#{viewScope.userRolesAdminForm.handleUserRowSelection}">
-                <af:column sortable="true" headerText="Username" align="start" id="c1" sortProperty="username"
-                           filterable="true">
-                    <af:outputText value="#{row.username}" id="ot1"/>
-                </af:column>
-                <af:column sortable="true" headerText="Full Name" align="start" id="c2" filterable="true"
-                           sortProperty="fullName">
-                    <af:outputText value="#{row.fullName}" id="ot2"/>
-                </af:column>
-                <af:column sortable="true" headerText="Email" align="start" id="c3" filterable="true"
-                           sortProperty="email">
-                    <af:outputText value="#{row.email}" id="ot3"/>
-                </af:column>
-                <af:column sortable="true" headerText="Tenant" align="start" id="c4">
-                    <af:outputText value="#{row.tenant}" id="ot4"/>
-                </af:column>
-            </af:table>
+            <af:panelCollection id="pc1">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t3">
+                        <af:button text="Add User" id="b5" actionListener="#{viewScope.userRolesAdminForm.addUser}"
+                                   rendered="#{not pageFlowScope.EditMode}"/>
+                        <af:button text="Delete User" id="b6"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table var="row" rowBandingInterval="0" id="t1" value="#{viewScope.userRolesAdminForm.userDataModel}"
+                          filterVisible="true" filterModel="#{viewScope.userRolesAdminForm.descriptor}"
+                          queryListener="#{viewScope.userRolesAdminForm.handleFilter}"
+                          binding="#{viewScope.userRolesAdminForm.userTable}" rowSelection="single"
+                          selectionListener="#{viewScope.userRolesAdminForm.handleUserRowSelection}">
+                    <af:column sortable="true" headerText="Username" align="start" id="c1" sortProperty="username"
+                               filterable="true">
+                        <af:outputText value="#{row.username}" id="ot1"/>
+                    </af:column>
+                    <af:column sortable="true" headerText="Full Name" align="start" id="c2" filterable="true"
+                               sortProperty="fullName">
+                        <af:outputText value="#{row.fullName}" id="ot2"/>
+                    </af:column>
+                    <af:column sortable="true" headerText="Email" align="start" id="c3" filterable="true"
+                               sortProperty="email">
+                        <af:outputText value="#{row.email}" id="ot3"/>
+                    </af:column>
+                    <af:column sortable="true" headerText="Tenant" align="start" id="c4">
+                        <af:outputText value="#{row.tenant}" id="ot4"/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
         </f:facet>
         <f:facet name="second">
             <af:panelGroupLayout id="pgl1" layout="vertical"
@@ -37,7 +48,8 @@
                                 <af:toolbar id="t2">
                                     <af:button text="Edit" id="b2" rendered="#{not pageFlowScope.editMode}"
                                                action="#{viewScope.userRolesAdminForm.editUser}"/>
-                                    <af:button text="Cancel" id="b1" rendered="#{pageFlowScope.editMode}" action="#{viewScope.userRolesAdminForm.cancel}">
+                                    <af:button text="Cancel" id="b1" rendered="#{pageFlowScope.editMode}"
+                                               action="#{viewScope.userRolesAdminForm.cancel}">
                                         <af:resetActionListener/>
                                     </af:button>
                                     <af:button text="Apply" id="b3" rendered="#{pageFlowScope.editMode}"
@@ -70,12 +82,13 @@
                                     <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
                                         <af:button text="Refresh" id="b4"
                                                    action="#{viewScope.userRolesAdminForm.refreshRoleItems}"/>
-                                        <af:selectManyShuttle label="Roles" id="sms1" disabled="#{not pageFlowScope.editMode}"
-                                                    value="#{viewScope.userRolesAdminForm.selectedUser.roleList}"
+                                        <af:selectManyShuttle label="" id="sms1"
+                                                              disabled="#{not pageFlowScope.editMode}"
+                                                              value="#{viewScope.userRolesAdminForm.selectedUser.roleList}"
                                                               autoSubmit="#{not pageFlowScope.editMode}"
-                                                              partialTriggers="b4">
-                                            <f:selectItems value="#{viewScope.userRolesAdminForm.roleItems}"
-                                                           id="si1"/>
+                                                              partialTriggers="b4" leadingHeader="Available Roles"
+                                                              trailingHeader="Selected Roles (Assigned)">
+                                            <f:selectItems value="#{viewScope.userRolesAdminForm.roleItems}" id="si1"/>
                                         </af:selectManyShuttle>
                                     </af:gridCell>
                                 </af:gridRow>

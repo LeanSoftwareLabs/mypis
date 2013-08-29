@@ -65,15 +65,9 @@
     <column>
       <name>password_salt</name>
       <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">100</value>
-          </entry>
-        </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
           <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>VARCHAR</typeName>
+          <typeName>TINYBLOB</typeName>
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>

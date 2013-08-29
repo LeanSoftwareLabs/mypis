@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import javax.naming.Context;
@@ -37,6 +38,8 @@ import oracle.adf.view.rich.model.FilterableQueryDescriptor;
 
 import org.apache.commons.collections.functors.FalsePredicate;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.realm.jdbc.JdbcRealm;
 
 public class UserRolesAdminForm {
     private UsersRolesPermissionsFacadeLocal service;
@@ -57,7 +60,7 @@ public class UserRolesAdminForm {
     private List<SelectItem> roleItems;
 
     public List<SelectItem> getRoleItems() {
-        if(roleItems == null){
+        if (roleItems == null) {
             initRoleItems();
         }
         return roleItems;
@@ -66,7 +69,7 @@ public class UserRolesAdminForm {
     private void initRoleItems() {
         List<Role> roleList = getService().getAllRoles();
         roleItems = new ArrayList<SelectItem>();
-        for(Role role: roleList){
+        for (Role role : roleList) {
             roleItems.add(new SelectItem(role, role.getRoleName()));
         }
     }
@@ -90,40 +93,50 @@ public class UserRolesAdminForm {
     public void init() {
 
     }
-    
-    public String prepare(){
+
+    public String prepare() {
         return "continue";
     }
 
     public User getSelectedUser() {
         return selectedUser;
     }
-    
-    public void editUser(){
+
+    public void editUser() {
         getUserTable().setRowSelection(RichTable.ROW_SELECTION_NONE);
         getUserTable().setFilterVisible(false);
         FormUtils.editing(true);
     }
-    
-    public void saveUser(){
+
+    public void saveUser() throws Exception {
         User user = getSelectedUser();
         String password = user.getPassword();
-        if(password != null && !password.equals(confirmPassword)){
+        if (password != null && !password.equals(confirmPassword)) {
             JSFUtils.addFacesErrorMessage("Passwords do not match");
             return;
         }
-        getService().createOrUpdateUser(getSelectedUser());
+        if (user.getTenant() == null) {
+            //set tenant to the same tenant of the current user
+            User currentUser = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+            user.setTenant(currentUser.getTenant());
+            getService().createUser(user);
+        } else {
+            getService().updateUser(getSelectedUser());
+        }
+        user.setPassword(null);       
+        userDataModel = null;//reset. will be re-initialized upon next call to getUserdataModel()
+        getUserTable().setRowSelection(RichTable.ROW_SELECTION_SINGLE);
+        getUserTable().setFilterVisible(true);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(getUserTable());
+        FormUtils.editing(false);
+    }
+
+    public void cancel() {
         getUserTable().setRowSelection(RichTable.ROW_SELECTION_SINGLE);
         getUserTable().setFilterVisible(true);
         FormUtils.editing(false);
     }
-    
-    public void cancel(){
-        getUserTable().setRowSelection(RichTable.ROW_SELECTION_SINGLE);
-        getUserTable().setFilterVisible(true);
-        FormUtils.editing(false);
-    }
-    
+
 
     public UsersRolesPermissionsFacadeLocal getService() {
         if (service == null) {
@@ -197,5 +210,10 @@ public class UserRolesAdminForm {
     public String refreshRoleItems() {
         initRoleItems();
         return null;
+    }
+
+    public void addUser(ActionEvent actionEvent) {
+        selectedUser = new User();
+        editUser();
     }
 }

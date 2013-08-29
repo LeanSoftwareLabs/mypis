@@ -27,7 +27,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.util.ByteSource;
 
 @Stateless(name = "UsersRolesPermissionsFacade", mappedName = "MyPIS-MyPISService-UsersRolesPermissionsFacade")
 public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFacade, UsersRolesPermissionsFacadeLocal {
@@ -88,10 +91,6 @@ public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFac
         em.remove(role);
     }
 
-    public User mergeUser(User user) {
-        return em.merge(user);
-    }
-
     public void removeUser(User user) {
         user = em.find(User.class, user.getUsername());
         em.remove(user);
@@ -131,32 +130,50 @@ public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFac
         return query.getResultList();
     }
 
-    public void createOrUpdateUser(User userParam) {
+    public void updateUser(User userParam) throws UserNotExistException, InsufficentPasswordStrenghtException {
         if (userParam == null) {
             throw new IllegalArgumentException("Param user is null");
         }
         User user = em.find(User.class, userParam.getUsername());
         String password = null;
-        if (user == null) {//new user
-            password = userParam.getPassword();
-            validatePassword(password);
-            userParam.setPassword(new Sha256Hash(userParam.getPassword()).toHex());
-            em.merge(user);
-            return;
+        if (user == null) { //new user
+            throw new UserNotExistException();
         }
         user.setEmail(userParam.getEmail());
         user.setFullName(userParam.getFullName());
         user.setRoleList(userParam.getRoleList());
         password = userParam.getPassword();
         if (password != null) {
-            validatePassword(password);
-            user.setPassword(new Sha256Hash(password).toHex());
+            configureSaltedHashedPasswordForUser(user, password);
         }
     }
 
-    private void validatePassword(String password) {
+    private void configureSaltedHashedPasswordForUser(User user,
+                                                      String password) throws InsufficentPasswordStrenghtException {
+        validatePassword(password);
+        RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+        ByteSource salt = rng.nextBytes();
+        String hashedPasswordBase64 = new Sha256Hash(password, salt, 1024).toBase64();
+        user.setPassword(hashedPasswordBase64);
+        user.setPasswordSalt(salt.getBytes());
+    }
+    
+    public void createUser(User userParam) throws UsernameNotAvailableException, InsufficentPasswordStrenghtException{
+        if (userParam == null) {
+            throw new IllegalArgumentException("Param user is null");
+        }
+        User userCheck = em.find(User.class, userParam.getUsername());
+        if(userCheck != null){
+            throw new UsernameNotAvailableException();
+        }
+        String password = userParam.getPassword();
+        configureSaltedHashedPasswordForUser(userParam, password);
+        em.merge(userParam);
+    }
+
+    private void validatePassword(String password) throws InsufficentPasswordStrenghtException {
         if(password == null|| password.length()<6){
-            throw new IllegalArgumentException("Password too short.");
+            throw new InsufficentPasswordStrenghtException();
         }
     }
     
@@ -164,4 +181,16 @@ public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFac
         em.merge(role);
     }
 
+    public final class UsernameNotAvailableException extends Exception {
+       
+    }
+    public final class UserNotExistException extends Exception{
+    }
+    
+    public final class InsufficentPasswordStrenghtException extends Exception{
+    
+    }
 }
+
+
+

@@ -4,6 +4,8 @@ import com.leansoftwarelabs.realm.domain.Role;
 import com.leansoftwarelabs.realm.domain.RolePermission;
 import com.leansoftwarelabs.realm.domain.User;
 
+import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeBean.UsernameNotAvailableException;
+
 import java.util.List;
 
 import javax.ejb.Local;
@@ -22,7 +24,9 @@ public interface UsersRolesPermissionsFacadeLocal {
     
     List<Role> getAllRoles();
     
-    void createOrUpdateUser(User userParam);
+    void updateUser(User userParam) throws Exception;
+    
+    void createUser(User userParam) throws Exception;
     
     void saveRole(Role role);
     
