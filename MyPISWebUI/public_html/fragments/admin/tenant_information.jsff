@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="#{viewScope.tenantInformationForm.tenant.displayName}" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Save" id="b1" actionListener="#{viewScope.tenantInformationForm.saveTenant}"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelFormLayout id="pfl1">
+      <f:facet name="footer"/>
+      <af:inputText label="Display Name" id="it1" value="#{viewScope.tenantInformationForm.tenant.displayName}"/>
+      <af:inputText label="Legal Name" id="it2" value="#{viewScope.tenantInformationForm.tenant.legalName}"/>
+      <af:inputText label="Overview" id="it15" value="#{viewScope.tenantInformationForm.tenant.description}"/>
+      <af:inputText label="Organization Type" id="it3"/>
+      <af:inputText label="Telephone" id="it5" value="#{viewScope.tenantInformationForm.tenant.telephone}"/>
+      <af:inputText label="Fax" id="it6" value="#{viewScope.tenantInformationForm.tenant.fax}"/>
+      <af:inputText label="Mobile" id="it7" value="#{viewScope.tenantInformationForm.tenant.mobile}"/>
+      <af:inputText label="Email" id="it8" value="#{viewScope.tenantInformationForm.tenant.email}"/>
+      <af:inputText label="Attention To" id="it9" value="#{viewScope.tenantInformationForm.tenant.attentionTo}"/>
+      <af:inputText label="Address Line 1" id="it10" value="#{viewScope.tenantInformationForm.tenant.addressLine1}"/>
+      <af:inputText label="Address Line 2" id="it11" value="#{viewScope.tenantInformationForm.tenant.addressLine2}"/>
+      <af:inputText label="City" id="it12" value="#{viewScope.tenantInformationForm.tenant.city}"/>
+      <af:inputText label="Province" id="it13" value="#{viewScope.tenantInformationForm.tenant.region}"/>
+      <af:inputText label="Postal Code" id="it16" value="#{viewScope.tenantInformationForm.tenant.zipCode}"/>
+      <af:inputText label="Country" id="it14" value="#{viewScope.tenantInformationForm.tenant.country}"/>
+    </af:panelFormLayout>
+  </af:panelHeader>
+</ui:composition>

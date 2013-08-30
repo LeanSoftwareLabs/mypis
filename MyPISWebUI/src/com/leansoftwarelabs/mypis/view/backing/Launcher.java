@@ -1,5 +1,6 @@
 package com.leansoftwarelabs.mypis.view.backing;
 
+import com.leansoftwarelabs.realm.domain.User;
 import com.leansoftwarelabs.view.dynamicShell.TabContext;
 
 import java.util.HashMap;
@@ -8,6 +9,8 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.faces.event.ActionEvent;
+
+import org.apache.shiro.SecurityUtils;
 
 public class Launcher {
     
@@ -37,6 +40,12 @@ public class Launcher {
         
     }
 
-  
-   
+
+    public void launchTenantInformation(ActionEvent actionEvent) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        User currentUser = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        parameters.put("tenantId", currentUser.getTenant().getTenantId());
+        System.out.println("tenantId: " +currentUser.getTenant().getTenantId());
+        launch("Organization", "/WEB-INF/taskflows/admin/tenant-information.xml#tenant-information", parameters,true);
+    }
 }

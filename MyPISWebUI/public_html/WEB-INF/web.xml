@@ -209,7 +209,12 @@
         <local>com.leansoftwarelabs.realm.service.ResourceFacadeLocal</local>
         <ejb-link>ResourceFacade</ejb-link>
     </ejb-local-ref>
-    
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/TenantFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.realm.service.TenantFacadeLocal</local>
+        <ejb-link>TenantFacade</ejb-link>
+    </ejb-local-ref>
     <listener>
         <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
     </listener>

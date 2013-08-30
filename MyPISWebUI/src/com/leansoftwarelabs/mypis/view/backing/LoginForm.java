@@ -50,6 +50,9 @@ public class LoginForm {
             HttpServletRequest request =
                 (HttpServletRequest) (FacesContext.getCurrentInstance().getExternalContext().getRequest());
             SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
+            //put user to session so user and tenant information can be accessed
+            //anywhere on the page
+            request.getSession().setAttribute("user", user);
             ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
             if (savedRequest != null) {
                 System.out.println("SavedRequest URL:" + savedRequest.getRequestUrl());

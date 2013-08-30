@@ -19,6 +19,8 @@
                     <af:panelList id="pl2" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}">
                         <af:link text="Manage Users" id="l4" actionListener="#{viewScope.launcher.launchUserRolesAdministration}"/>
                         <af:link text="Manage Roles and Permissions" id="l5" actionListener="#{viewScope.launcher.launchRolesPermissions}"/>
+                        <af:link text="Organization Information" id="l6"
+                                 actionListener="#{viewScope.launcher.launchTenantInformation}"/>
                     </af:panelList>
                 </f:facet>
                 <f:facet name="globalLinks"/>
@@ -43,9 +45,24 @@
                 </f:facet>
                 <f:facet name="welcome"/>
                 <f:facet name="innerToolbar"/>
-                <f:facet name="branding"/>
+                <f:facet name="branding">
+                    <af:panelBorderLayout id="pbl1">
+                        <f:facet name="start"/>
+                        <f:facet name="bottom"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                        <f:facet name="innerStart">
+                            <af:panelGroupLayout id="pgl1" layout="vertical">
+                                <af:spacer width="10" height="10" id="s1"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:panelBorderLayout>
+                </f:facet>
                 <f:facet name="globalMenu">
                     <af:toolbar id="t1">
+                        <af:group id="g1">
+                            <af:outputText value="You are login as: #{user.fullName}" id="ot1" noWrap="true"/>
+                        </af:group>
                         <af:link text="Log Out" id="l3" action="#{loginForm.logout}"/>
                     </af:toolbar>
                 </f:facet>
