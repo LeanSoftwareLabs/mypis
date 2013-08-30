@@ -69,10 +69,22 @@ public class BaptismalRegister implements Serializable {
     @NotNull
     @Column(nullable = false)
     private Integer volume;
+    @Column(name = "GOD_FATHER")
+    private String godFather;
+    @Column(name = "GOD_MOTHER")
+    private String godMother;
 
     public BaptismalRegister() {
     }
 
+
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
     public Integer getAge() {
         return age;
@@ -224,5 +236,32 @@ public class BaptismalRegister implements Serializable {
 
     public void setVolume(Integer volume) {
         this.volume = volume;
+    }
+
+
+    public void setGodFather(String godFather) {
+        this.godFather = godFather;
+    }
+
+    public String getGodFather() {
+        return godFather;
+    }
+
+    public void setGodMother(String godMother) {
+        this.godMother = godMother;
+    }
+
+    public String getGodMother() {
+        return godMother;
+    }
+
+    public String getIndex(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("%03d", volume));
+        builder.append("/");
+        builder.append(String.format("%02d", page));
+        builder.append("/");
+        builder.append(String.format("%02d", line));
+        return builder.toString();
     }
 }

@@ -49,9 +49,11 @@ public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFac
         if (jpqlStmt == null) {
             return Collections.emptyList();
         }
-        String username = sessionContext.getCallerPrincipal().getName();
-        User user = em.find(User.class, username);
-        Integer tenantId = user.getTenant().getTenantId();
+        User currentUser = em.find(User.class, principal.getName());
+        if (currentUser == null) {
+            return Collections.emptyList();
+        }
+        Integer tenantId = currentUser.getTenant().getTenantId();
         StringBuffer buffer = new StringBuffer(jpqlStmt);
         if (jpqlStmt.toUpperCase().contains("WHERE")) {
             buffer.append(" AND");
@@ -59,7 +61,7 @@ public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFac
             buffer.append(" WHERE");
         }
         buffer.append(" o.tenantId = :tenantId");
-        Query query = em.createQuery(jpqlStmt);
+        Query query = em.createQuery(buffer.toString());
         query.setParameter("tenantId", tenantId);
         if (firstResult > 0) {
             query = query.setFirstResult(firstResult);

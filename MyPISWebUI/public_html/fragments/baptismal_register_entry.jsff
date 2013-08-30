@@ -1,91 +1,105 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
-  <af:panelHeader text="Baptismal Register: #{viewScope.baptismalRegisterEntryForm.baptismalRegister.lastName}, #{viewScope.baptismalRegisterEntryForm.baptismalRegister.firstName}" id="ph1"
-                  headerLevel="2" size="2" partialTriggers="b1">
-    <f:facet name="context"/>
-    <f:facet name="menuBar"/>
-    <f:facet name="toolbar">
-      <af:toolbar id="t1">
-        <af:button text="Print Certificate" id="b5" actionListener="#{viewScope.baptismalRegisterEntryForm.printToPDF}"
-                   rendered="#{not pageFlowScope.editMode}"/>
-        <af:button text="Edit" id="b1"
-                   rendered="#{not pageFlowScope.editMode}" action="#{viewScope.baptismalRegisterEntryForm.edit}"/>
-        <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
-                   action="#{viewScope.baptismalRegisterEntryForm.cancel}" immediate="true">
-          <af:resetActionListener/>
-        </af:button>
-        <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
-                   action="#{viewScope.baptismalRegisterEntryForm.save}"/>
-        <af:button text="Close" id="b4" rendered="#{not pageFlowScope.editMode}" action="done"/>
-      </af:toolbar>
-    </f:facet>
-    <f:facet name="legend"/>
-    <f:facet name="info"/>
-    <af:panelGroupLayout id="pgl1" layout="vertical">
-      <af:panelFormLayout id="pfl2" rows="1" maxColumns="8" labelAlignment="top" fieldWidth="50" labelWidth="50">
-        <af:inputText label="Volume" id="it1" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.volume}"
-                      columns="6" disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Page" id="it2" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.page}"
-                      columns="6" disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Line" id="it3" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.line}"
-                      columns="6" disabled="#{not pageFlowScope.editMode}"/>
-        <af:spacer width="10" height="10" id="s2"/>
-        <af:inputText label="Last Name" id="it4"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.lastName}" columns="20"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="First Name" id="it5"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.firstName}" columns="20"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Middle Name" id="it6"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.middleName}" columns="20"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Suffix" id="it7" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.suffix}"
-                      columns="5" disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-      <af:panelFormLayout id="pfl1" rows="1" maxColumns="6" labelAlignment="top" fieldWidth="50" labelWidth="50">
-        <af:inputDate label="Birth Date" id="id1"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.birthDate}" columns="15"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Age" id="it14" value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.age}"
-                      columns="6" disabled="#{not pageFlowScope.editMode}"/>
-        <af:spacer width="10" height="10" id="s3"/>
-        <af:inputText label="Child Birth Place" id="it12"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.birthPlace}" columns="86"
-                      disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-      <af:panelFormLayout id="pfl3" rows="1" maxColumns="2" labelAlignment="top" fieldWidth="50" labelWidth="50">
-        <af:inputText label="Father's Name" id="it9"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.father}" columns="50"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Father's Birth Place/Origin" id="it10"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.fatherBirthPlace}" columns="72"
-                      disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-      <f:facet name="separator">
-        <af:separator id="s1"/>
-      </f:facet>
-      <af:panelFormLayout id="pfl4" labelAlignment="top" rows="1" maxColumns="4" fieldWidth="50" labelWidth="50">
-        <af:inputText label="Mother's Name" id="it8"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.mother}" columns="50"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Mother's Birth Place/Origin" id="it11"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.motherBirthPlace}" columns="72"
-                      disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-      <af:panelFormLayout id="pfl5" rows="1" fieldWidth="50" labelWidth="50" labelAlignment="top">
-        <af:inputDate label="Baptismal Date" id="id2"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.baptismalDate}" columns="18"
-                      disabled="#{not pageFlowScope.editMode}"/>
-        <af:inputText label="Minister/ Officiating Priest" id="it13"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.minister}" columns="60"
-                      disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-      <af:panelFormLayout id="pfl6" labelAlignment="top">
-        <af:inputText label="Remarks" id="it15"
-                      value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.remarks}" columns="130"
-                      rows="10" disabled="#{not pageFlowScope.editMode}"/>
-      </af:panelFormLayout>
-    </af:panelGroupLayout>
-  </af:panelHeader>
+    <af:panelHeader text="Baptismal Register: #{viewScope.baptismalRegisterEntryForm.baptismalRegister.lastName}, #{viewScope.baptismalRegisterEntryForm.baptismalRegister.firstName}"
+                    id="ph1" headerLevel="2" size="2" partialTriggers="b1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+            <af:toolbar id="t1">
+                <af:button text="Print Certificate" id="b5"
+                           actionListener="#{viewScope.baptismalRegisterEntryForm.printToPDF}"
+                           rendered="#{not pageFlowScope.editMode}"/>
+                <af:button text="Edit" id="b1" rendered="#{not pageFlowScope.editMode}"
+                           action="#{viewScope.baptismalRegisterEntryForm.edit}"/>
+                <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
+                           action="#{viewScope.baptismalRegisterEntryForm.cancel}" immediate="true">
+                    <af:resetActionListener/>
+                </af:button>
+                <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
+                           action="#{viewScope.baptismalRegisterEntryForm.save}"/>
+                <af:button text="Close" id="b4" rendered="#{not pageFlowScope.editMode}" action="done"/>
+            </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelGroupLayout id="pgl1" layout="vertical">
+            <af:panelFormLayout id="pfl2" rows="1" maxColumns="8" labelAlignment="top" fieldWidth="50" labelWidth="50">
+                <af:inputText label="Volume" id="it1"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.volume}" columns="6"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Page" id="it2"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.page}" columns="6"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Line" id="it3"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.line}" columns="6"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:inputText label="Last Name" id="it4"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.lastName}" columns="20"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="First Name" id="it5"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.firstName}" columns="20"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Middle Name" id="it6"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.middleName}" columns="20"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Suffix" id="it7"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.suffix}" columns="5"
+                              disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl1" rows="1" maxColumns="6" labelAlignment="top" fieldWidth="50" labelWidth="50">
+                <af:inputDate label="Birth Date" id="id1"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.birthDate}" columns="15"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Age" id="it14"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.age}" columns="6"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:inputText label="Child Birth Place" id="it12"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.birthPlace}" columns="86"
+                              disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl3" rows="1" maxColumns="2" labelAlignment="top" fieldWidth="50" labelWidth="50">
+                <af:inputText label="Father's Name" id="it9"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.father}" columns="61"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Father's Birth Place/Origin" id="it10"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.fatherBirthPlace}"
+                              columns="61" disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+            <f:facet name="separator">
+                <af:separator id="s1"/>
+            </f:facet>
+            <af:panelFormLayout id="pfl4" labelAlignment="top" rows="1" maxColumns="4" fieldWidth="50" labelWidth="50">
+                <af:inputText label="Mother's Name" id="it8"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.mother}" columns="61"
+                              disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Mother's Birth Place/Origin" id="it11"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.motherBirthPlace}"
+                              columns="61" disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl5" rows="1" fieldWidth="50" labelWidth="50" labelAlignment="top">
+                <af:inputDate label="Baptismal Date" id="id2"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.baptismalDate}"
+                              columns="18" disabled="#{not pageFlowScope.editMode}"/>
+                <af:inputText label="Minister/ Officiating Priest" id="it13"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.minister}" columns="60"
+                              disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl7" labelAlignment="top" fieldWidth="50" labelWidth="50" rows="1" maxColumns="4">
+                <af:inputText label="God Father" id="it16"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.godFather}"
+                              disabled="#{not pageFlowScope.editMode}" columns="61"/>
+                <af:inputText label="God Mother" id="it17"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.godMother}"
+                              disabled="#{not pageFlowScope.editMode}" columns="61"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl6" labelAlignment="top">
+                <af:inputText label="Remarks" id="it15"
+                              value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.remarks}" columns="130"
+                              rows="10" disabled="#{not pageFlowScope.editMode}"/>
+            </af:panelFormLayout>
+        </af:panelGroupLayout>
+    </af:panelHeader>
 </ui:composition>

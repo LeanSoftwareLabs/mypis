@@ -20,7 +20,7 @@
                   autoHeightRows="0" rowSelection="single" columnSelection="multiple"
                   binding="#{viewScope.baptismalRegisterListForm.baptismalRegisterTable}">
           <af:column sortable="false" headerText="Register Id" align="end" id="c1" width="30">
-            <af:link text="#{row.registerId}" id="l1"
+            <af:link text="#{row.index}" id="l1"
                      actionListener="#{viewScope.baptismalRegisterListForm.viewDetails}"/>
           </af:column>
           <af:column sortable="true" headerText="Volume" align="end" id="c2" width="30" sortProperty="volume">

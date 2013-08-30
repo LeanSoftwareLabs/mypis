@@ -17,17 +17,17 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "confirmation_register")
 public class ConfirmationRegister implements Serializable {
-
-
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "CONFIRMATION_REGISTER_ID", nullable = false)
-    private int registerId;
+    private Integer registerId;
     @Column(nullable = false)
-    private int line;
+    private Integer line;
     @Column(nullable = false)
-    private int volume;
+    private Integer volume;
+    @Column(nullable = false)
+    private Integer page;
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Size(min = 2, max = 45)
@@ -39,39 +39,49 @@ public class ConfirmationRegister implements Serializable {
     @Column(name = "TENANT_ID", nullable = false)
     private Integer tenantId;
 
-    @NotNull
 
-    public ConfirmationRegister() {
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
     }
 
-    public ConfirmationRegister(int confirmationRegisterId, int line, int volume) {
-        this.registerId = confirmationRegisterId;
-        this.line = line;
-        this.volume = volume;
+    public Integer getTenantId() {
+        return tenantId;
     }
 
-    public int getRegisterId() {
+
+    public void setRegisterId(Integer registerId) {
+        this.registerId = registerId;
+    }
+
+    public Integer getRegisterId() {
         return registerId;
     }
 
-    public void setRegisterId(int confirmationRegisterId) {
-        this.registerId = confirmationRegisterId;
-    }
-
-    public int getLine() {
-        return line;
-    }
-
-    public void setLine(int line) {
+    public void setLine(Integer line) {
         this.line = line;
     }
 
-    public int getVolume() {
+    public Integer getLine() {
+        return line;
+    }
+
+    public void setVolume(Integer volume) {
+        this.volume = volume;
+    }
+
+    public Integer getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public ConfirmationRegister() {
     }
 
     public String getFirstName() {
