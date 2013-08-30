@@ -7,15 +7,38 @@ import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeLocal;
 
 import com.leansoftwarelabs.view.utils.ADFUtils;
 
+import java.io.DataOutput;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 
 public class BaptismalRegisterEntryForm {
     private BaptismalRegister baptismalRegister;
@@ -23,15 +46,15 @@ public class BaptismalRegisterEntryForm {
 
     @PostConstruct
     public void init() {
-        
+
     }
-    
-    public String prepare(){
-        if(!SecurityContext.hasPermission("baptismal-register-entry:read")){
+
+    public String prepare() {
+        if (!SecurityContext.hasPermission("baptismal-register-entry:read")) {
             return "unathorized";
         }
         Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
-        if(registerId == -1){
+        if (registerId == -1) {
             editing(true);
         }
         return "toEntry";
@@ -42,7 +65,7 @@ public class BaptismalRegisterEntryForm {
     }
 
     public BaptismalRegister getBaptismalRegister() {
-        if(baptismalRegister == null){
+        if (baptismalRegister == null) {
             Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
             if (registerId == -1) {
                 baptismalRegister = new BaptismalRegister();
@@ -73,10 +96,10 @@ public class BaptismalRegisterEntryForm {
 
     public String cancel() {
         editing(false);
-        if(baptismalRegister.getRegisterId() == null){
+        if (baptismalRegister.getRegisterId() == null) {
             return "done";
-        }else{
-            baptismalRegister = null;// reset to focer requery upon call to get
+        } else {
+            baptismalRegister = null; // reset to focer requery upon call to get
         }
         return null;
     }
@@ -92,5 +115,27 @@ public class BaptismalRegisterEntryForm {
     public void save() {
         this.baptismalRegister = getService().mergeEntity(this.baptismalRegister);
         editing(false);
+    }
+
+    public void printToPDF(ActionEvent actionEvent) {
+        List data = new ArrayList();
+        data.add(getBaptismalRegister());
+        Map parameters = new HashMap<String, String>();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        InputStream stream = externalContext.getResourceAsStream("/reports/certificates/BaptismalCertificate.jasper");
+        JasperPrint print = null;
+        try {
+            JRDataSource datasource = new JRBeanCollectionDataSource(data, true);
+            print = JasperFillManager.fillReport(stream, parameters, datasource);
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        String printId = "JasperPrint_" + UUID.randomUUID().toString();
+        request.getSession().setAttribute(printId, print);
+        ADFUtils.openLink(request.getContextPath()+"/showpdf?filename=" + getBaptismalRegister().getLastName()+"&printId="+printId);
+
+
     }
 }

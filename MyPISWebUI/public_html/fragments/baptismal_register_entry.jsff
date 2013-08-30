@@ -7,6 +7,8 @@
     <f:facet name="menuBar"/>
     <f:facet name="toolbar">
       <af:toolbar id="t1">
+        <af:button text="Print Certificate" id="b5" actionListener="#{viewScope.baptismalRegisterEntryForm.printToPDF}"
+                   rendered="#{not pageFlowScope.editMode}"/>
         <af:button text="Edit" id="b1"
                    rendered="#{not pageFlowScope.editMode}" action="#{viewScope.baptismalRegisterEntryForm.edit}"/>
         <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"

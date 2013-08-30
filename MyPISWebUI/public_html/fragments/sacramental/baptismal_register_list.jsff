@@ -9,6 +9,9 @@
           <af:toolbar id="t2">
             <af:button text="Create New Baptismal Entry" id="b1"
                        actionListener="#{viewScope.baptismalRegisterListForm.create}"/>
+            <af:button text="Export Table" id="b2">
+              <af:exportCollectionActionListener type="excelHTML" exportedId="t1"/>
+            </af:button>
           </af:toolbar>
         </f:facet>
         <f:facet name="statusbar"/>

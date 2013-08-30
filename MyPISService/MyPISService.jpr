@@ -194,6 +194,12 @@
             <hash n="MyPISService">
                <value n="development-database" v="MyPISConn"/>
             </hash>
+            <hash n="MyPISService-1">
+               <value n="development-database" v="MyPISConn"/>
+            </hash>
+            <hash n="OutsideContainer">
+               <value n="development-database" v="MyPISConn"/>
+            </hash>
          </hash>
       </hash>
    </hash>
