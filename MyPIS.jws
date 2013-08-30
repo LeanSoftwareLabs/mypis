@@ -26,6 +26,7 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
    <list n="listOfChildren">
+      <hash><url n="URL" path="MyPISReports/MyPISReports.jpr"/></hash>
       <hash><url n="URL" path="MyPISService/MyPISService.jpr"/></hash>
       <hash><url n="URL" path="MyPISWebUI/MyPISWebUI.jpr"/></hash>
    </list>

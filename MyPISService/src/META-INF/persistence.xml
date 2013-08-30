@@ -27,4 +27,40 @@
       <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/JDBCRealmConnDS"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="MyPISService-1" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.leansoftwarelabs.realm.domain.Role</class>
+    <class>com.leansoftwarelabs.realm.domain.Resource</class>
+    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+    <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
+    <class>com.leansoftwarelabs.realm.domain.User</class>
+    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+    <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
+      <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
+      <property name="javax.persistence.jdbc.password"
+                value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
+      <property name="eclipselink.logging.level" value="FINER"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="OutsideContainer" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.leansoftwarelabs.realm.domain.Role</class>
+    <class>com.leansoftwarelabs.realm.domain.Resource</class>
+    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+    <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
+    <class>com.leansoftwarelabs.realm.domain.User</class>
+    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+    <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
+      <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
+      <property name="javax.persistence.jdbc.password"
+                value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
+      <property name="eclipselink.logging.level" value="FINER"/>
+    </properties>
+  </persistence-unit>
 </persistence>
