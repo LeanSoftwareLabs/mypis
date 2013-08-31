@@ -1,9 +1,20 @@
 package com.leansoftwarelabs.mypis.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,21 +27,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "GLAccount.findAll", query = "SELECT o FROM GLAccount o")
 })
-public class GLAccount implements Serializable {
+public class GLAccount implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
-    @Size(max = 20)
     @Column(name = "acct_type")
     private String type;
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "gl_acct_id")
     private Integer accountId;
     @NotNull
     @Column(name = "tenant_id")
     private Integer tenantId;
     
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "acct_code")
@@ -41,16 +48,10 @@ public class GLAccount implements Serializable {
     @Size(max = 200)
     @Column(name = "acct_desc")
     private String description;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "dashboard")
     private boolean dashboard;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "expense_claims")
     private boolean expenseClaims;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "payments")
     private boolean payments;
 
@@ -156,6 +157,26 @@ public class GLAccount implements Serializable {
     @Override
     public String toString() {
         return "count.entities.Account[ acctId=" + accountId + " ]";
+    }
+    
+    public static final class AccountType{
+        public static final Map VALUES;
+        static {
+            VALUES = new LinkedHashMap();
+            VALUES.put("Cash", "Cash");
+            VALUES.put("Receivables", "A/R");
+            VALUES.put("Inventories", "Inv");
+            VALUES.put("Prepayments", "Prepay");
+            VALUES.put("Other Current Assets", "OtherCA");
+            VALUES.put("Prepayments", "Prepay");
+            VALUES.put("Payables", "A/P");
+            VALUES.put("Long-term Liabilities", "LTL");
+            VALUES.put("Equity", "Equity");
+            VALUES.put("Retained Earnings", "Earn");
+            VALUES.put("Revenue", "Revenue");
+            VALUES.put("Direct Cost", "Cost");
+            VALUES.put("Expenses", "Exp");
+        }
     }
     
 }

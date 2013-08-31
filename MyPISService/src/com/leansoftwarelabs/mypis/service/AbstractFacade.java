@@ -1,5 +1,6 @@
 package com.leansoftwarelabs.mypis.service;
 
+import com.leansoftwarelabs.mypis.domain.MultiTenant;
 import com.leansoftwarelabs.realm.domain.User;
 
 import java.security.Principal;
@@ -43,7 +44,7 @@ public abstract class AbstractFacade<T> {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Object queryByRange(String jpqlStmt, List<Object[]> hints, int firstResult, int maxResults) {
-        User currentUser = getEntityManager().find(User.class, principal.getName());
+        User currentUser = getCurrentUser();
         if (currentUser == null) {
             return Collections.emptyList();
         }
@@ -60,6 +61,11 @@ public abstract class AbstractFacade<T> {
         query.setParameter("tenantId", tenantId);
         setFirstAndMaxResults(query, firstResult, maxResults);
         return query.getResultList();
+    }
+
+    private User getCurrentUser() {
+        User currentUser = getEntityManager().find(User.class, principal.getName());
+        return currentUser;
     }
 
     protected void setFirstAndMaxResults(Query query, int firstResult, int maxResults) {
@@ -82,13 +88,22 @@ public abstract class AbstractFacade<T> {
     protected boolean containsWhereClause(String jpql) {
         return jpql.toUpperCase().contains("WHERE");
     }
-
-    public <T> T persistEntity(T entity) {
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public <T extends MultiTenant> T persistEntity(T entity) {
+        User currentUser = getCurrentUser();
+        if(entity.getTenantId() == null){
+            entity.setTenantId(currentUser.getTenant().getTenantId());
+        }
         getEntityManager().persist(entity);
         return entity;
     }
-
-    public <T> T mergeEntity(T entity) {
-        return getEntityManager().merge(entity);
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public <T extends MultiTenant> T mergeEntity(T entity) {
+        User currentUser = getCurrentUser();
+        if(entity.getTenantId() == null){
+            entity.setTenantId(currentUser.getTenant().getTenantId());
+        }
+        entity = getEntityManager().merge(entity);
+        return entity;
     }
 }

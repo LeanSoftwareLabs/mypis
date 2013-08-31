@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 public class GLAccountFacadeBean extends AbstractFacade<GLAccount>{
     @Resource
     SessionContext sessionContext;
-    @PersistenceContext(unitName = "OutsideContainer")
+    @PersistenceContext(unitName = "MyPISService")
     private EntityManager em;
 
     public GLAccountFacadeBean() {

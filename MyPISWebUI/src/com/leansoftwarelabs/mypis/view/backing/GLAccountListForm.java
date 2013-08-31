@@ -146,6 +146,10 @@ public class GLAccountListForm {
             ADFUtils.closeDialog(getGlAccountDetailPopup());
         }
     }
+    
+    public Map getAccountTypeItems(){
+        return GLAccount.AccountType.VALUES;
+    }
 
     public void setRegion(RichRegion region) {
         this.region = region;

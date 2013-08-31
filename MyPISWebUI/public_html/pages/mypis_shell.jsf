@@ -22,7 +22,7 @@
                     <af:panelList id="pl2" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}">
                         <af:link text="Manage Users" id="l4" actionListener="#{viewScope.launcher.launchUserRolesAdministration}"/>
                         <af:link text="Manage Roles and Permissions" id="l5" actionListener="#{viewScope.launcher.launchRolesPermissions}"/>
-                        <af:link text="Organization Information" id="l6"
+                        <af:link text="Parish Information" id="l6"
                                  actionListener="#{viewScope.launcher.launchTenantInformation}"/>
                     </af:panelList>
                     <af:panelList id="pl3" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}">
@@ -59,7 +59,9 @@
                                                partialSubmit="true"/>
                     </af:navigationPane>
                 </f:facet>
-                <f:facet name="welcome"/>
+                <f:facet name="welcome">
+                    <af:outputText value="Welcome" id="ot2"/>
+                </f:facet>
                 <f:facet name="innerToolbar"/>
                 <f:facet name="branding">
                     <af:panelBorderLayout id="pbl1">

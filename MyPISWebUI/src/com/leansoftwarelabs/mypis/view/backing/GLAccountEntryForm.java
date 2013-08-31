@@ -3,6 +3,8 @@ package com.leansoftwarelabs.mypis.view.backing;
 import com.leansoftwarelabs.mypis.domain.GLAccount;
 import com.leansoftwarelabs.mypis.service.GLAccountFacadeBean;
 
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 
 import javax.naming.Context;
@@ -65,5 +67,9 @@ public class GLAccountEntryForm {
         this.account = getService().mergeEntity(this.account);
         FormUtils.editing(false);
         return null;
+    }
+    
+    public Map getAccountTypeItems(){
+        return GLAccount.AccountType.VALUES;
     }
 }

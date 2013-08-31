@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
     })
 @Entity
 @Table(name = "\"baptismal_register\"")
-public class BaptismalRegister implements Serializable {
+public class BaptismalRegister implements MultiTenant, Serializable {
     @NotNull
     @Column(name = "TENANT_ID", nullable = false)
     private Integer tenantId;

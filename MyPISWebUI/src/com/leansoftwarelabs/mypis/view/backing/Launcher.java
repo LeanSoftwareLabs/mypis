@@ -46,7 +46,7 @@ public class Launcher {
         User currentUser = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         parameters.put("tenantId", currentUser.getTenant().getTenantId());
         System.out.println("tenantId: " +currentUser.getTenant().getTenantId());
-        launch("Organization", "/WEB-INF/taskflows/admin/tenant-information.xml#tenant-information", parameters,true);
+        launch("Parish Information", "/WEB-INF/taskflows/admin/tenant-information.xml#tenant-information", parameters,true);
     }
     
     public void launchGLAccountList(ActionEvent actionEvent) {

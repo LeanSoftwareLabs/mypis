@@ -31,7 +31,9 @@
                         <af:outputText value="#{row.description}" id="ot3"/>
                     </af:column>
                     <af:column sortable="true" headerText="Type" align="start" id="c4" sortProperty="type">
-                        <af:outputText value="#{row.type}" id="ot4"/>
+                        <af:selectOneChoice label="Account Type" id="soc1" value="#{row.type}" readOnly="true">
+                            <f:selectItems value="#{viewScope.glAccountListForm.accountTypeItems}" id="si1"/>
+                        </af:selectOneChoice>
                     </af:column>
                     <af:column sortable="true" headerText="Dashboard" align="start" id="c5" width="50"
                                sortProperty="dashboard">

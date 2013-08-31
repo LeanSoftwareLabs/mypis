@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
     })
 @Entity
 @Table(name = "confirmation_register")
-public class ConfirmationRegister implements Serializable {
+public class ConfirmationRegister implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
