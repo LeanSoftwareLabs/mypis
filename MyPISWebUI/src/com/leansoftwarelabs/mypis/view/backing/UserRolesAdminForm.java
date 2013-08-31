@@ -4,15 +4,11 @@ import com.leansoftwarelabs.adf.query.AttributeDef;
 import com.leansoftwarelabs.adf.query.FilterableQueryDescriptorImpl;
 import com.leansoftwarelabs.adf.query.SavedSearchDef;
 import com.leansoftwarelabs.adf.query.SearchFieldDef;
-import com.leansoftwarelabs.ext.adf.EventHandler;
 import com.leansoftwarelabs.realm.domain.Role;
 import com.leansoftwarelabs.realm.domain.User;
-import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeLocal;
+import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeBean;
 import com.leansoftwarelabs.trinidad.model.FilterableCollectionModel;
 import com.leansoftwarelabs.trinidad.model.InMemoryFilterableCollectionModel;
-
-import com.leansoftwarelabs.view.utils.ADFUtils;
-
 import com.leansoftwarelabs.view.utils.JSFUtils;
 
 import java.math.BigDecimal;
@@ -29,20 +25,16 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import oracle.adf.view.rich.component.rich.data.RichTable;
-import oracle.adf.view.rich.component.rich.input.RichInputText;
-import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
 import oracle.adf.view.rich.component.rich.layout.RichPanelGroupLayout;
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.QueryEvent;
 import oracle.adf.view.rich.model.FilterableQueryDescriptor;
 
-import org.apache.commons.collections.functors.FalsePredicate;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
 
 public class UserRolesAdminForm {
-    private UsersRolesPermissionsFacadeLocal service;
+    private UsersRolesPermissionsFacadeBean service;
     private FilterableCollectionModel userDataModel;
     private FilterableQueryDescriptor descriptor;
     private RichTable userTable;
@@ -138,12 +130,12 @@ public class UserRolesAdminForm {
     }
 
 
-    public UsersRolesPermissionsFacadeLocal getService() {
+    public UsersRolesPermissionsFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (UsersRolesPermissionsFacadeLocal) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
+                    (UsersRolesPermissionsFacadeBean) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

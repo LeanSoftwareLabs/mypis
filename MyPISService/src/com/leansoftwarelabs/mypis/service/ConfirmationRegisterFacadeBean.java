@@ -12,24 +12,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless(name = "ConfirmationRegisterFacade", mappedName = "MyPIS-MyPISService-ConfirmationRegisterFacade")
-public class ConfirmationRegisterFacadeBean extends AbstractFacade implements ConfirmationRegisterFacade, ConfirmationRegisterFacadeLocal {
+public class ConfirmationRegisterFacadeBean extends AbstractFacade<ConfirmationRegister>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")
     private EntityManager em;
 
     public ConfirmationRegisterFacadeBean() {
+        super(ConfirmationRegister.class);
     }
 
     public void removeBaptismalRegister(BaptismalRegister baptismalRegister) {
         baptismalRegister = em.find(BaptismalRegister.class, baptismalRegister.getRegisterId());
         em.remove(baptismalRegister);
-    }
-
-    @Override
-    public ConfirmationRegister findConfirmationRegisterById(Integer registerId) {
-        // TODO Implement this method
-        return null;
     }
 
     @Override

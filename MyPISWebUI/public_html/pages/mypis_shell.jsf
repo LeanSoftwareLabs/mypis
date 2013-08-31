@@ -37,6 +37,10 @@
                                                selected="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}"
                                                immediate="true"
                                                partialSubmit="true"/>
+                        <af:commandNavigationItem text="Accounting" id="accounting" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'accounting'}"
+                                               immediate="true"
+                                               partialSubmit="true"/>
                         <af:commandNavigationItem text="Administration" id="admin" actionListener="#{viewScope.tabContext.globalTabSelected}"
                                                selected="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}"
                                                immediate="true"

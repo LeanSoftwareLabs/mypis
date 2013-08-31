@@ -16,13 +16,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless(name = "ResourceFacade", mappedName = "MyPIS-MyPISService-ResourceFacade")
-public class ResourceFacadeBean extends AbstractFacade implements ResourceFacade, ResourceFacadeLocal {
+public class ResourceFacadeBean extends AbstractFacade<Resource>{
     @javax.annotation.Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "JDBCRealm")
     private EntityManager em;
 
     public ResourceFacadeBean() {
+        super(Resource.class);
     }
 
     @Override

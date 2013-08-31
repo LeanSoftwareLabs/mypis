@@ -2,15 +2,9 @@ package com.leansoftwarelabs.mypis.view.backing;
 
 
 import com.leansoftwarelabs.realm.domain.User;
-import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeLocal;
-
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeBean;
 
 import java.io.IOException;
-
-import java.net.URL;
-
-import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -23,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
@@ -35,7 +27,7 @@ public class LoginForm {
     private boolean remember;
     public static final String HOME_URL = "/faces/pages/mypis_shell.jsf";
     public static final String LOGIN_URL = "/faces/login.jsf";
-    private UsersRolesPermissionsFacadeLocal service;
+    private UsersRolesPermissionsFacadeBean service;
 
     public LoginForm() {
         super();
@@ -66,12 +58,12 @@ public class LoginForm {
         return "";
     }
     
-    public UsersRolesPermissionsFacadeLocal getService() {
+    public UsersRolesPermissionsFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (UsersRolesPermissionsFacadeLocal) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
+                    (UsersRolesPermissionsFacadeBean) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

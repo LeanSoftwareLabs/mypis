@@ -1,12 +1,8 @@
 package com.leansoftwarelabs.mypis.view.backing;
 
 import com.leansoftwarelabs.ext.adf.EventHandler;
-import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
 import com.leansoftwarelabs.mypis.domain.ConfirmationRegister;
-import com.leansoftwarelabs.mypis.domain.ConfirmationRegister;
-import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeLocal;
-
-import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeLocal;
+import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeBean;
 import com.leansoftwarelabs.view.utils.ADFUtils;
 
 import java.util.HashMap;
@@ -14,14 +10,12 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import javax.faces.event.ActionEvent;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 public class ConfirmationRegisterEntryForm {
     private ConfirmationRegister confirmationRegister;
-    private ConfirmationRegisterFacadeLocal service;
+    private ConfirmationRegisterFacadeBean service;
 
     @PostConstruct
     public void init() {
@@ -29,7 +23,7 @@ public class ConfirmationRegisterEntryForm {
         if (registerId == -1) {
             confirmationRegister = new ConfirmationRegister();
         } else {
-            confirmationRegister = getService().findConfirmationRegisterById(registerId);
+            confirmationRegister = getService().find(registerId);
             
         }
     }
@@ -42,12 +36,12 @@ public class ConfirmationRegisterEntryForm {
         return confirmationRegister;
     }
 
-    public ConfirmationRegisterFacadeLocal getService() {
+    public ConfirmationRegisterFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (ConfirmationRegisterFacadeLocal) context.lookup("java:comp/env/ejb/local/ConfirmationRegisterFacade");
+                    (ConfirmationRegisterFacadeBean) context.lookup("java:comp/env/ejb/local/ConfirmationRegisterFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

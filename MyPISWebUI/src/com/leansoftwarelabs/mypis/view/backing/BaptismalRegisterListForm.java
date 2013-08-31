@@ -1,16 +1,24 @@
 package com.leansoftwarelabs.mypis.view.backing;
 
-import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeLocal;
 
-import java.math.BigDecimal;
+import com.leansoftwarelabs.adf.query.AttributeDef;
+import com.leansoftwarelabs.adf.query.QueryModelImpl;
+import com.leansoftwarelabs.ext.adf.EventHandler;
+import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
+import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeBean;
+import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
+import com.leansoftwarelabs.trinidad.model.LazyDataModel;
+import com.leansoftwarelabs.view.utils.ADFUtils;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+
+import javax.faces.event.ActionEvent;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -19,23 +27,8 @@ import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.event.QueryEvent;
 import oracle.adf.view.rich.model.QueryModel;
 
-import com.leansoftwarelabs.adf.query.AttributeDef;
-import com.leansoftwarelabs.adf.query.QueryModelImpl;
-import com.leansoftwarelabs.ext.adf.EventHandler;
-import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
-import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
-import com.leansoftwarelabs.trinidad.model.LazyDataModel;
-
-import com.leansoftwarelabs.trinidad.model.LazyDataModel;
-
-import com.leansoftwarelabs.view.utils.ADFUtils;
-
-import java.util.HashMap;
-
-import javax.faces.event.ActionEvent;
-
 public class BaptismalRegisterListForm {
-    private BaptismalRegisterFacadeLocal service;
+    private BaptismalRegisterFacadeBean service;
     private QueryModel queryModel;
     private LazyDataModel lazyDataModel;
     private RichTable baptismalRegisterTable;
@@ -68,12 +61,12 @@ public class BaptismalRegisterListForm {
         return queryModel;
     }
 
-    public BaptismalRegisterFacadeLocal getService() {
+    public BaptismalRegisterFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (BaptismalRegisterFacadeLocal) context.lookup("java:comp/env/ejb/local/BaptismalRegisterFacade");
+                    (BaptismalRegisterFacadeBean) context.lookup("java:comp/env/ejb/local/BaptismalRegisterFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

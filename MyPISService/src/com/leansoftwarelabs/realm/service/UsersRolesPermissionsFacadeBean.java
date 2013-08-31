@@ -33,7 +33,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.util.ByteSource;
 
 @Stateless(name = "UsersRolesPermissionsFacade", mappedName = "MyPIS-MyPISService-UsersRolesPermissionsFacade")
-public class UsersRolesPermissionsFacadeBean implements UsersRolesPermissionsFacade, UsersRolesPermissionsFacadeLocal {
+public class UsersRolesPermissionsFacadeBean{
     @Resource
     SessionContext sessionContext;
     @Inject

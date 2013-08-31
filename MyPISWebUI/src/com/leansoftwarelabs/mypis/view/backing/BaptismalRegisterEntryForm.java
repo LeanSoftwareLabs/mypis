@@ -3,21 +3,15 @@ package com.leansoftwarelabs.mypis.view.backing;
 import com.leansoftwarelabs.ext.adf.EventHandler;
 import com.leansoftwarelabs.ext.shiro.SecurityContext;
 import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
-import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeLocal;
-
+import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeBean;
 import com.leansoftwarelabs.view.utils.ADFUtils;
 
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -29,20 +23,16 @@ import javax.faces.event.ActionEvent;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 
 public class BaptismalRegisterEntryForm {
     private BaptismalRegister baptismalRegister;
-    private BaptismalRegisterFacadeLocal service;
+    private BaptismalRegisterFacadeBean service;
 
     @PostConstruct
     public void init() {
@@ -76,12 +66,12 @@ public class BaptismalRegisterEntryForm {
         return baptismalRegister;
     }
 
-    public BaptismalRegisterFacadeLocal getService() {
+    public BaptismalRegisterFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (BaptismalRegisterFacadeLocal) context.lookup("java:comp/env/ejb/local/BaptismalRegisterFacade");
+                    (BaptismalRegisterFacadeBean) context.lookup("java:comp/env/ejb/local/BaptismalRegisterFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

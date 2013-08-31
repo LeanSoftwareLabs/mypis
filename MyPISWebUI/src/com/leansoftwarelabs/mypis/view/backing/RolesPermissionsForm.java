@@ -6,8 +6,8 @@ import com.leansoftwarelabs.realm.domain.Resource;
 import com.leansoftwarelabs.realm.domain.Role;
 import com.leansoftwarelabs.realm.domain.RolePermission;
 import com.leansoftwarelabs.realm.domain.User;
-import com.leansoftwarelabs.realm.service.ResourceFacadeLocal;
-import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeLocal;
+import com.leansoftwarelabs.realm.service.ResourceFacadeBean;
+import com.leansoftwarelabs.realm.service.UsersRolesPermissionsFacadeBean;
 
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
 import com.leansoftwarelabs.trinidad.model.LazyDataModel;
@@ -44,13 +44,13 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 public class RolesPermissionsForm {
-    private UsersRolesPermissionsFacadeLocal service;
+    private UsersRolesPermissionsFacadeBean service;
     private List<Role> roleList;
     private Role role;
     private Role selectedRole;
     private QueryModel queryModel;
     private LazyDataModel lazyDataModel;
-    private ResourceFacadeLocal resourceFacade;
+    private ResourceFacadeBean resourceFacade;
 
     private RichTable roleTable;
     private RichPopup rolePopup;
@@ -113,12 +113,12 @@ public class RolesPermissionsForm {
     }
 
 
-    public UsersRolesPermissionsFacadeLocal getService() {
+    public UsersRolesPermissionsFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (UsersRolesPermissionsFacadeLocal) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
+                    (UsersRolesPermissionsFacadeBean) context.lookup("java:comp/env/ejb/local/UsersRolesPermissionsFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();
@@ -209,11 +209,11 @@ public class RolesPermissionsForm {
         return lazyDataModel;
     }
 
-    public ResourceFacadeLocal getResourceFacade() {
+    public ResourceFacadeBean getResourceFacade() {
         if (resourceFacade == null) {
             try {
                 final Context context = new InitialContext();
-                resourceFacade = (ResourceFacadeLocal) context.lookup("java:comp/env/ejb/local/ResourceFacade");
+                resourceFacade = (ResourceFacadeBean) context.lookup("java:comp/env/ejb/local/ResourceFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();

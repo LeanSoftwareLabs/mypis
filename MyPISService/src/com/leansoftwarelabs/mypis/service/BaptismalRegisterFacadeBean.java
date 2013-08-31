@@ -4,6 +4,7 @@ import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
 
 import javax.annotation.Resource;
 
+import javax.ejb.Local;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 
@@ -13,22 +14,16 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
+@Local
 @Stateless(name = "BaptismalRegisterFacade", mappedName = "MyPIS-MyPISService-BaptismalRegisterFacade")
-public class BaptismalRegisterFacadeBean extends AbstractFacade implements BaptismalRegisterFacade,
-                                                                           BaptismalRegisterFacadeLocal {
+public class BaptismalRegisterFacadeBean extends AbstractFacade<BaptismalRegister>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")
     private EntityManager em;
 
     public BaptismalRegisterFacadeBean() {
-    }
-
-
-    public void removeBaptismalRegister(BaptismalRegister baptismalRegister) {
-        baptismalRegister = em.find(BaptismalRegister.class, baptismalRegister.getRegisterId());
-        em.remove(baptismalRegister);
+        super(BaptismalRegister.class);
     }
 
 

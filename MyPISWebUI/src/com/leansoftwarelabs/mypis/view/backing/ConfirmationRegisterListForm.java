@@ -4,7 +4,7 @@ import com.leansoftwarelabs.adf.query.AttributeDef;
 import com.leansoftwarelabs.adf.query.QueryModelImpl;
 import com.leansoftwarelabs.ext.adf.EventHandler;
 import com.leansoftwarelabs.mypis.domain.ConfirmationRegister;
-import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeLocal;
+import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeBean;
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
 import com.leansoftwarelabs.trinidad.model.LazyDataModel;
 import com.leansoftwarelabs.view.utils.ADFUtils;
@@ -26,7 +26,7 @@ import oracle.adf.view.rich.event.QueryEvent;
 import oracle.adf.view.rich.model.QueryModel;
 
 public class ConfirmationRegisterListForm {
-    private ConfirmationRegisterFacadeLocal service;
+    private ConfirmationRegisterFacadeBean service;
     private QueryModel queryModel;
     private LazyDataModel lazyDataModel;
     private RichTable confirmationRegisterTable;
@@ -59,12 +59,12 @@ public class ConfirmationRegisterListForm {
         return queryModel;
     }
 
-    public ConfirmationRegisterFacadeLocal getService() {
+    public ConfirmationRegisterFacadeBean getService() {
         if (service == null) {
             try {
                 final Context context = new InitialContext();
                 service =
-                    (ConfirmationRegisterFacadeLocal) context.lookup("java:comp/env/ejb/local/ConfirmationRegisterFacade");
+                    (ConfirmationRegisterFacadeBean) context.lookup("java:comp/env/ejb/local/ConfirmationRegisterFacade");
             } catch (Exception ex) {
                 //TODO : bubble up exception or put in log file.
                 ex.printStackTrace();
