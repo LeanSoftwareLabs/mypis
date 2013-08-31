@@ -49,8 +49,13 @@ public abstract class AbstractFacade<T> {
         }
         Integer tenantId = currentUser.getTenant().getTenantId();
         StringBuffer buffer = new StringBuffer(jpqlStmt);
-        appendInitialConjuction(buffer);
-        buffer.append(" o.tenantId = :tenantId");
+        int index = buffer.toString().toUpperCase().indexOf("ORDER BY");
+        String tenantFilterClause = containsWhereClause(jpqlStmt)?" AND o.tenantId = :tenantId ": " WHERE o.tenantId = :tenantId ";
+        if(index == -1){
+            buffer.append(tenantFilterClause);
+        }else{
+            buffer.insert(index, tenantFilterClause);
+        }
         Query query = getEntityManager().createQuery(buffer.toString());
         query.setParameter("tenantId", tenantId);
         setFirstAndMaxResults(query, firstResult, maxResults);
@@ -72,6 +77,10 @@ public abstract class AbstractFacade<T> {
         } else {
             buffer.append(" WHERE");
         }
+    }
+    
+    protected boolean containsWhereClause(String jpql) {
+        return jpql.toUpperCase().contains("WHERE");
     }
 
     public <T> T persistEntity(T entity) {

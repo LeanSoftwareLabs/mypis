@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="#{viewScope.glAccountEntryForm.account.name}" id="ph1" partialTriggers="b1 b2 b3">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t1">
+        <af:button text="Edit" id="b1" rendered="#{not pageFlowScope.editMode}"
+                   action="#{viewScope.glAccountEntryForm.edit}"/>
+        <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
+                   action="#{viewScope.glAccountEntryForm.cancel}" immediate="true">
+          <af:resetActionListener/>
+        </af:button>
+        <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
+                   action="#{viewScope.glAccountEntryForm.save}"/>
+        <af:button text="Close" id="b4" action="done" rendered="#{not pageFlowScope.editMode}"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelBorderLayout id="pbl1">
+      <f:facet name="start">
+        <af:panelFormLayout id="pfl1">
+          <f:facet name="footer"/>
+          <af:inputText label="GL Code" id="it1" disabled="#{not pageFlowScope.editMode}"
+                        value="#{viewScope.glAccountEntryForm.account.code}"/>
+          <af:inputText label="Account Name" id="it2" disabled="#{not pageFlowScope.editMode}"
+                        value="#{viewScope.glAccountEntryForm.account.name}"/>
+          <af:inputText label="Description" id="it3" disabled="#{not pageFlowScope.editMode}"
+                        value="#{viewScope.glAccountEntryForm.account.description}"/>
+          <af:inputText label="Account Type" id="it4" disabled="#{not pageFlowScope.editMode}"
+                        value="#{viewScope.glAccountEntryForm.account.type}"/>
+          <af:selectBooleanCheckbox label="Show in Dashboard" id="sbc1" disabled="#{not pageFlowScope.editMode}"
+                                    value="#{viewScope.glAccountEntryForm.account.dashboard}"/>
+          <af:selectBooleanCheckbox label="Expense Claims" id="sbc2" disabled="#{not pageFlowScope.editMode}"
+                                    value="#{viewScope.glAccountEntryForm.account.expenseClaims}"/>
+          <af:selectBooleanCheckbox label="Payments" id="sbc3" disabled="#{not pageFlowScope.editMode}"
+                                    value="#{viewScope.glAccountEntryForm.account.payments}"/>
+        </af:panelFormLayout>
+      </f:facet>
+      <af:image source="/images/account-help.png" shortDesc="GL Account Type Effect on Reports" id="i1"/>
+    </af:panelBorderLayout>
+  </af:panelHeader>
+</ui:composition>

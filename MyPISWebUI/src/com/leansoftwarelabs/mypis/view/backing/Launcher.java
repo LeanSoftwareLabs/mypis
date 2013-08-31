@@ -48,4 +48,8 @@ public class Launcher {
         System.out.println("tenantId: " +currentUser.getTenant().getTenantId());
         launch("Organization", "/WEB-INF/taskflows/admin/tenant-information.xml#tenant-information", parameters,true);
     }
+    
+    public void launchGLAccountList(ActionEvent actionEvent) {
+        launch("GL Accounts","/WEB-INF/taskflows/acctg/gl-account-list.xml#gl-account-list", null,false);
+    }
 }

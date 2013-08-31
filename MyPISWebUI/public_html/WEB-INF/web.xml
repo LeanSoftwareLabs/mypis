@@ -215,6 +215,12 @@
         <local>com.leansoftwarelabs.realm.service.TenantFacadeBean</local>
         <ejb-link>TenantFacade</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/GLAccountFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.mypis.service.GLAccountFacadeBean</local>
+        <ejb-link>GLAccountFacade</ejb-link>
+    </ejb-local-ref>
     <listener>
         <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
     </listener>

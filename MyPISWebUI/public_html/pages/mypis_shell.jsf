@@ -13,14 +13,26 @@
                         <af:link text="Baptismal Register" id="l1"
                                  actionListener="#{viewScope.launcher.launchBaptismalRegister}"
                                  rendered="#{security:hasPermission('baptismal-register-list')}"/>
+                        <af:link text="First Communion Register" id="l14"/>
                         <af:link text="Confirmation Register" id="l2"
                                  actionListener="#{viewScope.launcher.launchConfirmationRegister}"/>
+                        <af:link text="Marriage Register" id="l15"/>
+                        <af:link text="Death Register" id="l16"/>
                     </af:panelList>
                     <af:panelList id="pl2" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}">
                         <af:link text="Manage Users" id="l4" actionListener="#{viewScope.launcher.launchUserRolesAdministration}"/>
                         <af:link text="Manage Roles and Permissions" id="l5" actionListener="#{viewScope.launcher.launchRolesPermissions}"/>
                         <af:link text="Organization Information" id="l6"
                                  actionListener="#{viewScope.launcher.launchTenantInformation}"/>
+                    </af:panelList>
+                    <af:panelList id="pl3" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}">
+                        <af:link text="Manage GL Accounts" id="l7" actionListener="#{viewScope.launcher.launchGLAccountList}"/>
+                        <af:link text="Check Vouchers" id="l11"/>
+                        <af:link text="Enter New Journal Voucher" id="l13"/>
+                        <af:link text="Fixed Assets" id="l12"/>
+                        <af:link text="General Ledger" id="l8"/>
+                        <af:link text="Trial Balance" id="l9"/>
+                        <af:link text="Balance Sheets" id="l10"/>
                     </af:panelList>
                 </f:facet>
                 <f:facet name="globalLinks"/>
@@ -37,8 +49,8 @@
                                                selected="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}"
                                                immediate="true"
                                                partialSubmit="true"/>
-                        <af:commandNavigationItem text="Accounting" id="accounting" actionListener="#{viewScope.tabContext.globalTabSelected}"
-                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'accounting'}"
+                        <af:commandNavigationItem text="Accounting" id="acctg" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                                               selected="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}"
                                                immediate="true"
                                                partialSubmit="true"/>
                         <af:commandNavigationItem text="Administration" id="admin" actionListener="#{viewScope.tabContext.globalTabSelected}"

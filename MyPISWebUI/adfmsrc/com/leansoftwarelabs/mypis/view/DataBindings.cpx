@@ -9,9 +9,12 @@
   <pageMap>
     <page path="/pages/main.jsf" usageId="com_leansoftwarelabs_mypis_view_mainPageDef"/>
     <page path="/pages/mypis_shell.jsf" usageId="com_leansoftwarelabs_mypis_view_mypis_shellPageDef"/>
+    <page path="/fragments/acctg/gl_account_list.jsff"
+          usageId="com_leansoftwarelabs_mypis_view_gl_account_listPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="com_leansoftwarelabs_mypis_view_mainPageDef" path="pages.mainPageDef"/>
     <page id="com_leansoftwarelabs_mypis_view_mypis_shellPageDef" path="pages.mypis_shellPageDef"/>
+    <page id="com_leansoftwarelabs_mypis_view_gl_account_listPageDef" path="fragments.acctg.gl_account_listPageDef"/>
   </pageDefinitionUsages>
 </Application>
