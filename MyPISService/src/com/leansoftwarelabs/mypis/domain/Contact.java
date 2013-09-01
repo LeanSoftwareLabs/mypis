@@ -131,12 +131,24 @@ public class Contact implements Serializable {
     private boolean employee;
     @Column(name = "CUSTOM_GROUPS")
     private String customGroups;
+    @NotNull
+    @Column(name = "TENANT_ID")
+    private Integer tenantId;
 
     public Contact() {
     }
 
     public Contact(Integer contactId) {
         this.contactId = contactId;
+    }
+
+
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public Integer getTenantId() {
+        return tenantId;
     }
 
     public String getName() {

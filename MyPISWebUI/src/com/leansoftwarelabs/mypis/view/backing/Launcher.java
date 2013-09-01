@@ -52,4 +52,8 @@ public class Launcher {
     public void launchGLAccountList(ActionEvent actionEvent) {
         launch("GL Accounts","/WEB-INF/taskflows/acctg/gl-account-list.xml#gl-account-list", null,false);
     }
+    
+    public void launchContactList(ActionEvent actionEvent) {
+        launch("Manage Contacts","/WEB-INF/taskflows/acctg/contact-list.xml#contact-list", null,false);
+    }
 }

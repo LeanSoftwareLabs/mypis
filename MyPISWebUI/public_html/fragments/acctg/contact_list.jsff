@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1" topHeight="auto">
+        <f:facet name="bottom"/>
+        <f:facet name="center">
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t2">
+                        <af:button text="Create New Employee" id="b2"/>
+                        <af:button text="Create New Supplier" id="b3"/>
+                        <af:button text="Create New Customer" id="b1"/>
+                    </af:toolbar>
+                </f:facet>
+                <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
+                          value="#{viewScope.contactListForm.lazyDataModel}" scrollPolicy="page" fetchSize="30"
+                          autoHeightRows="0" rowSelection="single" columnSelection="multiple"
+                          binding="#{viewScope.contactListForm.contactTable}">
+                    <af:column id="c8" width="25">
+                        <af:outputText value="#{vs.index + 1}" id="ot1"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Name" align="start" id="c1">
+                        <af:outputText value="#{row.name}" id="ot10"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Email" align="start" id="c2">
+                        <af:outputText value="#{row.email}" id="ot2"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Postal City" align="start" id="c3">
+                        <af:outputText value="#{row.postalCity}" id="ot3"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Telephone" align="start" id="c4">
+                        <af:outputText value="#{row.telephone}" id="ot4"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Fax" align="start" id="c5">
+                        <af:outputText value="#{row.fax}" id="ot5"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Mobile" align="start" id="c6">
+                        <af:outputText value="#{row.mobile}" id="ot6"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Ddi" align="start" id="c7">
+                        <af:outputText value="#{row.ddi}" id="ot7"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Skype" align="start" id="c14">
+                        <af:outputText value="#{row.skype}" id="ot8"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Tax No" align="start" id="c9">
+                        <af:outputText value="#{row.taxNo}" id="ot9"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Customer" align="start" id="c10" width="40">
+                        <af:selectBooleanCheckbox label="Customer" id="sbc3" value="#{row.customer}" disabled="true"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Employee" align="start" id="c11" width="40">
+                        <af:selectBooleanCheckbox label="Employee" value="#{row.employee}" id="sbc2" disabled="true"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Supplier" align="start" id="c12" width="40">
+                        <af:selectBooleanCheckbox label="Supplier" value="#{row.supplier}" id="sbc1" disabled="true"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Custom Groups" align="start" id="c13">
+                        <af:outputText value="#{row.customGroups}" id="ot13"/>
+                    </af:column>
+                </af:table>
+                <f:facet name="statusbar"/>
+            </af:panelCollection>
+        </f:facet>
+        <f:facet name="top">
+            <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.contactListForm.queryModel}"
+                      value="#{viewScope.contactListForm.queryModel.currentDescriptor}" resultComponentId="::pc1:t1"
+                      queryListener="#{viewScope.contactListForm.tableFilter}"/>
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

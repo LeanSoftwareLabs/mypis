@@ -27,6 +27,8 @@
                     </af:panelList>
                     <af:panelList id="pl3" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}">
                         <af:link text="Manage GL Accounts" id="l7" actionListener="#{viewScope.launcher.launchGLAccountList}"/>
+                        <af:link text="Manage Contacts" id="l17"
+                                 actionListener="#{viewScope.launcher.launchContactList}"/>
                         <af:link text="Check Vouchers" id="l11"/>
                         <af:link text="Enter New Journal Voucher" id="l13"/>
                         <af:link text="Fixed Assets" id="l12"/>

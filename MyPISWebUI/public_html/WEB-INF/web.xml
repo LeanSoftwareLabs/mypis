@@ -221,6 +221,12 @@
         <local>com.leansoftwarelabs.mypis.service.GLAccountFacadeBean</local>
         <ejb-link>GLAccountFacade</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/ContactFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.mypis.service.ContactFacadeBean</local>
+        <ejb-link>ContactFacade</ejb-link>
+    </ejb-local-ref>
     <listener>
         <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
     </listener>
