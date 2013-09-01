@@ -26,8 +26,8 @@
                     <af:column sortable="true" headerText="Name" align="start" id="c2" width="150" sortProperty="name">
                         <af:outputText value="#{row.name}" id="ot2"/>
                     </af:column>
-                    <af:column sortable="true" headerText="Description" align="start" id="c3" width="200"
-                               sortProperty="description">
+                    <af:column sortable="true" headerText="Description" align="start" id="c3" width="300"
+                               sortProperty="description" noWrap="false">
                         <af:outputText value="#{row.description}" id="ot3"/>
                     </af:column>
                     <af:column sortable="true" headerText="Type" align="start" id="c4" sortProperty="type">

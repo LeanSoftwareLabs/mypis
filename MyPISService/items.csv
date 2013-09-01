@@ -1,0 +1,11 @@
+item_id,item_code,Description,Purchase_Unit_Price,Purchase_Acct,Sales_Unit_Price,Sales_Acct
+1,BOOK,'Fish out of Water: Finding Your Brand',0,,19.95,4
+2,DevD,Development work - develper onsite per day,0,,650,4
+3,DevH,Development work - per hour rate,0,,90,4
+4,GB1-White,Golf balls - white single,4.2,7,5.6,4
+5,PMBr,Project management & implementation - branding workshop with your team,0,,250,4
+6,PMD,Project Management - onsite daily rate,0,,700,4
+7,PMDD,Project management & implementation - 'due diligence' stocktake of your project scope/schedule/implementation plan/outcome measures (hourly rate as agreed),0,,105,4
+8,PMWe,Project management & implementation - website revamp workshop with your team,0,,300,4
+9,Support-M,Desktop/network support via email & phone.Per month fixed fee for minimum 20 hours/month.,0,,500,4
+10,Train-MS,Half day training - Microsoft Office,0,,500,4

@@ -164,18 +164,19 @@ public class GLAccount implements MultiTenant, Serializable {
         static {
             VALUES = new LinkedHashMap();
             VALUES.put("Cash", "Cash");
-            VALUES.put("Receivables", "A/R");
-            VALUES.put("Inventories", "Inv");
-            VALUES.put("Prepayments", "Prepay");
-            VALUES.put("Other Current Assets", "OtherCA");
-            VALUES.put("Prepayments", "Prepay");
-            VALUES.put("Payables", "A/P");
-            VALUES.put("Long-term Liabilities", "LTL");
+            VALUES.put("Receivables", "Receivables");
+            VALUES.put("Inventories", "Inventories");
+            VALUES.put("Prepayments", "Prepayments");
+            VALUES.put("Other Current Assets", "Other Current Assets");
+            VALUES.put("Fixed Assets", "Fixed Assets");
+            VALUES.put("Payables", "Payables");
+            VALUES.put("Long-term Payables", "Long-term Payables");
             VALUES.put("Equity", "Equity");
-            VALUES.put("Retained Earnings", "Earn");
+            VALUES.put("Retained Earnings", "Retained Earnings");
             VALUES.put("Revenue", "Revenue");
-            VALUES.put("Direct Cost", "Cost");
-            VALUES.put("Expenses", "Exp");
+            VALUES.put("Direct Cost", "Direct Cost");
+            VALUES.put("Expenses", "Expenses");
+            VALUES.put("Taxes", "Taxes");
         }
     }
     

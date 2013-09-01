@@ -1,0 +1,53 @@
+ACCT_CODE,ACCT_NAME,ACCT_DESC,ACCT_Type,Expense_Claims,Payments
+10,AMEX,AMEX,Bank,0,0
+90,Ridgeway Business A/C,Ridgeway Business A/C,Bank,0,0
+200,Sales,Income from any normal business activity,Revenue,0,0
+260,Other Revenue,Any other income that does not relate to normal business activities and is not recurring,Revenue,0,0
+270,Interest Income,Interest income,Revenue,0,0
+300,Purchases,Goods purchased with the intention of selling these to customers,Costs,0,0
+400,Advertising,Expenses incurred for advertising while trying to increase sales,Expense,1,0
+404,Bank Fees,Fees charged by your bank for transactions regarding your bank account(s).,Expense,1,0
+408,Cleaning,Expenses incurred for cleaning  business property.,Expense,1,0
+412,Consulting & Accounting,Expenses related to paying consultants,Expense,1,0
+416,Depreciation,The amount of the asset's cost (based on the useful life) that was consumed during the period,Expense,0,0
+420,Entertainment,Expenses paid by company for the business but are not deductable for income tax purposes.,Expense,1,0
+425,Freight & Courier,Expenses incurred on courier & freight costs,Expense,1,0
+429,General Expenses,General expenses related to the running of the business.,Expense,1,0
+433,Insurance,Expenses incurred for insuring the business' assets,Expense,1,0
+437,Interest Expense,"Any interest expenses paid to your tax authority, business bank accounts or credit card accounts.",Expense,1,0
+441,Legal expenses,Expenses incurred on any legal matters,Expense,1,0
+445,"Light, Power, Heating","Expenses incurred for lighting, powering or heating the premises",Expense,1,0
+449,Motor Vehicle Expenses,Expenses incurred on the running of company motor vehicles,Expense,1,0
+453,Office Expenses,General expenses related to the running of the business office.,Expense,1,0
+461,Printing & Stationery,Expenses incurred by the entity as a result of printing and stationery,Expense,1,0
+469,Rent,The payment to lease a building or area.,Expense,1,0
+473,Repairs and Maintenance,Expenses incurred on a damaged or run down asset that will bring the asset back to its original condition.,Expense,1,0
+477,Wages and Salaries,Payment to employees in exchange for their resources,Expense,0,0
+478,Superannuation,Superannuation contributions,Expense,0,0
+485,Subscriptions,"E.g. Magazines, professional bodies",Expense,1,0
+489,Telephone & Internet,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",Expense,1,0
+493,Travel - National,Expenses incurred from domestic travel which has a business purpose,Expense,1,0
+494,Travel - International,Expenses incurred from international travel which has a business purpose,Expense,1,0
+505,Income Tax Expense,A percentage of total earnings paid to the government.,Expense,0,0
+610,Accounts Receivable,Outstanding invoices the company has issued out to the client but has not yet received in cash at balance date.,A/R,0,0
+620,Prepayments,An expenditure that has been paid for in advance.,Current Asset,0,0
+710,Office Equipment,Office equipment that is owned and controlled by the business,Fixed Asset,1,0
+711,Less Accumulated Depreciation on Office Equipment,The total amount of office equipment cost that has been consumed by the entity (based on the useful life),Fixed Asset,0,0
+720,Computer Equipment,Computer equipment that is owned and controlled by the business,Fixed Asset,1,0
+721,Less Accumulated Depreciation on Computer Equipment,The total amount of computer equipment cost that has been consumed by the business (based on the useful life),Fixed Asset,0,0
+800,Accounts Payable,Outstanding invoices the company has received from suppliers but has not yet paid at balance date,A/P,0,0
+801,Unpaid Expense Claims,Expense claims typically made by employees/shareholder employees still outstanding.,Unpaid Expense Claims,0,0
+820,Sales Tax,The balance in this account represents Sales Tax owing to or from your tax authority. 'refunds from' or 'payments to' your tax authority that will appear on the bank statement.,Sales Tax,0,0
+825,Employee Tax Payable,The amount of tax that has been deducted from wages or salaries paid to employes and is due to be paid,Current Liability,0,0
+826,Superannuation Payable,The amount of superannuation that is due to be paid,Current Liability,0,0
+830,Income Tax Payable,"The amount of income tax that is due to be paid, also resident withholding tax paid on interest received.",Current Liability,0,0
+835,Revenue Received in Advance,When customers pay in advance of work/services.,Current Liability,0,0
+840,Historical Adjustment,For accountant adjustments,Historical Adjustment,0,0
+850,Suspense,"An entry that allows an unknown transaction to be entered, so the accounts can still be worked on in balance and the entry can be dealt with later.",Current Liability,0,0
+860,Rounding,An adjustment entry to allow for rounding,Rounding,0,0
+877,Tracking Transfers,Transfers between tracking categories,Tracking,0,0
+880,Owner A Drawings,Withdrawals by the owners,Current Liability,0,1
+881,Owner A Funds Introduced,Funds contributed by the owner,Current Liability,0,1
+900,Loan,Money that has been borrowed from a creditor,Non-current Liability,0,0
+960,Retained Earnings,Do not Use,Earnings,0,0
+970,Owner A Share Capital,The value of shares purchased by the shareholders,Equity,0,1

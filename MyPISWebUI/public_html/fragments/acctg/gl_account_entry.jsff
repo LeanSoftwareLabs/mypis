@@ -21,14 +21,14 @@
         <f:facet name="info"/>
         <af:panelBorderLayout id="pbl1">
             <f:facet name="start">
-                <af:panelFormLayout id="pfl1">
+                <af:panelFormLayout id="pfl1" fieldWidth="300" labelWidth="50">
                     <f:facet name="footer"/>
                     <af:inputText label="GL Code" id="it1" disabled="#{not pageFlowScope.editMode}"
-                                  value="#{viewScope.glAccountEntryForm.account.code}"/>
+                                  value="#{viewScope.glAccountEntryForm.account.code}" columns="50"/>
                     <af:inputText label="Account Name" id="it2" disabled="#{not pageFlowScope.editMode}"
-                                  value="#{viewScope.glAccountEntryForm.account.name}"/>
+                                  value="#{viewScope.glAccountEntryForm.account.name}" columns="50"/>
                     <af:inputText label="Description" id="it3" disabled="#{not pageFlowScope.editMode}"
-                                  value="#{viewScope.glAccountEntryForm.account.description}" rows="3"/>
+                                  value="#{viewScope.glAccountEntryForm.account.description}" rows="8" columns="50"/>
                     <af:selectOneChoice label="Account Type" value="#{viewScope.glAccountEntryForm.account.type}"
                                         id="soc1" disabled="#{not pageFlowScope.editMode}">
                         <f:selectItems value="#{viewScope.glAccountEntryForm.accountTypeItems}" id="si1"/>
