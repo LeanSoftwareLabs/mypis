@@ -84,10 +84,12 @@
          <string v="ADF_FACES"/>
          <string v="ADFc"/>
          <string v="ADFm"/>
+         <string v="Database"/>
          <string v="JSF"/>
          <string v="JSP"/>
          <string v="Java"/>
          <string v="TRINIDAD"/>
+         <string v="TopLink"/>
          <string v="XML"/>
       </list>
    </hash>
@@ -286,6 +288,14 @@
             <value n="id" v="Shiro-all-1.2.2.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="TopLink"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle XML Parser v2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -429,6 +439,14 @@
          </hash>
          <hash>
             <value n="id" v="Shiro-all-1.2.2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="TopLink"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle XML Parser v2"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

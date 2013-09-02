@@ -17,4 +17,9 @@
       </amconfig-overrides>
     </startup>
   </adf-adfm-config>
+  <adf-desktopintegration-servlet-config xmlns="http://xmlns.oracle.com/adf/desktopintegration/servlet/config">
+    <controller-state-manager-class>
+      oracle.adf.desktopintegration.controller.impl.ADFcControllerStateManager
+    </controller-state-manager-class>
+  </adf-desktopintegration-servlet-config>
 </adf-config>

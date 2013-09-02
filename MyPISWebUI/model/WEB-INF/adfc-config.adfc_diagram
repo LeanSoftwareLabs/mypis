@@ -13,9 +13,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">194.29883</property>
+         name="y">191.94824</property>
       <property
-         name="x">364.0</property>
+         name="x">648.0</property>
    </View>
    <WildcardControlFlowRule
       id="WildcardControlFlowRule4">
@@ -34,6 +34,6 @@
       <property
          name="fromOutcome">logout</property>
       <property
-         name="sdm:polyPoints">R50,183.0,195.74707,323.0,193.94824,L50</property>
+         name="sdm:polyPoints">R50,183.0,195.74707,607.0,191.94824,L50</property>
    </ControlFlowCase>
 </SDM>

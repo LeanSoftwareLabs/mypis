@@ -2,66 +2,68 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
-  <persistence-unit name="MyPISService">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>java:/app/jdbc/jdbc/MyPISConnDS</jta-data-source>
-    <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
-    <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
-    <class>com.leansoftwarelabs.mypis.domain.GLAccount</class>
-    <properties>
-      <property name="eclipselink.target-server" value="WebLogic_10"/>
-      <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>
-      <property name="eclipselink.logging.level" value="FINEST"/>
-      <property name="eclipselink.logging.logger" value="JavaLogger"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="JDBCRealm">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>java:/app/jdbc/jdbc/JDBCRealmConnDS</jta-data-source>
-    <class>com.leansoftwarelabs.realm.domain.Role</class>
-    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
-    <class>com.leansoftwarelabs.realm.domain.User</class>
-    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
-    <class>com.leansoftwarelabs.realm.domain.Resource</class>
-    <properties>
-      <property name="eclipselink.target-server" value="WebLogic_10"/>
-      <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/JDBCRealmConnDS"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="MyPISService-1" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.leansoftwarelabs.realm.domain.Role</class>
-    <class>com.leansoftwarelabs.realm.domain.Resource</class>
-    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
-    <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
-    <class>com.leansoftwarelabs.realm.domain.User</class>
-    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
-    <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
-    <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
-      <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
-      <property name="javax.persistence.jdbc.password"
-                value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
-      <property name="eclipselink.logging.level" value="FINER"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="OutsideContainer" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.leansoftwarelabs.realm.domain.Role</class>
-    <class>com.leansoftwarelabs.realm.domain.Resource</class>
-    <class>com.leansoftwarelabs.realm.domain.Tenant</class>
-    <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
-    <class>com.leansoftwarelabs.realm.domain.User</class>
-    <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
-    <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
-    <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
-      <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
-      <property name="javax.persistence.jdbc.password"
-                value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
-      <property name="eclipselink.logging.level" value="FINER"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="MyPISService">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:/app/jdbc/jdbc/MyPISConnDS</jta-data-source>
+        <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+        <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
+        <class>com.leansoftwarelabs.mypis.domain.MarriageRegister</class>
+        <class>com.leansoftwarelabs.mypis.domain.DeathRegister</class>
+        <class>com.leansoftwarelabs.mypis.domain.GLAccount</class>
+        <properties>
+            <property name="eclipselink.target-server" value="WebLogic_10"/>
+            <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
+            <property name="eclipselink.logging.logger" value="JavaLogger"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="JDBCRealm">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:/app/jdbc/jdbc/JDBCRealmConnDS</jta-data-source>
+        <class>com.leansoftwarelabs.realm.domain.Role</class>
+        <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+        <class>com.leansoftwarelabs.realm.domain.User</class>
+        <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+        <class>com.leansoftwarelabs.realm.domain.Resource</class>
+        <properties>
+            <property name="eclipselink.target-server" value="WebLogic_10"/>
+            <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/JDBCRealmConnDS"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="MyPISService-1" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.leansoftwarelabs.realm.domain.Role</class>
+        <class>com.leansoftwarelabs.realm.domain.Resource</class>
+        <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+        <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
+        <class>com.leansoftwarelabs.realm.domain.User</class>
+        <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+        <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
+            <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
+            <property name="javax.persistence.jdbc.password"
+                      value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
+            <property name="eclipselink.logging.level" value="FINER"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="OutsideContainer" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.leansoftwarelabs.realm.domain.Role</class>
+        <class>com.leansoftwarelabs.realm.domain.Resource</class>
+        <class>com.leansoftwarelabs.realm.domain.Tenant</class>
+        <class>com.leansoftwarelabs.mypis.domain.ConfirmationRegister</class>
+        <class>com.leansoftwarelabs.realm.domain.User</class>
+        <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
+        <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>
+            <property name="javax.persistence.jdbc.user" value="mypis_admin"/>
+            <property name="javax.persistence.jdbc.password"
+                      value="029AD782655131D385E3D0B0D8E556469C9802577091F4ABA1E7261249902560"/>
+            <property name="eclipselink.logging.level" value="FINER"/>
+        </properties>
+    </persistence-unit>
 </persistence>

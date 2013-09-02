@@ -19,6 +19,11 @@ public class Launcher {
         
     }
     
+    public void launchDeathRegister(ActionEvent e){
+        launch("Death Register", "/WEB-INF/death-register-list.xml#death-register-list", null, false);
+        
+    }
+    
     public void launchConfirmationRegister(ActionEvent actionEvent) {
 
         launch("Comfirmation Register", "/WEB-INF/confirmation-register-list.xml#confirmation-register-list", null,false);
@@ -40,7 +45,6 @@ public class Launcher {
         
     }
 
-
     public void launchTenantInformation(ActionEvent actionEvent) {
         Map<String, Object> parameters = new HashMap<String, Object>();
         User currentUser = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
@@ -55,5 +59,8 @@ public class Launcher {
     
     public void launchContactList(ActionEvent actionEvent) {
         launch("Manage Contacts","/WEB-INF/taskflows/acctg/contact-list.xml#contact-list", null,false);
+    }
+    public void launchMarriageRegister(ActionEvent actionEvent) {
+        // Add event code here...
     }
 }

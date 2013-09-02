@@ -16,8 +16,12 @@
                         <af:link text="First Communion Register" id="l14"/>
                         <af:link text="Confirmation Register" id="l2"
                                  actionListener="#{viewScope.launcher.launchConfirmationRegister}"/>
-                        <af:link text="Marriage Register" id="l15"/>
-                        <af:link text="Death Register" id="l16"/>
+                        <af:link text="Marriage Register" id="ma"
+                                 actionListener="#{viewScope.launcher.launchMarriageRegister}"/>
+                        <af:link text="Death Register" id="l7"
+                                 actionListener="#{viewScope.launcher.launchDeathRegister}">
+                       
+                        </af:link>
                     </af:panelList>
                     <af:panelList id="pl2" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'admin'}">
                         <af:link text="Manage Users" id="l4" actionListener="#{viewScope.launcher.launchUserRolesAdministration}"/>
@@ -26,7 +30,7 @@
                                  actionListener="#{viewScope.launcher.launchTenantInformation}"/>
                     </af:panelList>
                     <af:panelList id="pl3" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}">
-                        <af:link text="Manage GL Accounts" id="l7" actionListener="#{viewScope.launcher.launchGLAccountList}"/>
+                        <af:link text="Manage GL Accounts" id="l15" actionListener="#{viewScope.launcher.launchGLAccountList}"/>
                         <af:link text="Manage Contacts" id="l17"
                                  actionListener="#{viewScope.launcher.launchContactList}"/>
                         <af:link text="Check Vouchers" id="l11"/>

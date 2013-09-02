@@ -28,7 +28,7 @@ public class ConfirmationRegisterEntryForm {
         }
     }
 
-    public void setConfirmationRegister(ConfirmationRegister baptismalRegister) {
+    public void setConfirmationRegister(ConfirmationRegister confirmationRegister) {
         this.confirmationRegister = confirmationRegister;
     }
 
