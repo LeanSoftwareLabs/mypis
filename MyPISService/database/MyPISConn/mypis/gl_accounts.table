@@ -33,6 +33,36 @@
       </properties>
     </column>
     <column>
+      <name>tenant_id</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>tenant_id</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_accounts</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
       <name>acct_code</name>
       <dataTypeUsage>
         <attributeValues>
@@ -52,86 +82,6 @@
           <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
           <value class="oracle.javatools.db.ReferenceID">
             <name>acct_code</name>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_accounts</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <type>COLUMN</type>
-          </value>
-        </entry>
-      </properties>
-    </column>
-    <column>
-      <name>dashboard</name>
-      <dataTypeUsage>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>BIT</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <default class="java.lang.String">0</default>
-      <notNull>false</notNull>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>dashboard</name>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_accounts</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <type>COLUMN</type>
-          </value>
-        </entry>
-      </properties>
-    </column>
-    <column>
-      <name>acct_desc</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">255</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>VARCHAR</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>false</notNull>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>acct_desc</name>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_accounts</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <type>COLUMN</type>
-          </value>
-        </entry>
-      </properties>
-    </column>
-    <column>
-      <name>expense_claims</name>
-      <dataTypeUsage>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>BIT</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <default class="java.lang.String">0</default>
-      <notNull>false</notNull>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>expense_claims</name>
             <parent class="oracle.javatools.db.ReferenceID">
               <name>gl_accounts</name>
               <schemaName>mypis</schemaName>
@@ -173,20 +123,25 @@
       </properties>
     </column>
     <column>
-      <name>payments</name>
+      <name>acct_desc</name>
       <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">255</value>
+          </entry>
+        </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
           <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>BIT</typeName>
+          <typeName>VARCHAR</typeName>
         </dataTypeID>
       </dataTypeUsage>
-      <default class="java.lang.String">0</default>
       <notNull>false</notNull>
       <properties>
         <entry>
           <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
           <value class="oracle.javatools.db.ReferenceID">
-            <name>payments</name>
+            <name>acct_desc</name>
             <parent class="oracle.javatools.db.ReferenceID">
               <name>gl_accounts</name>
               <schemaName>mypis</schemaName>
@@ -217,6 +172,81 @@
           <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
           <value class="oracle.javatools.db.ReferenceID">
             <name>acct_type</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_accounts</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>dashboard</name>
+      <dataTypeUsage>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>BIT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <default class="java.lang.String">0</default>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>dashboard</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_accounts</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>expense_claims</name>
+      <dataTypeUsage>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>BIT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <default class="java.lang.String">0</default>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>expense_claims</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_accounts</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>payments</name>
+      <dataTypeUsage>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>BIT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <default class="java.lang.String">0</default>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>payments</name>
             <parent class="oracle.javatools.db.ReferenceID">
               <name>gl_accounts</name>
               <schemaName>mypis</schemaName>
@@ -264,6 +294,40 @@
       </properties>
     </constraint>
   </constraints>
+  <indexes>
+    <indexe>
+      <name>real_key</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>tenant_id</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>acct_code</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>real_key</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_accounts</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+  </indexes>
   <properties>
     <entry>
       <key>OfflineDBConstants.IMPORT_SOURCE_CONNECTION</key>
