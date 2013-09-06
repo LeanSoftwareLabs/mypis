@@ -7,20 +7,116 @@
       <property
          name="activityId">confirmation_register_list</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
          name="page">/fragments/sacramental/confirmation_register_list.jsff</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>confirmation_register_list&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>confirmation_register_list&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="thumbnailExpanded">false</property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">127.74707</property>
+         name="y">346.0459</property>
       <property
          name="pageFragment">true</property>
       <property
-         name="x">-26.305664</property>
+         name="x">65.694336</property>
    </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">gateway</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>gateway&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">343.79883</property>
+      <property
+         name="x">-208.5</property>
+   </MethodCall>
+   <View
+      id="View4">
+      <property
+         name="inherited">true</property>
+      <property
+         name="activityId">unauthorized</property>
+      <property
+         name="page">/unauthorized.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>unauthorized&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">221.09766</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">-51.30664</property>
+   </View>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule5">
+      <property
+         name="activityId">*</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="y">512.2988</property>
+      <property
+         name="x">-186.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowReturn
+      id="TaskFlowReturn6">
+      <property
+         name="activityId">taskFlowReturn1</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">500.09766</property>
+      <property
+         name="x">16.5</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="WildcardControlFlowRule5"
+      to="TaskFlowReturn6">
+      <property
+         name="fromOutcome">done</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">R50,-150.0,512.44824,-24.5,499.74707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall3"
+      to="View4">
+      <property
+         name="fromOutcome">unauthorized</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">T50,-208.5,289.44824,-92.30664,220.74707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase9"
+      from="MethodCall3"
+      to="View6">
+      <property
+         name="fromOutcome">gatePassed</property>
+      <property
+         name="sdm:polyPoints">R50,-167.5,343.44824,24.694336,345.6953,L50</property>
+   </ControlFlowCase>
 </SDM>

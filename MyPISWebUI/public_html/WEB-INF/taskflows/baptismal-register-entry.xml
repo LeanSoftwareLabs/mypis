@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2" xmlns:security="http://leansoftwarelabs.com/ext/security">
   <task-flow-definition id="baptismal-register-entry">
-    <default-activity>prepare</default-activity>
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
     <input-parameter-definition id="__2">
       <name>registerId</name>
       <value>#{pageFlowScope.registerId}</value>
@@ -20,36 +23,11 @@
     <view id="baptismal_register_entry">
       <page>/fragments/baptismal_register_entry.jsff</page>
     </view>
-    <method-call id="prepare">
-      <method>#{viewScope.baptismalRegisterEntryForm.prepare}</method>
-      <outcome>
-        <to-string/>
-      </outcome>
-    </method-call>
-    <task-flow-return id="taskFlowReturn1">
-      <outcome>
-        <name>taskFlowReturn1</name>
-      </outcome>
-    </task-flow-return>
-    <view id="authorizationErrorPage">
-      <page>/authorizationErrorPage.jsff</page>
-    </view>
-    <control-flow-rule id="__10">
-      <from-activity-id>prepare</from-activity-id>
-      <control-flow-case id="__11">
-        <from-outcome>toEntry</from-outcome>
+    <control-flow-rule id="__4">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>gatePassed</from-outcome>
         <to-activity-id>baptismal_register_entry</to-activity-id>
-      </control-flow-case>
-      <control-flow-case id="__4">
-        <from-outcome>unathorized</from-outcome>
-        <to-activity-id>authorizationErrorPage</to-activity-id>
-      </control-flow-case>
-    </control-flow-rule>
-    <control-flow-rule id="__12">
-      <from-activity-id>*</from-activity-id>
-      <control-flow-case id="__13">
-        <from-outcome>done</from-outcome>
-        <to-activity-id>taskFlowReturn1</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

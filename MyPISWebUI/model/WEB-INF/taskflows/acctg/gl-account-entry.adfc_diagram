@@ -9,29 +9,65 @@
       <property
          name="page">/fragments/acctg/gl_account_entry.jsff</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>gl_account_entry&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>gl_account_entry&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
          name="y">246.94824</property>
       <property
+         name="pageFragment">true</property>
+      <property
          name="x">397.0</property>
+   </View>
+   <MethodCall
+      id="MethodCall6">
+      <property
+         name="activityId">gateway</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>gateway&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">266.79883</property>
+      <property
+         name="x">61.5</property>
+   </MethodCall>
+   <View
+      id="View7">
+      <property
+         name="inherited">true</property>
+      <property
+         name="activityId">unauthorized</property>
+      <property
+         name="page">/unauthorized.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>unauthorized&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">71.79883</property>
       <property
          name="pageFragment">true</property>
+      <property
+         name="x">149.69336</property>
    </View>
    <WildcardControlFlowRule
-      id="WildcardControlFlowRule3">
+      id="WildcardControlFlowRule8">
       <property
          name="activityId">*</property>
       <property
-         name="y">360.29883</property>
+         name="inherited">true</property>
       <property
-         name="x">270.0</property>
+         name="y">61.0</property>
+      <property
+         name="x">230.0</property>
    </WildcardControlFlowRule>
    <TaskFlowReturn
-      id="TaskFlowReturn4">
+      id="TaskFlowReturn9">
       <property
          name="activityId">taskFlowReturn1</property>
       <property
@@ -39,20 +75,46 @@
       <property
          name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
       <property
+         name="inherited">true</property>
+      <property
          name="exceptionHandler">false</property>
       <property
-         name="y">354.94824</property>
+         name="y">87.79883</property>
       <property
-         name="x">582.0</property>
+         name="x">346.5</property>
    </TaskFlowReturn>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase5"
-      from="WildcardControlFlowRule3"
-      to="TaskFlowReturn4">
+      id="ControlFlowCase10"
+      from="WildcardControlFlowRule8"
+      to="TaskFlowReturn9">
       <property
          name="fromOutcome">done</property>
       <property
-         name="sdm:polyPoints">R50,306.0,360.44824,541.0,354.59766,L50</property>
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">R50,266.0,61.149414,305.5,87.44824,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase11"
+      from="MethodCall6"
+      to="View7">
+      <property
+         name="fromOutcome">unauthorized</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">T50,61.5,212.44824,149.69336,125.44824,B50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase12"
+      from="MethodCall6"
+      to="View2">
+      <property
+         name="fromOutcome">gatePassed</property>
+      <property
+         name="sdm:polyPoints">R50,102.5,266.44824,356.0,246.59766,L50</property>
    </ControlFlowCase>
 </SDM>

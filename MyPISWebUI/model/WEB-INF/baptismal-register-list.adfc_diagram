@@ -9,16 +9,114 @@
       <property
          name="page">/fragments/sacramental/baptismal_register_list.jsff</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>baptismal_register_list&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>baptismal_register_list&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">264.59766</property>
-      <property
-         name="x">450.0</property>
+         name="y">246.89648</property>
       <property
          name="pageFragment">true</property>
+      <property
+         name="x">436.0</property>
    </View>
+   <TaskFlowReturn
+      id="TaskFlowReturn3">
+      <property
+         name="activityId">taskFlowReturn1</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">87.79883</property>
+      <property
+         name="x">76.5</property>
+   </TaskFlowReturn>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule4">
+      <property
+         name="activityId">*</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="y">61.0</property>
+      <property
+         name="x">230.0</property>
+   </WildcardControlFlowRule>
+   <View
+      id="View5">
+      <property
+         name="inherited">true</property>
+      <property
+         name="activityId">unauthorized</property>
+      <property
+         name="page">/unauthorized.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>unauthorized&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">114.09766</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">387.69336</property>
+   </View>
+   <MethodCall
+      id="MethodCall6">
+      <property
+         name="activityId">gateway</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>gateway&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">246.09766</property>
+      <property
+         name="x">134.5</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="WildcardControlFlowRule4"
+      to="TaskFlowReturn3">
+      <property
+         name="fromOutcome">done</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">L50,194.0,61.149414,117.5,87.44824,R50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall6"
+      to="View5">
+      <property
+         name="fromOutcome">unauthorized</property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="sdm:polyPoints">R46,175.5,242.24707,346.69336,113.74707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase9"
+      from="MethodCall6"
+      to="View2">
+      <property
+         name="fromOutcome">gatePassed</property>
+      <property
+         name="sdm:polyPoints">R54,176.68896,249.24707,395.0,246.5459,L50</property>
+   </ControlFlowCase>
 </SDM>

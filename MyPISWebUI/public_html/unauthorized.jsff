@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout id="pgl1" layout="horizontal">
+    <af:outputText value="You are not authorized to view this page." id="ot1"/>
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:link text="Close" id="l1" action="done"/>
+  </af:panelGroupLayout>
+</ui:composition>

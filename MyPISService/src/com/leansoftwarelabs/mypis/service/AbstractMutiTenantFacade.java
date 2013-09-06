@@ -17,12 +17,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class AbstractFacade<T> {
+public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
     @Inject
     Principal principal;
     private Class<T> entityClass;
 
-    public AbstractFacade(Class<T> entityClass) {
+    public AbstractMutiTenantFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractFacade<T> {
         return jpql.toUpperCase().contains("WHERE");
     }
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public <T extends MultiTenant> T persistEntity(T entity) {
+    public T persistEntity(T entity) {
         User currentUser = getCurrentUser();
         if(entity.getTenantId() == null){
             entity.setTenantId(currentUser.getTenant().getTenantId());
@@ -98,7 +98,7 @@ public abstract class AbstractFacade<T> {
         return entity;
     }
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public <T extends MultiTenant> T mergeEntity(T entity) {
+    public T mergeEntity(T entity) {
         User currentUser = getCurrentUser();
         if(entity.getTenantId() == null){
             entity.setTenantId(currentUser.getTenant().getTenantId());

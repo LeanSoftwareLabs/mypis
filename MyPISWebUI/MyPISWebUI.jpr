@@ -285,15 +285,19 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Shiro-all-1.2.2.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
             <value n="id" v="TopLink"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
             <value n="id" v="Oracle XML Parser v2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="IText-2.1.7.js2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Jasperreports-5.2.0.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -327,11 +331,20 @@
             </hash>
             <hash>
                <list n="classPath">
-                  <url path="../../../../leansoftwarelabs/lib/shiro-all-1.2.2.jar" jar-entry=""/>
+                  <url path="../../../../leansoftwarelabs/lib/iText-2.1.7.js2.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Shiro-all-1.2.2.jar"/>
-               <value n="id" v="Shiro-all-1.2.2.jar"/>
+               <value n="description" v="IText-2.1.7.js2.jar"/>
+               <value n="id" v="IText-2.1.7.js2.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../leansoftwarelabs/lib/jasperreports-5.2.0.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Jasperreports-5.2.0.jar"/>
+               <value n="id" v="Jasperreports-5.2.0.jar"/>
                <value n="locked" v="true"/>
             </hash>
          </list>
@@ -438,15 +451,19 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Shiro-all-1.2.2.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
             <value n="id" v="TopLink"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
             <value n="id" v="Oracle XML Parser v2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="IText-2.1.7.js2.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Jasperreports-5.2.0.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

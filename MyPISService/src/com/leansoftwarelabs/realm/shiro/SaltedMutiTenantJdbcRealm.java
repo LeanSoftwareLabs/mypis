@@ -36,7 +36,7 @@ public class SaltedMutiTenantJdbcRealm extends JdbcRealm {
     
     protected String userTenantIdQuery = "select tenant_id from users where username = ?";
     protected String permissionsQuery = "select permission from roles_permissions where role_name = ? and tenant_id = ?";
-    protected String userRolesQuery = "select role_name from user_roles where username = ?";
+    protected String userRolesQuery = "select role_name from user_roles where username = ? and tenant_id = ?";
 
     public void setUserTenantIdQuery(String userTenantIdQuery) {
         this.userTenantIdQuery = userTenantIdQuery;
@@ -217,6 +217,7 @@ public class SaltedMutiTenantJdbcRealm extends JdbcRealm {
                     // Loop over results and add each returned role to a set
                     while (rs.next()) {
                         String permissionString = rs.getString(1);
+                        System.out.println(permissionString);
                         // Add the permission to the set of permissions
                         permissions.add(permissionString);
                     }

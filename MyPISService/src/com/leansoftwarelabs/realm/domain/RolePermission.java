@@ -98,4 +98,32 @@ public class RolePermission implements Serializable {
         return delete;
     }
 
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof RolePermission)) {
+            return false;
+        }
+        final RolePermission other = (RolePermission) object;
+        if (!(role == null ? other.role == null : role.equals(other.role))) {
+            return false;
+        }
+        if (!(resource == null ? other.resource == null : resource.equals(other.resource))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 37;
+        int result = 1;
+        result = PRIME * result + ((role == null) ? 0 : role.hashCode());
+        result = PRIME * result + ((resource == null) ? 0 : resource.hashCode());
+        return result;
+    }
+
 }

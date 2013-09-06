@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="confirmation-register-entry">
-    <default-activity>editMode</default-activity>
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
     <data-control-scope>
       <shared/>
     </data-control-scope>
     <input-parameter-definition id="__2">
       <name>registerId</name>
       <value>#{pageFlowScope.registerId}</value>
-      <required/>
-    </input-parameter-definition>
-    <input-parameter-definition id="__3">
-      <name>eventHandler</name>
-      <value>#{pageFlowScope.eventHandler}</value>
       <required/>
     </input-parameter-definition>
     <managed-bean id="__1">
@@ -23,47 +21,11 @@
     <view id="confirmation_register_entry">
       <page>/fragments/confirmation_register_entry.jsff</page>
     </view>
-    <router id="editMode">
-      <case id="__8">
-        <expression>#{pageFlowScope.registerId eq -1}</expression>
-        <outcome>prepare</outcome>
-      </case>
-      <default-outcome>toEntry</default-outcome>
-    </router>
-    <method-call id="prepareEditing">
-      <method>#{viewScope.confirmationRegisterEntryForm.edit}</method>
-      <outcome>
-        <fixed-outcome>toEntry</fixed-outcome>
-      </outcome>
-    </method-call>
-    <task-flow-return id="taskFlowReturn1">
-      <outcome>
-        <name>taskFlowReturn1</name>
-      </outcome>
-    </task-flow-return>
-    <control-flow-rule id="__4">
-      <from-activity-id>editMode</from-activity-id>
-      <control-flow-case id="__5">
-        <from-outcome>toEntry</from-outcome>
+    <control-flow-rule id="__3">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>gatePassed</from-outcome>
         <to-activity-id>confirmation_register_entry</to-activity-id>
-      </control-flow-case>
-      <control-flow-case id="__9">
-        <from-outcome>prepare</from-outcome>
-        <to-activity-id>prepareEditing</to-activity-id>
-      </control-flow-case>
-    </control-flow-rule>
-    <control-flow-rule id="__10">
-      <from-activity-id>prepareEditing</from-activity-id>
-      <control-flow-case id="__11">
-        <from-outcome>toEntry</from-outcome>
-        <to-activity-id>confirmation_register_entry</to-activity-id>
-      </control-flow-case>
-    </control-flow-rule>
-    <control-flow-rule id="__12">
-      <from-activity-id>*</from-activity-id>
-      <control-flow-case id="__13">
-        <from-outcome>done</from-outcome>
-        <to-activity-id>taskFlowReturn1</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

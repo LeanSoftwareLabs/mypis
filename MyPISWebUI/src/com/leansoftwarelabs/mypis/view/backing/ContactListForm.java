@@ -66,7 +66,7 @@ public class ContactListForm {
 
     public LazyDataModel getLazyDataModel() {
         if (lazyDataModel == null) {
-            lazyDataModel = new JpqlLazyDataModel("Contact", 30) {
+            lazyDataModel = new JpqlLazyDataModel("Contact", 20) {
                 protected List queryByRange(String jpqlStmt, int first, int pageSize) {
                     return (List) getService().queryByRange(jpqlStmt, null, first, pageSize);
                 }

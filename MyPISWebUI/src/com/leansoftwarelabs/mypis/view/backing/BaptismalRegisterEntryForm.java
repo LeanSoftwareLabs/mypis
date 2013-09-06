@@ -39,17 +39,6 @@ public class BaptismalRegisterEntryForm {
 
     }
 
-    public String prepare() {
-        if (!SecurityContext.hasPermission("baptismal-register-entry:read")) {
-            return "unathorized";
-        }
-        Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
-        if (registerId == -1) {
-            editing(true);
-        }
-        return "toEntry";
-    }
-
     public void setBaptismalRegister(BaptismalRegister baptismalRegister) {
         this.baptismalRegister = baptismalRegister;
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-template id="mypis-task-flow-template">
+    <default-activity>gateway</default-activity>
+    <input-parameter-definition id="__1">
+      <name>eventHandler</name>
+      <value>#{pageFlowScope.eventHandler}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__2">
+      <name>editMode</name>
+      <value>#{pageFlowScope.editMode}</value>
+    </input-parameter-definition>
+    <view id="unauthorized">
+      <page>/unauthorized.jsff</page>
+    </view>
+    <method-call id="gateway">
+      <method>#{taskFlowGateway.route}</method>
+      <outcome>
+        <to-string/>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__4">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>unauthorized</from-outcome>
+        <to-activity-id>unauthorized</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>done</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-template>
+</adfc-config>

@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 @Stateless(name = "GLAccountFacade", mappedName = "MyPIS-MyPISService-GLAccountFacade")
 @Local
-public class GLAccountFacadeBean extends AbstractFacade<GLAccount>{
+public class GLAccountFacadeBean extends AbstractMutiTenantFacade<GLAccount>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")

@@ -1,6 +1,5 @@
 package com.leansoftwarelabs.realm.service;
 
-import com.leansoftwarelabs.mypis.service.AbstractFacade;
 import com.leansoftwarelabs.realm.domain.Tenant;
 
 import javax.annotation.Resource;

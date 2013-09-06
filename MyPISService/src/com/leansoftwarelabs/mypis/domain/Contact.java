@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"),
     @NamedQuery(name = "Contact.findByName", query = "SELECT c FROM Contact c WHERE c.name = :name"),
     @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")})
-public class Contact implements Serializable {
+public class Contact implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
     @Size(max = 60)
     @Column(name = "NAME")

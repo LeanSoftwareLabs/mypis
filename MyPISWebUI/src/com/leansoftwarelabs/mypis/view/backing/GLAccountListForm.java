@@ -56,7 +56,7 @@ public class GLAccountListForm {
 
     public LazyDataModel getLazyDataModel() {
         if (lazyDataModel == null) {
-            lazyDataModel = new JpqlLazyDataModel("GLAccount", 30) {
+            lazyDataModel = new JpqlLazyDataModel("GLAccount", 20) {
                 protected List queryByRange(String jpqlStmt, int first, int pageSize) {
                     return (List) getService().queryByRange(jpqlStmt, null, first, pageSize);
                 }

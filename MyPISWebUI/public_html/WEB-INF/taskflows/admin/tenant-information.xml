@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="tenant-information">
-    <default-activity>tenant_information</default-activity>
-    <input-parameter-definition id="__2">
-      <name>eventHandler</name>
-      <value>#{pageFlowScope.eventHandler}</value>
-    </input-parameter-definition>
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
     <input-parameter-definition id="__3">
       <name>tenantId</name>
       <value>#{pageFlowScope.tenantId}</value>
@@ -19,6 +18,13 @@
     <view id="tenant_information">
       <page>/fragments/admin/tenant_information.jsff</page>
     </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>gatePassed</from-outcome>
+        <to-activity-id>tenant_information</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

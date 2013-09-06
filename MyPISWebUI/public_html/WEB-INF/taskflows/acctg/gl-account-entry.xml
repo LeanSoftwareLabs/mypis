@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="gl-account-entry">
-    <default-activity>gl_account_entry</default-activity>
-    <input-parameter-definition id="__1">
-      <name>eventHandler</name>
-      <value>#{pageFlowScope.eventHandler}</value>
-    </input-parameter-definition>
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
     <input-parameter-definition id="__2">
       <name>accountId</name>
       <value>#{pageFlowScope.accountId}</value>
@@ -19,16 +18,11 @@
     <view id="gl_account_entry">
       <page>/fragments/acctg/gl_account_entry.jsff</page>
     </view>
-    <task-flow-return id="taskFlowReturn1">
-      <outcome>
-        <name>taskFlowReturn1</name>
-      </outcome>
-    </task-flow-return>
-    <control-flow-rule id="__4">
-      <from-activity-id>*</from-activity-id>
-      <control-flow-case id="__5">
-        <from-outcome>done</from-outcome>
-        <to-activity-id>taskFlowReturn1</to-activity-id>
+    <control-flow-rule id="__1">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>gatePassed</from-outcome>
+        <to-activity-id>gl_account_entry</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

@@ -38,6 +38,8 @@ public class DataSourceFactory {
         register.setFirstName("Rommel");
         registerList.add(register);
         return registerList;
+//        ServiceFacade facade = new ServiceFacade();
+//        return facade.getFindBaptismalRegisterById(1);
     }
 
     public static void main(String[] args) {

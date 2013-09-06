@@ -1,14 +1,11 @@
 package com.leansoftwarelabs.realm.service;
 
-import com.leansoftwarelabs.mypis.service.AbstractFacade;
-
 import com.leansoftwarelabs.realm.domain.Resource;
 
 import java.util.List;
 
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 

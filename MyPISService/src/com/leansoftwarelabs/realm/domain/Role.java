@@ -54,9 +54,9 @@ public class Role implements Serializable {
     }
     
     public void addRolePermission(RolePermission permission){
+        permission.setRole(this);
         if(!permissionList.contains(permission)){
-            getPermissionList().add(permission);
-            permission.setRole(this);
+            getPermissionList().add(permission);      
         }
     }
 

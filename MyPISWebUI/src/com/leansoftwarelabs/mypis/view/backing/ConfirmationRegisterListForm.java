@@ -85,23 +85,24 @@ public class ConfirmationRegisterListForm {
         String title =
             "Confirmation: " + confirmationRegister.getRegisterId() + ":" + confirmationRegister.getLastName() + ", " +
             confirmationRegister.getFirstName();
-        launchActivity(registerId, title);
+        launchActivity(registerId, title, false);
     }
 
-    private void launchActivity(Integer registerId, String title) {
+    private void launchActivity(Integer registerId, String title, boolean editMode) {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("title", title);
         payload.put("taskFlowId", "/WEB-INF/taskflows/confirmation-register-entry.xml#confirmation-register-entry");
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("registerId", registerId);
         parameters.put("KEY", registerId);
+        parameters.put("editMode", editMode);
         payload.put("parameters", parameters);
         payload.put("newTab", true);
         raiseEvent("launchActivity", payload);
     }
 
     public void create(ActionEvent ev) {
-        launchActivity(-1, "New Confirmation Entry");
+        launchActivity(-1, "New Confirmation Entry", true);
     }
 
     private static void raiseEvent(String eventName, Map<String, Object> payload) {

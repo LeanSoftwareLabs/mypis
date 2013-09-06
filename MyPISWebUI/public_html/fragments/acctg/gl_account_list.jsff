@@ -3,53 +3,59 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1" topHeight="auto" bottomHeight="0px">
         <f:facet name="center">
-            <af:panelCollection id="pc1">
-                <f:facet name="menus"/>
-                <f:facet name="toolbar">
-                    <af:toolbar id="t2">
-                        <af:button text="Create New GL Account" id="b1"
-                                   actionListener="#{viewScope.glAccountListForm.create}"/>
-                    </af:toolbar>
-                </f:facet>
-                <f:facet name="statusbar"/>
-                <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
-                          value="#{viewScope.glAccountListForm.lazyDataModel}" scrollPolicy="page" fetchSize="30"
-                          autoHeightRows="0" rowSelection="single" columnSelection="multiple"
-                          binding="#{viewScope.glAccountListForm.glAccountTable}">
-                    <af:column id="c8" width="25">
-                        <af:outputText value="#{vs.index + 1}" id="ot1"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Code" align="start" id="c1" width="70" sortProperty="code">
-                        <af:link text="#{row.code}" id="l1"
-                                 actionListener="#{viewScope.glAccountListForm.viewDetails}"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Name" align="start" id="c2" width="150" sortProperty="name">
-                        <af:outputText value="#{row.name}" id="ot2"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Description" align="start" id="c3" width="300"
-                               sortProperty="description" noWrap="false">
-                        <af:outputText value="#{row.description}" id="ot3"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Type" align="start" id="c4" sortProperty="type">
-                        <af:selectOneChoice label="Account Type" id="soc1" value="#{row.type}" readOnly="true">
-                            <f:selectItems value="#{viewScope.glAccountListForm.accountTypeItems}" id="si1"/>
-                        </af:selectOneChoice>
-                    </af:column>
-                    <af:column sortable="true" headerText="Dashboard" align="start" id="c5" width="50"
-                               sortProperty="dashboard">
-                        <af:selectBooleanCheckbox value="#{row.dashboard}" label="Dashboard" id="sbc1" disabled="true"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Expense Claims" align="start" id="c6" width="50"
-                               sortProperty="expenseClaims">
-                        <af:selectBooleanCheckbox value="#{row.expenseClaims}" label="Expense Claims" id="sbc2"
-                                                  disabled="true"/>
-                    </af:column>
-                    <af:column sortable="true" headerText="Payments" align="start" id="c7" width="50"
-                               sortProperty="payments">
-                        <af:selectBooleanCheckbox value="#{row.payments}" label="Payments" id="sbc3" disabled="true"/>
-                    </af:column>
-                </af:table>
-            </af:panelCollection>
+            <af:panelGroupLayout id="pgl1">
+                <af:panelCollection id="pc1" styleClass="AfStretchWidth">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:button text="Create New GL Account" id="b1"
+                                       actionListener="#{viewScope.glAccountListForm.create}"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar"/>
+                    <af:table var="row" rowBandingInterval="0" id="t1" varStatus="vs"
+                              value="#{viewScope.glAccountListForm.lazyDataModel}" scrollPolicy="page" fetchSize="20"
+                              autoHeightRows="0" rowSelection="single" columnSelection="multiple"
+                              binding="#{viewScope.glAccountListForm.glAccountTable}">
+                        <af:column id="c8" width="25">
+                            <af:outputText value="#{vs.index + 1}" id="ot1"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Code" align="start" id="c1" width="70"
+                                   sortProperty="code">
+                            <af:link text="#{row.code}" id="l1"
+                                     actionListener="#{viewScope.glAccountListForm.viewDetails}"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Name" align="start" id="c2" width="150"
+                                   sortProperty="name">
+                            <af:outputText value="#{row.name}" id="ot2"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Description" align="start" id="c3" width="300"
+                                   sortProperty="description" noWrap="false">
+                            <af:outputText value="#{row.description}" id="ot3"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Type" align="start" id="c4" sortProperty="type">
+                            <af:selectOneChoice label="Account Type" id="soc1" value="#{row.type}" readOnly="true">
+                                <f:selectItems value="#{viewScope.glAccountListForm.accountTypeItems}" id="si1"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortable="true" headerText="Dashboard" align="start" id="c5" width="50"
+                                   sortProperty="dashboard">
+                            <af:selectBooleanCheckbox value="#{row.dashboard}" label="Dashboard" id="sbc1"
+                                                      disabled="true"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Expense Claims" align="start" id="c6" width="50"
+                                   sortProperty="expenseClaims">
+                            <af:selectBooleanCheckbox value="#{row.expenseClaims}" label="Expense Claims" id="sbc2"
+                                                      disabled="true"/>
+                        </af:column>
+                        <af:column sortable="true" headerText="Payments" align="start" id="c7" width="50"
+                                   sortProperty="payments">
+                            <af:selectBooleanCheckbox value="#{row.payments}" label="Payments" id="sbc3"
+                                                      disabled="true"/>
+                        </af:column>
+                    </af:table>
+                </af:panelCollection>
+            </af:panelGroupLayout>
         </f:facet>
         <f:facet name="top">
             <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.glAccountListForm.queryModel}"

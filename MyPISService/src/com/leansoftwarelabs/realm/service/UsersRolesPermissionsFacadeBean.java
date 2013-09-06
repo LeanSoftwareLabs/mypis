@@ -2,7 +2,6 @@ package com.leansoftwarelabs.realm.service;
 
 import com.leansoftwarelabs.realm.domain.Role;
 import com.leansoftwarelabs.realm.domain.RolePK;
-
 import com.leansoftwarelabs.realm.domain.RolePermission;
 import com.leansoftwarelabs.realm.domain.RolePermissionPK;
 import com.leansoftwarelabs.realm.domain.User;
@@ -16,7 +15,6 @@ import javax.annotation.Resource;
 
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
@@ -26,7 +24,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -44,33 +41,6 @@ public class UsersRolesPermissionsFacadeBean{
     public UsersRolesPermissionsFacadeBean() {
     }
 
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Object queryByRange(String jpqlStmt, List<Object[]> hints, int firstResult, int maxResults) {
-        if (jpqlStmt == null) {
-            return Collections.emptyList();
-        }
-        User currentUser = em.find(User.class, principal.getName());
-        if (currentUser == null) {
-            return Collections.emptyList();
-        }
-        Integer tenantId = currentUser.getTenant().getTenantId();
-        StringBuffer buffer = new StringBuffer(jpqlStmt);
-        if (jpqlStmt.toUpperCase().contains("WHERE")) {
-            buffer.append(" AND");
-        } else {
-            buffer.append(" WHERE");
-        }
-        buffer.append(" o.tenantId = :tenantId");
-        Query query = em.createQuery(buffer.toString());
-        query.setParameter("tenantId", tenantId);
-        if (firstResult > 0) {
-            query = query.setFirstResult(firstResult);
-        }
-        if (maxResults > 0) {
-            query = query.setMaxResults(maxResults);
-        }
-        return query.getResultList();
-    }
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public User findUserByUsername(String username){
         User user = em.find(User.class, username);
