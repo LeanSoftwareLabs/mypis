@@ -2,19 +2,32 @@ package com.leansoftwarelabs.mypis.domain;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.eclipse.persistence.annotations.JoinFetch;
 
 @NamedQueries({@NamedQuery(name = "findBaptismalRegisterById", query = "Select o from BaptismalRegister o where o.registerId = :registerId")
                
@@ -63,6 +76,7 @@ public class BaptismalRegister implements MultiTenant, Serializable {
     private Integer page;
     @Id
     @Column(name = "BAPTISMAL_REGISTER_ID", nullable = false)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer registerId;
     private String remarks;
     private String suffix;
@@ -73,10 +87,26 @@ public class BaptismalRegister implements MultiTenant, Serializable {
     private String godFather;
     @Column(name = "GOD_MOTHER")
     private String godMother;
+    @JoinFetch
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name= "baptismal_sponsors", joinColumns = @JoinColumn(name = "baptismal_register_id", referencedColumnName = "baptismal_register_id"),
+               inverseJoinColumns = @JoinColumn(name = "sponsor_id", referencedColumnName = "sponsor_id"))
+    private List <Sponsor> sponsors;
 
     public BaptismalRegister() {
     }
 
+
+    public List<Sponsor> getSponsors() {
+        if(sponsors == null){
+            sponsors = new ArrayList<Sponsor>();
+        }
+        return sponsors;
+    }
+
+    public void addSponsor(Sponsor sponsor){
+        getSponsors().add(sponsor);
+    }
 
     public void setTenantId(Integer tenantId) {
         this.tenantId = tenantId;

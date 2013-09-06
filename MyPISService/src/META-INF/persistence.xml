@@ -10,6 +10,7 @@
         <class>com.leansoftwarelabs.mypis.domain.MarriageRegister</class>
         <class>com.leansoftwarelabs.mypis.domain.DeathRegister</class>
         <class>com.leansoftwarelabs.mypis.domain.GLAccount</class>
+        <class>com.leansoftwarelabs.mypis.domain.Sponsor</class>
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>

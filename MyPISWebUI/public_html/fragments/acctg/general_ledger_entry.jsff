@@ -20,7 +20,7 @@
     <f:facet name="legend"/>
     <f:facet name="info"/>
     <af:panelGroupLayout id="pgl1" layout="vertical">
-      <af:panelFormLayout id="pfl1" rows="3" maxColumns="3">
+      <af:panelFormLayout id="pfl1" rows="3" maxColumns="3" fieldWidth="50" labelWidth="50">
         <af:inputText label="My Reference" id="it1" value="#{viewScope.generalLedgerEntryForm.entry.myReference}"
                       disabled="#{not pageFlowScope.editMode}"/>
         <af:inputText label="Your Reference" id="it2" value="#{viewScope.generalLedgerEntryForm.entry.yourReference}"

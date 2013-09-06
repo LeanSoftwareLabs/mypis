@@ -23,7 +23,7 @@
         </f:facet>
         <f:facet name="legend"/>
         <f:facet name="info"/>
-        <af:panelGroupLayout id="pgl1" layout="vertical">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
             <af:panelFormLayout id="pfl2" rows="1" maxColumns="8" labelAlignment="top" fieldWidth="50" labelWidth="50">
                 <af:inputText label="Volume" id="it1"
                               value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.volume}" columns="6"
@@ -98,8 +98,47 @@
             <af:panelFormLayout id="pfl6" labelAlignment="top">
                 <af:inputText label="Remarks" id="it15"
                               value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.remarks}" columns="130"
-                              rows="10" disabled="#{not pageFlowScope.editMode}"/>
+                              rows="5" disabled="#{not pageFlowScope.editMode}"/>
             </af:panelFormLayout>
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth" partialTriggers="b6 b7 b8">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t3">
+                        <af:button text="Add Sponsor" id="b6" rendered="#{pageFlowScope.editMode}"
+                                   actionListener="#{viewScope.baptismalRegisterEntryForm.addSponsor}"/>
+                        <af:button text="Insert" id="b7" rendered="#{pageFlowScope.editMode}"
+                                   actionListener="#{viewScope.baptismalRegisterEntryForm.insertSponsor}"/>
+                        <af:button text="Remove" id="b8" rendered="#{pageFlowScope.editMode}"
+                                   actionListener="#{viewScope.baptismalRegisterEntryForm.removeSponsor}"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{viewScope.baptismalRegisterEntryForm.baptismalRegister.sponsors}" var="row"
+                          rowBandingInterval="0" id="t2" varStatus="vs" fetchSize="10" autoHeightRows="10"
+                          binding="#{viewScope.baptismalRegisterEntryForm.sponsorTable}" rowSelection="single">
+                    <af:column sortable="false" headerText="No." align="start" id="c1" width="25">
+                        <af:outputText value="#{row.setSponsorNumber(vs.index+1)}#{row.sponsorNumber}" id="ot1"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Name" align="start" id="c5" width="200">
+                        <af:inputText value="#{row.name}" id="it22" columns="30" readOnly="#{not pageFlowScope.editMode}"/>
+                    </af:column>
+                    <af:column id="c6" headerText="Gender" width="80">
+                        <af:selectOneChoice label="Gender" id="soc1" value="#{row.gender}" readOnly="#{not pageFlowScope.editMode}">
+                            <af:selectItem label="Male" value="M" id="si1"/>
+                            <af:selectItem label="Female" value="F" id="si2"/>
+                        </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortable="false" headerText="Birth Date" align="start" id="c2">
+                        <af:inputDate label="Birth Date" value="#{row.birthDate}" id="id3" readOnly="#{not pageFlowScope.editMode}"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Age" align="end" id="c3" width="30">
+                        <af:inputText value="#{row.age}" id="it20" readOnly="#{not pageFlowScope.editMode}"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="Remarks" align="start" id="c4" width="300">
+                        <af:inputText value="#{row.remarks}" id="it21" readOnly="#{not pageFlowScope.editMode}"/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
         </af:panelGroupLayout>
     </af:panelHeader>
 </ui:composition>
