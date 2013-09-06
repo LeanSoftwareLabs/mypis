@@ -63,4 +63,8 @@ public class Launcher {
     public void launchMarriageRegister(ActionEvent actionEvent) {
         // Add event code here...
     }
+
+    public void launchGeneralLedger(ActionEvent actionEvent) {
+        launch("General Ledger", "/WEB-INF/taskflows/acctg/general-ledger.xml#general-ledger", null,false);
+    }
 }

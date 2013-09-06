@@ -6,10 +6,8 @@
             <af:decorativeBox id="db1">
                 <f:facet name="center">
                     <af:panelFormLayout id="pfl1">
-                        <af:inputText label="User Name" id="username" value="#{loginForm.userName}" showRequired="true"
-                                      required="true" clientComponent="true"/>
-                        <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"
-                                      required="true" showRequired="true"/>
+                        <af:inputText label="User Name" id="username" value="#{loginForm.userName}" clientComponent="true"/>
+                        <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"/>
                         <af:selectBooleanCheckbox text="Remember Me" label="Remember Me" id="rememberMe"
                                                   value="#{loginForm.remember}"/>
                         <f:facet name="footer">

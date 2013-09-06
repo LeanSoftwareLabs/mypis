@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1" topHeight="auto">
+        <f:facet name="bottom"/>
+        <f:facet name="center">
+            <af:panelGroupLayout id="pgl1">
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="statusBar">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:button text="Create New Journal Voucher" id="b1"
+                                       actionListener="#{viewScope.generalLedgerForm.create}"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{viewScope.generalLedgerForm.lazyDataModel}" var="row" rowBandingInterval="0"
+                              id="t1" varStatus="vs" rowSelection="single" columnSelection="multiple"
+                              scrollPolicy="page" autoHeightRows="0" fetchSize="20"
+                              binding="#{viewScope.generalLedgerForm.richTable}">
+                        <af:column sortable="false" headerText="My Reference" align="start" id="c1">
+                            <af:link text="#{row.myReference}" id="l1"
+                                     actionListener="#{viewScope.generalLedgerForm.viewDetails}"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Your Reference" align="start" id="c2">
+                            <af:outputText value="#{row.yourReference}" id="ot2"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Description" align="start" id="c3">
+                            <af:outputText value="#{row.description}" id="ot3"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Trans Type" align="start" id="c4">
+                            <af:outputText value="#{row.transType}" id="ot4"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Trans Date" align="start" id="c5">
+                            <af:outputText value="#{row.transDate}" id="ot5"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Reporting Date" align="start" id="c6">
+                            <af:outputText value="#{row.reportingDate}" id="ot6"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Status" align="start" id="c7">
+                            <af:outputText value="#{row.status}" id="ot7"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Total Debit" align="start" id="c8">
+                            <af:outputText value="#{row.totalDebit}" id="ot8"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Total Credit" align="start" id="c9">
+                            <af:outputText value="#{row.totalCredit}" id="ot9"/>
+                        </af:column>
+                    </af:table>
+                </af:panelCollection>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="top">
+            <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.generalLedgerForm.queryModel}"
+                      value="#{viewScope.generalLedgerForm.queryModel.currentDescriptor}" resultComponentId="::pc1:t1"
+                      queryListener="#{viewScope.generalLedgerForm.tableFilter}"/>
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

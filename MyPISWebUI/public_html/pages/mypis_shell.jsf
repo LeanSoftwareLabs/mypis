@@ -36,7 +36,8 @@
                         <af:link text="Check Vouchers" id="l11"/>
                         <af:link text="Enter New Journal Voucher" id="l13"/>
                         <af:link text="Fixed Assets" id="l12"/>
-                        <af:link text="General Ledger" id="l8"/>
+                        <af:link text="General Ledger" id="l8"
+                                 actionListener="#{viewScope.launcher.launchGeneralLedger}"/>
                         <af:link text="Trial Balance" id="l9"/>
                         <af:link text="Balance Sheets" id="l10"/>
                     </af:panelList>

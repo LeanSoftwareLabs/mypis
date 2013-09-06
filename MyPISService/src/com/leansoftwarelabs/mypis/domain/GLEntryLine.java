@@ -1,6 +1,9 @@
 package com.leansoftwarelabs.mypis.domain;
 
 import java.io.Serializable;
+
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,11 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GLEntryLine implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "GL_TRANS_DETAIL_ID")
     private Integer id;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "LINE_NO")
     private int lineNo;
@@ -32,10 +33,10 @@ public class GLEntryLine implements Serializable {
     @JoinColumn(name = "GL_ACCOUNT_ID")
     @ManyToOne
     private GLAccount account;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AMOUNT")
-    private double amount;
+    @Column(name = "DEBIT")
+    private BigDecimal debit;
+    @Column(name = "CREDIT")
+    private BigDecimal credit;
     
     @ManyToOne
     @JoinColumn(name = "GL_TRANS_HEADER_ID")
@@ -48,11 +49,6 @@ public class GLEntryLine implements Serializable {
         this.id = glTransDetailId;
     }
 
-    public GLEntryLine(Integer glTransDetailId, int lineNo, double amount) {
-        this.id = glTransDetailId;
-        this.lineNo = lineNo;
-        this.amount = amount;
-    }
 
     public Integer getId() {
         return id;
@@ -86,12 +82,21 @@ public class GLEntryLine implements Serializable {
         this.account = account;
     }
 
-    public double getAmount() {
-        return amount;
+
+    public void setDebit(BigDecimal debit) {
+        this.debit = debit;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public BigDecimal getDebit() {
+        return debit;
+    }
+
+    public void setCredit(BigDecimal credit) {
+        this.credit = credit;
+    }
+
+    public BigDecimal getCredit() {
+        return credit;
     }
 
     public GLEntry getEntry() {
@@ -126,5 +131,7 @@ public class GLEntryLine implements Serializable {
     public String toString() {
         return "count.domain.GLEntryLine[ id=" + id + " ]";
     }
+
+    
     
 }

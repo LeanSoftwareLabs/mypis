@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="#{viewScope.generalLedgerEntryForm.entry.myReference}" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Edit" id="b1" rendered="#{not pageFlowScope.editMode}"
+                   action="#{viewScope.generalLedgerEntryForm.edit}"/>
+        <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
+                   action="#{viewScope.generalLedgerEntryForm.cancel}" immediate="true">
+          <af:resetActionListener/>
+        </af:button>
+        <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
+                    action="#{viewScope.generalLedgerEntryForm.save}"/>
+        <af:button text="Close" id="b4" action="done" rendered="#{not pageFlowScope.editMode}"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+      <af:panelFormLayout id="pfl1" rows="3" maxColumns="3">
+        <af:inputText label="My Reference" id="it1" value="#{viewScope.generalLedgerEntryForm.entry.myReference}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputText label="Your Reference" id="it2" value="#{viewScope.generalLedgerEntryForm.entry.yourReference}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputText label="Description" id="it3" value="#{viewScope.generalLedgerEntryForm.entry.description}"
+                      rows="4" columns="50" disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputDate label="Trans Date" id="id1" value="#{viewScope.generalLedgerEntryForm.entry.transDate}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputDate label="Reporting Date" id="id2" value="#{viewScope.generalLedgerEntryForm.entry.reportingDate}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+      </af:panelFormLayout>
+      <af:panelCollection id="pc1" featuresOff="viewMenu statusBar detach" styleClass="AFStretchWidth">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t3">
+            <af:button text="Add New Line" id="b5" actionListener="#{viewScope.generalLedgerEntryForm.addLine}"
+                       rendered="#{pageFlowScope.editMode}"/>
+            <af:button text="Remove" id="b6" actionListener="#{viewScope.generalLedgerEntryForm.removeLine}"
+                       rendered="#{pageFlowScope.editMode}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="statusbar"/>
+        <af:table value="#{viewScope.generalLedgerEntryForm.entry.lineList}" var="row" rowBandingInterval="0" id="t1"
+                  binding="#{viewScope.generalLedgerEntryForm.entryLineTable}" rowSelection="single"
+                  partialTriggers="::b5 ::b6" varStatus="vs">
+          <af:column sortable="false" headerText="Line" align="end" id="c1" width="30" displayIndex="1">
+            <af:outputText value="#{row.setLineNo(vs.index + 1)}#{row.lineNo}" id="ot1"/>
+          </af:column>
+          <af:column sortable="false" headerText="GL Code" align="start" id="c2">
+            <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1" value="#{row.account}"
+                                  model="#{viewScope.generalLedgerEntryForm.glAccountLOVModel}"
+                                  converter="#{viewScope.generalLedgerEntryForm.glAccountLOVModel.converter}"
+                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+          </af:column>
+          <af:column sortable="false" headerText="Account Description" align="start" id="c5">
+            <af:outputText value="#{row.account.name}" id="ot5" partialTriggers="ilov1"/>
+          </af:column>
+          <af:column sortable="false" headerText="Description" align="start" id="c3" width="200">
+            <af:inputText label="Description" value="#{row.description}" id="it4" readOnly="#{not pageFlowScope.editMode}"/>
+          </af:column>
+          <af:column sortable="false" headerText="Debit" align="end" id="c4">
+            <af:inputText label="Debit" value="#{row.debit}" id="it14" readOnly="#{not pageFlowScope.editMode}"/>
+          </af:column>
+          <af:column sortable="false" headerText="Credit" align="end" id="c6">
+            <af:inputText label="Credit" value="#{row.credit}" id="it5" readOnly="#{not pageFlowScope.editMode}"/>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</ui:composition>

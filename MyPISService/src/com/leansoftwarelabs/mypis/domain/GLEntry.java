@@ -1,9 +1,17 @@
 package com.leansoftwarelabs.mypis.domain;
 
+import com.leansoftwarelabs.mypis.validator.AssertMethodAsTrue;
+
 import java.io.Serializable;
+
+import java.math.BigDecimal;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,27 +22,26 @@ import org.eclipse.persistence.annotations.PrivateOwned;
  *
  * @author Rommel
  */
+@AssertMethodAsTrue("areGLEntryLinesBalance")
+
 @Entity
 @Table(name = "gl_trans_header")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GLEntry.findAll", query = "SELECT o FROM GLEntry o")})
-public class GLEntry implements Serializable {
+public class GLEntry implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "GL_TRANS_HEADER_ID")
     private Integer id;
     @Size(max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "TRANS_DATE")
     @Temporal(TemporalType.DATE)
     private Date transDate;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "REPORTING_DATE")
     @Temporal(TemporalType.DATE)
@@ -44,20 +51,23 @@ public class GLEntry implements Serializable {
     private String status;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TOTAL_DEBIT")
-    private Double totalDebit;
+    private BigDecimal totalDebit;
     @Column(name = "TOTAL_CREDIT")
-    private Double totalCredit;
+    private BigDecimal totalCredit;
+    @NotNull
     @Size(max = 5)
     @Column(name = "TRANS_TYPE")
     private String transType;
+    @NotNull
     @Size(max = 20)
     @Column(name = "MY_TRANS_REF")
     private String myReference;
     @Size(max = 20)
     @Column(name = "YOUR_TRANS_REF")
     private String yourReference;
-    @OneToMany(mappedBy = "entry")
-    @PrivateOwned
+    @Column(name = "TENANT_ID")
+    private Integer tenantId;
+    @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GLEntryLine> lineList;
 
     public GLEntry() {
@@ -72,7 +82,16 @@ public class GLEntry implements Serializable {
         this.transDate = transDate;
         this.reportingDate = reportingDate;
     }
-
+    
+    public void addGLEntryLine(GLEntryLine entryLine){
+        getLineList().add(entryLine);
+        entryLine.setEntry(this);   
+    }
+    
+    public void removeGLEntryLine(GLEntryLine entryLine){
+        getLineList().remove(entryLine);
+        entryLine.setEntry(null);   
+    }
     public Integer getId() {
         return id;
     }
@@ -113,19 +132,19 @@ public class GLEntry implements Serializable {
         this.status = status;
     }
 
-    public Double getTotalDebit() {
+    public BigDecimal getTotalDebit() {
         return totalDebit;
     }
 
-    public void setTotalDebit(Double totalDebit) {
+    public void setTotalDebit(BigDecimal totalDebit) {
         this.totalDebit = totalDebit;
     }
 
-    public Double getTotalCredit() {
+    public BigDecimal getTotalCredit() {
         return totalCredit;
     }
 
-    public void setTotalCredit(Double totalCredit) {
+    public void setTotalCredit(BigDecimal totalCredit) {
         this.totalCredit = totalCredit;
     }
 
@@ -157,6 +176,9 @@ public class GLEntry implements Serializable {
 
     @XmlTransient
     public List<GLEntryLine> getLineList() {
+        if(lineList == null){
+            lineList = new ArrayList<GLEntryLine>();
+        }
         return lineList;
     }
 
@@ -188,5 +210,34 @@ public class GLEntry implements Serializable {
     public String toString() {
         return "count.domain.GLEntry[ id=" + id + " ]";
     }
+
+    @Override
+    public Integer getTenantId() {
+        return tenantId;
+    }
+
+    @Override
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     
+    public BigDecimal getComputedDebit(){
+        BigDecimal result = BigDecimal.ZERO;
+        for (GLEntryLine line : getLineList()){
+            result = result.add(line.getDebit());
+        }
+        return result;
+    }
+            
+    public BigDecimal getComputedCredit(){
+        BigDecimal result = BigDecimal.ZERO;
+        for (GLEntryLine line : getLineList()){
+            result = result.add(line.getCredit());
+        }
+        return result;
+    }        
+    
+    protected boolean areGLEntryLinesBalance(){
+        return getComputedDebit().compareTo(getComputedCredit()) == 0;
+    }
 }

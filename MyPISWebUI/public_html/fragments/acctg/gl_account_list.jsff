@@ -3,8 +3,8 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1" topHeight="auto" bottomHeight="0px">
         <f:facet name="center">
-            <af:panelGroupLayout id="pgl1">
-                <af:panelCollection id="pc1" styleClass="AfStretchWidth">
+            <af:panelGroupLayout id="pgl1" layout="vertical">
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
                     <f:facet name="menus"/>
                     <f:facet name="toolbar">
                         <af:toolbar id="t2">

@@ -47,7 +47,7 @@ public class GLAccountListForm {
         attributes.put("code", new AttributeDef("code", String.class, null, AttributeDef.INPUT_TEXT));
         attributes.put("name", new AttributeDef("name", String.class, null, AttributeDef.INPUT_TEXT));
         attributes.put("description", new AttributeDef("description", String.class, null, AttributeDef.INPUT_TEXT));
-        attributes.put("dashboards", new AttributeDef("dashboards", Boolean.class, null, AttributeDef.CHECK_BOX));
+        attributes.put("dashboard", new AttributeDef("dashboard", Boolean.class, null, AttributeDef.CHECK_BOX));
         attributes.put("expenseClaims", new AttributeDef("expenseClaims", Boolean.class, null, AttributeDef.CHECK_BOX));
         attributes.put("payments", new AttributeDef("payments", Boolean.class, null, AttributeDef.CHECK_BOX));
 

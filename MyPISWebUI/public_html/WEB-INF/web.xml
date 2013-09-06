@@ -222,6 +222,12 @@
         <ejb-link>GLAccountFacade</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
+        <ejb-ref-name>ejb/local/GLEntryFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.mypis.service.GLEntryFacadeBean</local>
+        <ejb-link>GLEntryFacade</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
         <ejb-ref-name>ejb/local/ContactFacade</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.leansoftwarelabs.mypis.service.ContactFacadeBean</local>

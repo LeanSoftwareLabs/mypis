@@ -43,7 +43,7 @@ public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Object queryByRange(String jpqlStmt, List<Object[]> hints, int firstResult, int maxResults) {
+    public List<T> queryByRange(String jpqlStmt, List<Object[]> hints, int firstResult, int maxResults) {
         User currentUser = getCurrentUser();
         if (currentUser == null) {
             return Collections.emptyList();
