@@ -30,9 +30,4 @@ public class BaptismalRegisterFacadeBean extends AbstractMutiTenantFacade<Baptis
         return em;
     }
 
-    public BaptismalRegister findBaptismalRegisterById(Integer registerId) {
-        Query query = em.createNamedQuery("findBaptismalRegisterById");
-        query.setParameter("registerId", registerId);
-        return (BaptismalRegister) query.getSingleResult();
-    }
 }

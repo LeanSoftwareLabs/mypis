@@ -73,6 +73,8 @@
                 <f:facet name="branding">
                     <af:panelBorderLayout id="pbl1">
                         <f:facet name="start"/>
+                        <af:image source="/images/MyPIS_logo.png" shortDesc="MyPIS" id="i1"
+                                  inlineStyle="max-height:50px;"/>
                         <f:facet name="bottom"/>
                         <f:facet name="end"/>
                         <f:facet name="top"/>

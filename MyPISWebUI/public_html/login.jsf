@@ -3,27 +3,41 @@
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
     <af:document title="login.jsf" id="d1" initialFocusId="username">
         <af:form id="f1" defaultCommand="log">
-            <af:decorativeBox id="db1">
-                <f:facet name="center">
-                    <af:panelFormLayout id="pfl1">
-                        <af:inputText label="User Name" id="username" value="#{loginForm.userName}" clientComponent="true"/>
-                        <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"/>
-                        <af:selectBooleanCheckbox text="Remember Me" label="Remember Me" id="rememberMe"
-                                                  value="#{loginForm.remember}"/>
-                        <f:facet name="footer">
-                            <af:panelBorderLayout id="pbl1">
-                                <f:facet name="end">
-                                    <af:button text="Login" id="log" partialSubmit="false" action="#{loginForm.login}"/>
-                                </f:facet>
-                                <af:spacer width="10" height="10" id="s1"/>
-                            </af:panelBorderLayout>
-                        </f:facet>
-                    </af:panelFormLayout>
+            <af:panelBorderLayout id="pbl2">
+                <f:facet name="start"/>
+                <f:facet name="bottom"/>
+                <f:facet name="end">
+                    <af:spacer width="50" height="10" id="s4"/>
                 </f:facet>
                 <f:facet name="top">
-                    <af:messages id="m1" inline="true"/>
+                    <af:spacer width="10" height="50" id="s3"/>
                 </f:facet>
-            </af:decorativeBox>
+                <f:facet name="innerEnd">
+                    <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                        <af:panelGroupLayout id="pgl1">
+                            <af:image source="/images/MyPIS_logo.png" id="i1"/>
+                        </af:panelGroupLayout>
+                        <af:spacer width="10" height="30" id="s2"/>
+                        <af:panelFormLayout id="pfl1">
+                            <af:messages id="m1" inline="true"/>
+                            <af:inputText label="User Name" id="username" value="#{loginForm.userName}"
+                                          clientComponent="true"/>
+                            <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"/>
+                            <af:selectBooleanCheckbox label="Remember Me" id="rememberMe"
+                                                      value="#{loginForm.remember}"/>
+                            <f:facet name="footer">
+                                <af:panelBorderLayout id="pbl1">
+                                    <f:facet name="end">
+                                        <af:button text="Login" id="log" partialSubmit="false"
+                                                   action="#{loginForm.login}"/>
+                                    </f:facet>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                </af:panelBorderLayout>
+                            </f:facet>
+                        </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:panelBorderLayout>
         </af:form>
     </af:document>
 </f:view>

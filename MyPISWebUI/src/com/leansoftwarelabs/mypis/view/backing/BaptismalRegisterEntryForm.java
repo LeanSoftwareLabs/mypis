@@ -55,13 +55,8 @@ public class BaptismalRegisterEntryForm {
             Integer registerId = (Integer) ADFUtils.getPageFlowScope().get("registerId");
             if (registerId == -1) {
                 baptismalRegister = new BaptismalRegister();
-
-                for (int i = 0; i < 10; i++) {
-                    Sponsor sponssor = new Sponsor();
-                    baptismalRegister.addSponsor(sponssor);
-                }
             } else {
-                baptismalRegister = getService().findBaptismalRegisterById(registerId);
+                baptismalRegister = getService().find(registerId);
             }
         }
         return baptismalRegister;
