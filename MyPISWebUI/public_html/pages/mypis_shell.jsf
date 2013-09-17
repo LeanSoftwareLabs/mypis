@@ -6,7 +6,13 @@
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:pageTemplate viewId="/templates/dynamicShell/shell.jsf" id="pt1" value="#{bindings.ptb1}">
-                <f:facet name="copyright"/>
+                <f:facet name="copyright">
+                    <af:group id="g2">
+                        <af:link text="Lean Software Labs, Inc." id="l16"/>
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:outputText value="[efficient.working.valuable] All rights reserved..." id="ot3"/>
+                    </af:group>
+                </f:facet>
                 <f:facet name="about"/>
                 <f:facet name="navigation">
                     <af:panelList id="pl1" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}">
@@ -31,6 +37,8 @@
                     </af:panelList>
                     <af:panelList id="pl3" rendered="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}">
                         <af:link text="Manage GL Accounts" id="l15" actionListener="#{viewScope.launcher.launchGLAccountList}"/>
+                        <af:link text="Subsidiary Accounts" id="l18" actionListener="#{viewScope.launcher.launchSubAccounts}"/>
+                        <af:link text="Tracking" id="l19" actionListener="#{viewScope.launcher.launchTrackingCategories}"/>
                         <af:link text="Manage Contacts" id="l17"
                                  actionListener="#{viewScope.launcher.launchContactList}"/>
                         <af:link text="Check Vouchers" id="l11"/>
@@ -38,8 +46,11 @@
                         <af:link text="Fixed Assets" id="l12"/>
                         <af:link text="General Ledger" id="l8"
                                  actionListener="#{viewScope.launcher.launchGeneralLedger}"/>
-                        <af:link text="Trial Balance" id="l9"/>
-                        <af:link text="Balance Sheets" id="l10"/>
+                        <af:link text="Trial Balance" id="l9"
+                                 actionListener="#{viewScope.launcher.launchTrialBalance}"/>
+                        <af:link text="Balance Sheet" id="l10"
+                                 actionListener="#{viewScope.launcher.launchBalanceSheet}"/>
+                        <af:link text="Income Statement" id="l20" actionListener="#{viewScope.launcher.launchIncomeStatement}"/>
                     </af:panelList>
                 </f:facet>
                 <f:facet name="globalLinks"/>

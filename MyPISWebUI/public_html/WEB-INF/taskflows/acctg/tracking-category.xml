@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tracking-category">
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
+    <managed-bean id="__3">
+      <managed-bean-name>trackingCategoryForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.TrackingCategoryForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="tracking_category">
+      <page>/fragments/acctg/tracking_category.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>gatePassed</from-outcome>
+        <to-activity-id>tracking_category</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

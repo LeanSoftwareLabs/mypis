@@ -1,0 +1,334 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<table xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
+  <name>layout_group_members</name>
+  <columns>
+    <column>
+      <name>layout_id</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>layout_id</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>group_name</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">45</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>VARCHAR</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>group_name</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>member_acct</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>member_acct</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+  </columns>
+  <constraints>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>gl_accounts_layout_fk</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>member_acct</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <onDeleteAction>NO_ACTION</onDeleteAction>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>gl_accounts_layout_fk</name>
+            <childObjectNames>
+              <childObjectName>member_acct</childObjectName>
+            </childObjectNames>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <subType>FKConstraint</subType>
+            <type>CONSTRAINT</type>
+          </value>
+        </entry>
+      </properties>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>PRIMARY</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>gl_accounts</name>
+          <schemaName>mypis</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>mypis</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>layout_detail_fk</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>layout_id</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>group_name</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <onDeleteAction>NO_ACTION</onDeleteAction>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>layout_detail_fk</name>
+            <childObjectNames>
+              <childObjectName>layout_id</childObjectName>
+              <childObjectName>group_name</childObjectName>
+            </childObjectNames>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <subType>FKConstraint</subType>
+            <type>CONSTRAINT</type>
+          </value>
+        </entry>
+      </properties>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>PRIMARY</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>layout_detail</name>
+          <schemaName>mypis</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>mypis</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>PRIMARY</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>layout_id</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>group_name</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>member_acct</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>layout_group_members</name>
+            <schemaName>mypis</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>mypis</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>PRIMARY</name>
+            <childObjectNames>
+              <childObjectName>layout_id</childObjectName>
+              <childObjectName>group_name</childObjectName>
+              <childObjectName>member_acct</childObjectName>
+            </childObjectNames>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <subType>PKConstraint</subType>
+            <type>CONSTRAINT</type>
+          </value>
+        </entry>
+      </properties>
+    </constraint>
+  </constraints>
+  <indexes>
+    <indexe>
+      <name>gl_accounts_layout_fk_idx</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>member_acct</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>gl_accounts_layout_fk_idx</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+    <indexe>
+      <name>layout_detail_fk_idx</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>layout_id</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>group_name</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>layout_detail_fk_idx</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>layout_group_members</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+  </indexes>
+  <properties>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+      <value class="oracle.javatools.db.ReferenceID">
+        <name>layout_group_members</name>
+        <schemaName>mypis</schemaName>
+        <type>TABLE</type>
+      </value>
+    </entry>
+    <entry>
+      <key>TableType</key>
+      <value class="oracle.javatools.db.Table$TableType">NORMAL</value>
+    </entry>
+  </properties>
+  <schema>
+    <name>mypis</name>
+  </schema>
+</table>

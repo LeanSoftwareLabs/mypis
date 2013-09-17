@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBorderLayout id="pbl1">
+    <f:facet name="start"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:button text="Create Subsidiary Account" id="b1" actionListener="#{viewScope.subAccountListForm.create}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{viewScope.subAccountListForm.lazyDataModel}" var="row" rowBandingInterval="0" id="t1"
+                rowSelection="single" varStatus="vs" binding="#{viewScope.subAccountListForm.richTable}">
+        <af:column sortable="false" headerText="Code" align="start" id="c1">
+          <af:link text="#{row.code}" id="l1" actionListener="#{viewScope.subAccountListForm.viewDetails}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Name" align="start" id="c2" width="150">
+          <af:outputText value="#{row.name}" id="ot2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Description" align="start" id="c3" width="300">
+          <af:outputText value="#{row.description}" id="ot3"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <f:facet name="bottom"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:query headerText="Search" disclosed="true" id="q1" model="#{viewScope.subAccountListForm.queryModel}"
+                      value="#{viewScope.subAccountListForm.queryModel.currentDescriptor}" resultComponentId="::pc1:t1"
+                      queryListener="#{viewScope.subAccountListForm.tableFilter}"/>
+    </f:facet>
+  </af:panelBorderLayout>
+</ui:composition>

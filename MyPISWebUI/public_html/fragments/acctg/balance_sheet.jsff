@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:util="http://leansoftwarelabs.com/ext/jsf">
+    <af:panelStretchLayout id="psl1" topHeight="50px">
+        <f:facet name="bottom"/>
+        <f:facet name="center">
+            <af:panelHeader text="Balance Sheet Report as of #{util:formatDate(viewScope.balanceSheetForm.reportDate,'yyyy-MM-dd')}" id="ph1" partialTriggers="b1"
+                            visible="#{viewScope.balanceSheetForm.data ne null}">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:table value="#{viewScope.balanceSheetForm.data}" var="row" rowBandingInterval="0" id="t1">
+                    <!--<af:column id="c6" width="12"/>-->
+                    <af:column sortable="false" headerText=" " id="c1" colSpan="#{row[1] eq ''?5:1}" width="12">
+                        <af:outputText value="#{row[1] eq ''? row[0]:''}" id="ot1"
+                                       inlineStyle="font-weight:bold; font-size:larger;"/>
+                    </af:column>
+                    <af:column sortable="false" id="c2" width="12" headerText="" colSpan="#{row[1] eq '-'?3:row[2] eq ''?4:row[2] eq '-'?3:1}" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[1] eq'-'?row[0]:row[2] eq ''|| row[2] eq '-'?row[1]:''}" id="ot2"/>
+                    </af:column>
+                    <af:column sortable="false" headerText=" " id="c3" colSpan="#{row[3] eq '' ||row[3] eq '-'?2:1}" width="12" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[3] eq ''||row[3] eq '-'? row[2]:''}" id="ot3"/>
+                    </af:column>
+                    <af:column sortable="false" headerText=" " id="c4" width="200" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[3]}" id="ot4"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="As of #{util:formatDate(viewScope.balanceSheetForm.reportDate,'yyyy-MM-dd')}" id="c5"
+                               align="right"
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[5]}" id="ot5">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortable="false" headerText="As of #{util:formatDate(util:dateAdd(viewScope.balanceSheetForm.reportDate,1,-1),'yyyy-MM-dd')}" id="c6"
+                               align="right"
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                               rendered="#{viewScope.balanceSheetForm.comparative >0}">
+                        <af:outputText value="#{row[6]}" id="ot6">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortable="false" headerText="As of #{util:formatDate(util:dateAdd(viewScope.balanceSheetForm.reportDate,1,-2),'yyyy-MM-dd')}" id="c7"
+                               align="right"
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                               rendered="#{viewScope.balanceSheetForm.comparative >1}">
+                        <af:outputText value="#{row[7]}" id="ot7">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                </af:table>
+            </af:panelHeader>
+        </f:facet>
+        <f:facet name="start"/>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgl2" layout="vertical">
+                <af:panelFormLayout id="pfl1" labelAlignment="top" rows="1" maxColumns="5" fieldWidth="50"
+                                    labelWidth="50">
+                    <af:inputDate label="Report Date" id="id1" value="#{viewScope.balanceSheetForm.reportDate}"/>
+                    <af:selectOneChoice label="Level" id="soc2" value="#{viewScope.balanceSheetForm.reportLevel}">
+                        <af:selectItem label="By Account Type" value="2" id="si4"/>
+                        <af:selectItem label="By Account Code" value="3" id="si5"/>
+                        <af:selectItem label="By Account Code w/ Subtotal" value="4" id="si6"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice label="Comparative" id="soc1" value="#{viewScope.balanceSheetForm.comparative}">
+                        <af:selectItem label="None" value="0" id="si1"/>
+                        <af:selectItem label="2-Year Comparative" value="1" id="si2"/>
+                        <af:selectItem label="3-Year Comparative" value="2" id="si3"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:panelGroupLayout id="pgl1" layout="vertical">
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:button text="Run Report" id="b1" actionListener="#{viewScope.balanceSheetForm.runReport}"/>
+                    </af:panelGroupLayout>
+                </af:panelFormLayout>
+                <af:separator id="s3"/>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

@@ -8,6 +8,9 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
+import java.util.Set;
+
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
@@ -15,14 +18,23 @@ import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+
+import javax.persistence.criteria.Root;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidatorFactory;
+
+public abstract class AbstractMultiTenantFacade<T extends MultiTenant> {
     @Inject
     Principal principal;
     private Class<T> entityClass;
 
-    public AbstractMutiTenantFacade(Class<T> entityClass) {
+    public AbstractMultiTenantFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
@@ -37,8 +49,12 @@ public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
     }
 
     public List<T> findAll() {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<T> root = cq.from(entityClass);
+        Path path = root.get("tenantId");
+        Predicate predicate = cb.equal(path, getCurrentUser().getTenant().getTenantId());
+        cq.where(predicate);
         return (List<T>) getEntityManager().createQuery(cq).getResultList();
     }
 
@@ -51,10 +67,11 @@ public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
         Integer tenantId = currentUser.getTenant().getTenantId();
         StringBuffer buffer = new StringBuffer(jpqlStmt);
         int index = buffer.toString().toUpperCase().indexOf("ORDER BY");
-        String tenantFilterClause = containsWhereClause(jpqlStmt)?" AND o.tenantId = :tenantId ": " WHERE o.tenantId = :tenantId ";
-        if(index == -1){
+        String tenantFilterClause =
+            containsWhereClause(jpqlStmt) ? " AND o.tenantId = :tenantId " : " WHERE o.tenantId = :tenantId ";
+        if (index == -1) {
             buffer.append(tenantFilterClause);
-        }else{
+        } else {
             buffer.insert(index, tenantFilterClause);
         }
         Query query = getEntityManager().createQuery(buffer.toString());
@@ -63,7 +80,7 @@ public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
         return query.getResultList();
     }
 
-    private User getCurrentUser() {
+    protected User getCurrentUser() {
         User currentUser = getEntityManager().find(User.class, principal.getName());
         return currentUser;
     }
@@ -84,26 +101,34 @@ public abstract class AbstractMutiTenantFacade<T extends MultiTenant> {
             buffer.append(" WHERE");
         }
     }
-    
+
     protected boolean containsWhereClause(String jpql) {
         return jpql.toUpperCase().contains("WHERE");
     }
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public T persistEntity(T entity) {
         User currentUser = getCurrentUser();
-        if(entity.getTenantId() == null){
+        if (entity.getTenantId() == null) {
             entity.setTenantId(currentUser.getTenant().getTenantId());
         }
         getEntityManager().persist(entity);
         return entity;
     }
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public T mergeEntity(T entity) {
+    public T mergeEntity(T entity) throws ServiceException {
         User currentUser = getCurrentUser();
-        if(entity.getTenantId() == null){
+        if (entity.getTenantId() == null) {
             entity.setTenantId(currentUser.getTenant().getTenantId());
+        }
+        Set violations = ValidationUtil.validate(entity);
+        if(!violations.isEmpty()){
+            throw new ApplicationConstraintViolationException(violations);
         }
         entity = getEntityManager().merge(entity);
         return entity;
     }
+   
+    
 }

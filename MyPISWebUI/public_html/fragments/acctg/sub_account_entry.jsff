@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="#{viewScope.subAccountEntryForm.subAccount.code}:#{viewScope.subAccountEntryForm.subAccount.name}" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Edit" id="b1" rendered="#{not pageFlowScope.editMode}"
+                   action="#{viewScope.subAccountEntryForm.edit}"/>
+        <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
+                   action="#{viewScope.subAccountEntryForm.cancel}" immediate="true">
+          <af:resetActionListener/>
+        </af:button>
+        <af:button text="Save" id="b3" rendered="#{pageFlowScope.editMode}"
+                    action="#{viewScope.subAccountEntryForm.save}"/>
+        <af:button text="Close" id="b4" action="done" rendered="#{not pageFlowScope.editMode}"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelFormLayout id="pfl1">
+      <af:inputText label="Code" id="it1" disabled="#{not pageFlowScope.editMode}"
+                    value="#{viewScope.subAccountEntryForm.subAccount.code}"/>
+      <af:inputText label="Name" id="it2" disabled="#{not pageFlowScope.editMode}"
+                    value="#{viewScope.subAccountEntryForm.subAccount.name}"/>
+      <af:inputText label="Description" id="it3" disabled="#{not pageFlowScope.editMode}" rows="5" columns="50"
+                    value="#{viewScope.subAccountEntryForm.subAccount.description}"/>
+    </af:panelFormLayout>
+  </af:panelHeader>
+</ui:composition>

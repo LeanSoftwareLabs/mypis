@@ -1,8 +1,12 @@
 package com.leansoftwarelabs.mypis.view.backing;
 
 import com.leansoftwarelabs.mypis.domain.GLAccount;
+import com.leansoftwarelabs.mypis.domain.GLAccountType;
 import com.leansoftwarelabs.mypis.service.GLAccountFacadeBean;
+import com.leansoftwarelabs.mypis.service.ServiceException;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +19,7 @@ import oracle.adf.view.rich.context.AdfFacesContext;
 public class GLAccountEntryForm {
     private GLAccountFacadeBean service;
     private GLAccount account;
+    private Map<String, GLAccountType> accountTypeItems;
 
     @PostConstruct
     public void init(){
@@ -64,12 +69,23 @@ public class GLAccountEntryForm {
 
 
     public String save() {
-        this.account = getService().mergeEntity(this.account);
+        try {
+            this.account = getService().mergeEntity(this.account);
+        } catch (ServiceException se) {
+            System.out.println("Something error");
+        }
         FormUtils.editing(false);
         return null;
     }
     
     public Map getAccountTypeItems(){
-        return GLAccount.AccountType.VALUES;
+        if(accountTypeItems == null){
+            accountTypeItems = new LinkedHashMap<String, GLAccountType>();
+            List<GLAccountType> accountTypes = getService().findAllGLAccountTypes();
+            for(GLAccountType type: accountTypes){
+                accountTypeItems.put(type.getName(),type);
+            }
+        }
+        return accountTypeItems;
     }
 }

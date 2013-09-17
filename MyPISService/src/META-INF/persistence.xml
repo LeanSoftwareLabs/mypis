@@ -11,11 +11,17 @@
         <class>com.leansoftwarelabs.mypis.domain.DeathRegister</class>
         <class>com.leansoftwarelabs.mypis.domain.GLAccount</class>
         <class>com.leansoftwarelabs.mypis.domain.Sponsor</class>
+        <class>com.leansoftwarelabs.mypis.domain.SubAccount</class>
+        <class>com.leansoftwarelabs.mypis.domain.TrackingCategory</class>
+        <class>com.leansoftwarelabs.mypis.domain.TrackingValue</class>
+        <class>com.leansoftwarelabs.mypis.domain.GLAccountType</class>
+        <class>com.leansoftwarelabs.mypis.domain.Layout</class>
+        <class>com.leansoftwarelabs.mypis.domain.LayoutDetail</class>
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
-            <property name="eclipselink.logging.logger" value="JavaLogger"/>
+            <property name="eclipselink.logging.logger" value="ServerLogger"/>
         </properties>
     </persistence-unit>
     <persistence-unit name="JDBCRealm">

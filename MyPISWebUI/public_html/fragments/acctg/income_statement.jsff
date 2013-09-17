@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:util="http://leansoftwarelabs.com/ext/jsf">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="bottom"/>
+        <f:facet name="center">
+            <af:panelHeader text="Income Statement for the Period #{util:formatDate(viewScope.incomeStatementForm.startDate,'yyyy-MM-dd')} to #{util:formatDate(viewScope.incomeStatementForm.endDate,'yyyy-MM-dd')}"
+                            id="ph1" partialTriggers="b1" visible="#{viewScope.incomeStatementForm.data ne null}">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:table value="#{viewScope.incomeStatementForm.data}" var="row" rowBandingInterval="0" id="t1">
+                    <af:column sortable="false" headerText="" id="c1" colSpan="#{row[1] eq '' and row[2] eq ''?2:1}" width="12" inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[0]}" id="ot1" inlineStyle="#{row[3] ne '-'?'font-weight:bold;':''}"/>
+                    </af:column>
+                    <af:column sortable="false" headerText="" id="c2"
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                               width="200">
+                        <af:outputText value="#{viewScope.incomeStatementForm.reportLevel>2?row[2]:row[1]}" id="ot2"/>
+                    </af:column>
+                    <!--<af:column sortable="false" headerText="" id="c3"
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[2]}" id="ot3"/>
+                    </af:column>-->
+                    <af:column sortable="false"
+                               headerText="#{util:formatDate(viewScope.incomeStatementForm.startDate,'yyyy-MM-dd')} to #{util:formatDate(viewScope.incomeStatementForm.endDate,'yyyy-MM-dd')}"
+                               id="c4" align="right"
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[4]}" id="ot4">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortable="false" headerText="#{viewScope.incomeStatementForm.comparative1Header}" id="c5"
+                               align="right" rendered="#{viewScope.incomeStatementForm.periodComparative > 0}"
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[5]}" id="ot5">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortable="false" headerText="#{viewScope.incomeStatementForm.comparative2Header}" id="c6"
+                               align="right" rendered="#{viewScope.incomeStatementForm.periodComparative > 1}"
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                        <af:outputText value="#{row[6]}" id="ot6">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </af:outputText>
+                    </af:column>
+                </af:table>
+            </af:panelHeader>
+        </f:facet>
+        <f:facet name="start"/>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgl2">
+                <af:panelFormLayout id="pfl1" rows="1" maxColumns="8" fieldWidth="50" labelWidth="50"
+                                    labelAlignment="top">
+                    <af:inputDate label="From" id="id1" value="#{viewScope.incomeStatementForm.startDate}"/>
+                    <af:inputDate label="To" id="id2" value="#{viewScope.incomeStatementForm.endDate}"/>
+                    <af:selectOneChoice label="Level" id="soc2" value="#{viewScope.incomeStatementForm.reportLevel}">
+                        <af:selectItem label="By Account Type" value="2" id="si4"/>
+                        <af:selectItem label="By Account Code" value="3" id="si5"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice label="Period Type" id="soc3" value="#{viewScope.incomeStatementForm.interval}">
+                        <af:selectItem label="Previous Months" value="MONTH" id="si6"/>
+                        <af:selectItem label="Previous Years" value="YEAR" id="si7"/>
+                        <af:selectItem label="Range" value="DAY" id="si8"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice label="Comparative" id="soc1"
+                                        value="#{viewScope.incomeStatementForm.periodComparative}">
+                        <af:selectItem label="None" value="0" id="si1"/>
+                        <af:selectItem label="2-Period Comparative" value="1" id="si2"/>
+                        <af:selectItem label="3-Period Comparative" value="2" id="si3"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:panelGroupLayout id="pgl1" layout="vertical">
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:button text="Run Report" id="b1"
+                                   actionListener="#{viewScope.incomeStatementForm.runReport}"/>
+                    </af:panelGroupLayout>
+                </af:panelFormLayout>
+                <af:separator id="s3"/>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

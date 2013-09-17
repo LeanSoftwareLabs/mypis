@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>mypis_skin.desktop</id>
+    <family>mypis_skin</family>
+    <extends>skyros-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>skins/mypis_skin/mypis_skin.css</style-sheet-name>
+    <bundle-name>com.leansoftwarelabs.mypis.view.skinBundle</bundle-name>
+  </skin>
+</skins>

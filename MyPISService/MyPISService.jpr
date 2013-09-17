@@ -56,6 +56,7 @@
    </list>
    <value n="defaultPackage" v="com.leansoftwarelabs.mypis"/>
    <hash n="ejbModuleContainer">
+      <url n="ejbJarNodeURL" path="src/META-INF/ejb-jar.xml"/>
       <value n="ejbMetaDataPrefs" v="PREFASANNON"/>
       <value n="ejbVersion" v="3.0"/>
       <value n="ejbVersionMinor" v="0.1"/>
@@ -144,6 +145,18 @@
             <value n="id" v="Contexts and Dependency Injection"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3-javadoc.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -154,6 +167,33 @@
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Shiro-all-1.2.2.jar"/>
                <value n="id" v="Shiro-all-1.2.2.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../leansoftwarelabs/lib/joda-time-2.3-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Joda-time-2.3-javadoc.jar"/>
+               <value n="id" v="Joda-time-2.3-javadoc.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../leansoftwarelabs/lib/joda-time-2.3-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Joda-time-2.3-sources.jar"/>
+               <value n="id" v="Joda-time-2.3-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../leansoftwarelabs/lib/joda-time-2.3.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Joda-time-2.3.jar"/>
+               <value n="id" v="Joda-time-2.3.jar"/>
                <value n="locked" v="true"/>
             </hash>
          </list>
@@ -177,6 +217,18 @@
          </hash>
          <hash>
             <value n="id" v="Contexts and Dependency Injection"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3-javadoc.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Joda-time-2.3.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

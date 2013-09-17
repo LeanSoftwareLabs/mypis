@@ -41,6 +41,13 @@ public class GLEntryLine implements Serializable {
     @ManyToOne
     @JoinColumn(name = "GL_TRANS_HEADER_ID")
     private GLEntry entry;
+    @JoinColumn(name = "SUB_ACCOUNT")
+    private SubAccount subAccount;
+    private Integer tracking1;
+    private Integer tracking2;
+    private Integer tracking3;
+    private Integer tracking4;
+    private Integer tracking5;
 
     public GLEntryLine() {
     }
@@ -88,7 +95,7 @@ public class GLEntryLine implements Serializable {
     }
 
     public BigDecimal getDebit() {
-        return debit;
+        return debit == null? BigDecimal.ZERO: debit;
     }
 
     public void setCredit(BigDecimal credit) {
@@ -96,7 +103,7 @@ public class GLEntryLine implements Serializable {
     }
 
     public BigDecimal getCredit() {
-        return credit;
+        return credit == null? BigDecimal.ZERO: credit;
     }
 
     public GLEntry getEntry() {
@@ -105,6 +112,56 @@ public class GLEntryLine implements Serializable {
 
     public void setEntry(GLEntry entry) {
         this.entry = entry;
+    }
+
+
+    public void setSubAccount(SubAccount subAccount) {
+        this.subAccount = subAccount;
+    }
+
+    public SubAccount getSubAccount() {
+        return subAccount;
+    }
+
+
+    public void setTracking1(Integer tracking1) {
+        this.tracking1 = tracking1;
+    }
+
+    public Integer getTracking1() {
+        return tracking1;
+    }
+
+    public void setTracking2(Integer tracking2) {
+        this.tracking2 = tracking2;
+    }
+
+    public Integer getTracking2() {
+        return tracking2;
+    }
+
+    public void setTracking3(Integer tracking3) {
+        this.tracking3 = tracking3;
+    }
+
+    public Integer getTracking3() {
+        return tracking3;
+    }
+
+    public void setTracking4(Integer tracking4) {
+        this.tracking4 = tracking4;
+    }
+
+    public Integer getTracking4() {
+        return tracking4;
+    }
+
+    public void setTracking5(Integer tracking5) {
+        this.tracking5 = tracking5;
+    }
+
+    public Integer getTracking5() {
+        return tracking5;
     }
 
     @Override

@@ -167,7 +167,11 @@
     </context-param>
     <context-param>
         <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
-        <param-value>/WEB-INF/security.functions.taglib.xml</param-value>
+        <param-value>/WEB-INF/security.functions.taglib.xml;/WEB-INF/util.functions.taglib.xml;</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.trinidad.DISABLE_CONTENT_COMPRESSION</param-name>
+        <param-value>true</param-value>
     </context-param>
     <mime-mapping>
         <extension>swf</extension>
@@ -232,6 +236,18 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.leansoftwarelabs.mypis.service.ContactFacadeBean</local>
         <ejb-link>ContactFacade</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/SubAccountFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.mypis.service.SubAccountFacadeBean</local>
+        <ejb-link>SubAccountFacade</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/local/TrackingCategoryFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.leansoftwarelabs.mypis.service.TrackingCategoryFacadeBean</local>
+        <ejb-link>TrackingCategoryFacade</ejb-link>
     </ejb-local-ref>
     <listener>
         <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>

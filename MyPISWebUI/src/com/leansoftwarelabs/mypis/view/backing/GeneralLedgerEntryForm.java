@@ -4,14 +4,19 @@ import com.leansoftwarelabs.adf.query.AttributeDef;
 import com.leansoftwarelabs.adf.query.ListOfValuesModelImpl;
 import com.leansoftwarelabs.adf.query.QueryModelImpl;
 import com.leansoftwarelabs.ext.adf.EventHandler;
+import com.leansoftwarelabs.mypis.domain.GLAccount;
 import com.leansoftwarelabs.mypis.domain.GLEntry;
 
 import com.leansoftwarelabs.mypis.domain.GLEntryLine;
+import com.leansoftwarelabs.mypis.service.ApplicationConstraintViolationException;
 import com.leansoftwarelabs.mypis.service.GLAccountFacadeBean;
 import com.leansoftwarelabs.mypis.service.GLEntryFacadeBean;
+import com.leansoftwarelabs.mypis.service.ServiceException;
 import com.leansoftwarelabs.trinidad.model.FilterableCollectionModel;
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
 import com.leansoftwarelabs.view.utils.ADFUtils;
+
+import com.leansoftwarelabs.view.utils.JSFUtils;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -19,12 +24,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 import javax.faces.event.ActionEvent;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
+import javax.validation.ConstraintViolation;
 
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
@@ -37,6 +51,7 @@ public class GeneralLedgerEntryForm {
     private GLEntryFacadeBean service;
     private RichTable entryLineTable;
     private ListOfValuesModel glAccountLOVModel;
+    
     private GLAccountFacadeBean glAccountFacade;
 
     public GLEntryFacadeBean getService() {
@@ -54,7 +69,7 @@ public class GeneralLedgerEntryForm {
 
 
     public GLAccountFacadeBean getGLAccountFacade() {
-        if(glAccountFacade == null){
+        if (glAccountFacade == null) {
             try {
                 final Context context = new InitialContext();
                 glAccountFacade = (GLAccountFacadeBean) context.lookup("java:comp/env/ejb/local/GLAccountFacade");
@@ -67,20 +82,20 @@ public class GeneralLedgerEntryForm {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         Integer glEntryId = (Integer) ADFUtils.getPageFlowScope().get("glEntryId");
-        if(glEntryId == -1){
+        if (glEntryId == -1) {
             entry = new GLEntry();
             entry.setTransType("JV");
             entry.setTransDate(Calendar.getInstance().getTime());
             entry.setReportingDate(entry.getTransDate());
             GLEntryLine entryLine = new GLEntryLine();
             entry.addGLEntryLine(entryLine);
-        }else{
+        } else {
             entry = getService().find(glEntryId);
         }
     }
-    
+
     public void edit() {
         FormUtils.editing(true);
     }
@@ -95,12 +110,19 @@ public class GeneralLedgerEntryForm {
         return null;
     }
 
-   
 
     public void save() {
-        entry = getService().mergeEntity(entry);
-        FormUtils.editing(false);
+        try {
+            entry = getService().mergeEntity(entry);
+            FormUtils.editing(false);
+        } catch (ApplicationConstraintViolationException ce) {
+            FormUtils.addFacesErrorMessage(ce.getViolations());
+        } catch (ServiceException se) {
+
+        }
+
     }
+
 
     public GLEntry getEntry() {
         return entry;
@@ -131,13 +153,14 @@ public class GeneralLedgerEntryForm {
 
 
     public ListOfValuesModel getGlAccountLOVModel() {
-        if(glAccountLOVModel == null){
+        if (glAccountLOVModel == null) {
             Map<String, AttributeDef> attributes = new LinkedHashMap<String, AttributeDef>();
             attributes.put("code", new AttributeDef("code", String.class, null, AttributeDef.INPUT_TEXT));
             attributes.put("name", new AttributeDef("name", String.class, null, AttributeDef.INPUT_TEXT));
             attributes.put("description", new AttributeDef("description", String.class, null, AttributeDef.INPUT_TEXT));
             attributes.put("dashboard", new AttributeDef("dashboard", Boolean.class, null, AttributeDef.CHECK_BOX));
-            attributes.put("expenseClaims", new AttributeDef("expenseClaims", Boolean.class, null, AttributeDef.CHECK_BOX));
+            attributes.put("expenseClaims",
+                           new AttributeDef("expenseClaims", Boolean.class, null, AttributeDef.CHECK_BOX));
             attributes.put("payments", new AttributeDef("payments", Boolean.class, null, AttributeDef.CHECK_BOX));
             QueryModelImpl queryModel = new QueryModelImpl("GLAccountQuery", attributes, null, null);
             FilterableCollectionModel collectionModel = new JpqlLazyDataModel("GLAccount", 20) {
@@ -145,10 +168,11 @@ public class GeneralLedgerEntryForm {
                     return getGLAccountFacade().queryByRange(jpqlStmt, null, first, pageSize);
                 }
             };
-            glAccountLOVModel = new ListOfValuesModelImpl("code", queryModel, collectionModel);
+            glAccountLOVModel = new ListOfValuesModelImpl(new String[]{"code","name"}, queryModel, collectionModel);
         }
         return glAccountLOVModel;
     }
 
-
 }
+
+

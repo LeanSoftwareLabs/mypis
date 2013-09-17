@@ -67,4 +67,24 @@ public class Launcher {
     public void launchGeneralLedger(ActionEvent actionEvent) {
         launch("General Ledger", "/WEB-INF/taskflows/acctg/general-ledger.xml#general-ledger", null,false);
     }
+    
+    public void launchSubAccounts(ActionEvent actionEvent) {
+        launch("Subsidiary Accounts", "/WEB-INF/taskflows/acctg/sub-account-list.xml#sub-account-list", null,false);
+    }
+    
+    public void launchTrackingCategories(ActionEvent actionEvent) {
+        launch("Tracking", "/WEB-INF/taskflows/acctg/tracking-category.xml#tracking-category", null,false);
+    }
+    
+    public void launchTrialBalance(ActionEvent actionEvent) {
+        launch("Trial Balance", "/WEB-INF/taskflows/acctg/trial-balance.xml#trial-balance", null,false);
+    }
+    
+    public void launchBalanceSheet(ActionEvent actionEvent) {
+        launch("Balance Sheet", "/WEB-INF/taskflows/acctg/balance-sheet.xml#balance-sheet", null,false);
+    }
+    
+    public void launchIncomeStatement(ActionEvent actionEvent) {
+        launch("Income Statement", "/WEB-INF/taskflows/acctg/income-statement.xml#income-statement", null,false);
+    }
 }

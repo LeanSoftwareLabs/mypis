@@ -22,7 +22,7 @@ import org.eclipse.persistence.annotations.PrivateOwned;
  *
  * @author Rommel
  */
-@AssertMethodAsTrue("areGLEntryLinesBalance")
+//@AssertMethodAsTrue("areGLEntryLinesBalance")
 
 @Entity
 @Table(name = "gl_trans_header")
@@ -237,7 +237,8 @@ public class GLEntry implements MultiTenant, Serializable {
         return result;
     }        
     
-    protected boolean areGLEntryLinesBalance(){
+    @AssertTrue(message = "Accounting Lines not Balance")
+    public boolean isGLEntryLinesBalance(){
         return getComputedDebit().compareTo(getComputedCredit()) == 0;
     }
 }

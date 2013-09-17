@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,8 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class GLAccount implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
-    @Column(name = "acct_type")
-    private String type;
+    @JoinColumn(name = "acct_type")
+    private GLAccountType type;
     @Id
     @Column(name = "gl_acct_id")
     private Integer accountId;
@@ -70,11 +71,11 @@ public class GLAccount implements MultiTenant, Serializable {
         return tenantId;
     }
 
-    public String getType() {
+    public GLAccountType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(GLAccountType type) {
         this.type = type;
     }
 
@@ -159,25 +160,25 @@ public class GLAccount implements MultiTenant, Serializable {
         return "count.entities.Account[ acctId=" + accountId + " ]";
     }
     
-    public static final class AccountType{
-        public static final Map VALUES;
-        static {
-            VALUES = new LinkedHashMap();
-            VALUES.put("Cash", "Cash");
-            VALUES.put("Receivables", "Receivables");
-            VALUES.put("Inventories", "Inventories");
-            VALUES.put("Prepayments", "Prepayments");
-            VALUES.put("Other Current Assets", "Other Current Assets");
-            VALUES.put("Fixed Assets", "Fixed Assets");
-            VALUES.put("Payables", "Payables");
-            VALUES.put("Long-term Payables", "Long-term Payables");
-            VALUES.put("Equity", "Equity");
-            VALUES.put("Retained Earnings", "Retained Earnings");
-            VALUES.put("Revenue", "Revenue");
-            VALUES.put("Direct Cost", "Direct Cost");
-            VALUES.put("Expenses", "Expenses");
-            VALUES.put("Taxes", "Taxes");
-        }
-    }
+//    public static final class AccountType{
+//        public static final Map VALUES;
+//        static {
+//            VALUES = new LinkedHashMap();
+//            VALUES.put("Cash", "Cash");
+//            VALUES.put("Receivables", "Receivables");
+//            VALUES.put("Inventories", "Inventories");
+//            VALUES.put("Prepayments", "Prepayments");
+//            VALUES.put("Other Current Assets", "Other Current Assets");
+//            VALUES.put("Fixed Assets", "Fixed Assets");
+//            VALUES.put("Payables", "Payables");
+//            VALUES.put("Long-term Payables", "Long-term Payables");
+//            VALUES.put("Equity", "Equity");
+//            VALUES.put("Retained Earnings", "Retained Earnings");
+//            VALUES.put("Revenue", "Revenue");
+//            VALUES.put("Direct Cost", "Direct Cost");
+//            VALUES.put("Expenses", "Expenses");
+//            VALUES.put("Taxes", "Taxes");
+//        }
+//    }
     
 }

@@ -18,6 +18,8 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import javax.ejb.EJBTransactionRolledbackException;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -26,6 +28,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import javax.servlet.http.HttpServletRequest;
+
+import javax.validation.ConstraintViolationException;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -99,7 +103,19 @@ public class BaptismalRegisterEntryForm {
     }
 
     public void save() {
-        this.baptismalRegister = getService().mergeEntity(this.baptismalRegister);
+        try {
+            this.baptismalRegister = getService().mergeEntity(this.baptismalRegister);
+        } catch (Exception e) {
+            Throwable t = e.getCause();
+            while ((t != null) && !(t instanceof ConstraintViolationException)) {
+                t = t.getCause();
+            }
+            if (t instanceof ConstraintViolationException) {
+                System.out.println("Something went wrong");
+
+            }
+        }
+
         editing(false);
     }
 
@@ -144,12 +160,12 @@ public class BaptismalRegisterEntryForm {
             baptismalRegister.addSponsor(sponsor);
         }
     }
-    
-    private int getSelectedSponsorIndex(){
+
+    private int getSelectedSponsorIndex() {
         int result = -1;
         RowKeySet rowKeySet = getSponsorTable().getSelectedRowKeys();
         Iterator iterator = rowKeySet.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             result = (Integer) iterator.next();
         }
         return result;

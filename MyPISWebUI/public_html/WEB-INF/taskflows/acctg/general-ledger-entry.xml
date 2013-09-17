@@ -15,6 +15,16 @@
       <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.GeneralLedgerEntryForm</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__5">
+      <managed-bean-name>subAccountListForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.SubAccountListForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>trackingCategoryForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.TrackingCategoryForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="general_ledger_entry">
       <page>/fragments/acctg/general_ledger_entry.jsff</page>
     </view>

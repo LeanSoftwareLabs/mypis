@@ -3,6 +3,7 @@ package com.leansoftwarelabs.mypis.view.backing;
 import com.leansoftwarelabs.ext.adf.EventHandler;
 import com.leansoftwarelabs.mypis.domain.ConfirmationRegister;
 import com.leansoftwarelabs.mypis.service.ConfirmationRegisterFacadeBean;
+import com.leansoftwarelabs.mypis.service.ServiceException;
 import com.leansoftwarelabs.view.utils.ADFUtils;
 
 import java.util.HashMap;
@@ -71,7 +72,12 @@ public class ConfirmationRegisterEntryForm {
     }
 
     public void save() {
-        this.confirmationRegister = getService().mergeEntity(this.confirmationRegister);
+        try {
+            this.confirmationRegister = getService().mergeEntity(this.confirmationRegister);
+        } catch (ServiceException se) {
+            // TODO: Add catch code
+            se.printStackTrace();
+        }
         editing(false);
     }
 }

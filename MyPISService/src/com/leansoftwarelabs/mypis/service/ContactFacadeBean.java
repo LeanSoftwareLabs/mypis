@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 @Stateless(name = "ContactFacade", mappedName = "MyPIS-MyPISService-ContactFacade")
 @Local
-public class ContactFacadeBean extends AbstractMutiTenantFacade<Contact>{
+public class ContactFacadeBean extends AbstractMultiTenantFacade<Contact>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")

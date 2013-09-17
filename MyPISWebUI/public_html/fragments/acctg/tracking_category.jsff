@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelHeader text="Tracking Categories" id="ph0">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelSplitter id="ps1" orientation="vertical" partialTriggers="pc1:b1 pc1:b8 b2 b3 b4">
+            <f:facet name="first">
+                <af:panelCollection id="pc1" featuresOff="viewMenu detach statusBar">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:button text="Add New Tracking Category" id="b1" rendered="#{not pageFlowScope.editMode}"
+                                       actionListener="#{viewScope.trackingCategoryForm.addTrackingCategory}"/>
+                            <af:button text="Delete Tracking Category" id="b8" rendered="#{not pageFlowScope.editMode}">
+                                <af:showPopupBehavior popupId="::p1" triggerType="action"/>
+                            </af:button>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:table value="#{viewScope.trackingCategoryForm.trackingCategoryList}" var="row"
+                              rowBandingInterval="0" id="t1" rowSelection="single"
+                              binding="#{viewScope.trackingCategoryForm.trackingCategoryTable}"
+                              selectionListener="#{viewScope.trackingCategoryForm.handleTrackingCategorySelection}"
+                              selectedRowKeys="#{viewScope.trackingCategoryForm.rowKeySet}" varStatus="vs">
+                        <af:column id="c4" width="20">
+                            <af:outputText value="#{vs.index+1}" id="ot1"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Name" align="start" id="c2" width="300">
+                            <af:inputText value="#{row.name}" id="it2" readOnly="true"/>
+                        </af:column>
+                        <af:column id="c5" headerText="Mandatory">
+                            <af:selectBooleanCheckbox label="Mandatory" id="sbc1" value="#{row.required}"
+                                                      disabled="true"/>
+                        </af:column>
+                    </af:table>
+                    <f:facet name="statusbar"/>
+                </af:panelCollection>
+            </f:facet>
+            <f:facet name="second">
+                <af:panelGroupLayout id="pgl0" binding="#{viewScope.trackingCategoryForm.trackingCategoryPanelGroup}"
+                                     partialTriggers="b2 b3 b4 b5">
+                    <af:switcher defaultFacet="false"
+                                 facetName="#{viewScope.trackingCategoryForm.selectedTrackingCategory ne null}">
+                        <f:facet name="true">
+                            <af:panelHeader text="#{viewScope.trackingCategoryForm.selectedTrackingCategory.name}" id="ph1">
+                                <f:facet name="context"/>
+                                <f:facet name="menuBar"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t4">
+                                        <af:button text="Edit" id="b2" rendered="#{not pageFlowScope.editMode}"
+                                                   actionListener="#{viewScope.trackingCategoryForm.edit}"/>
+                                        <af:button text="Cancel" id="b3" rendered="#{pageFlowScope.editMode}"
+                                                   actionListener="#{viewScope.trackingCategoryForm.cancel}"/>
+                                        <af:button text="Apply" id="b4" rendered="#{pageFlowScope.editMode}"
+                                                   actionListener="#{viewScope.trackingCategoryForm.apply}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="legend"/>
+                                <f:facet name="info"/>
+                                <af:panelFormLayout id="pfl1" rows="1" maxColumns="4">
+                                    <af:inputText label="Category Name" id="it1"
+                                                  value="#{viewScope.trackingCategoryForm.selectedTrackingCategory.name}"
+                                                  disabled="#{not pageFlowScope.editMode}"/>
+                                    <af:selectBooleanCheckbox label="Mandatory" id="sbc2" value="#{viewScope.trackingCategoryForm.selectedTrackingCategory.required}"
+                                                              disabled="#{not pageFlowScope.editMode}"/>
+                                </af:panelFormLayout>
+                                <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                                    featuresOff="viewMenu detach statusBar">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t5">
+                                            <af:button text="Add New Value" id="b6" rendered="#{pageFlowScope.editMode}"
+                                                       actionListener="#{viewScope.trackingCategoryForm.addTrackingValue}"/>
+                                            <af:button text="Delete" id="b7" rendered="#{pageFlowScope.editMode}"
+                                                       actionListener="#{viewScope.trackingCategoryForm.deleteTrackingValue}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table var="row" rowBandingInterval="0" id="t3"
+                                              value="#{viewScope.trackingCategoryForm.selectedTrackingCategory.trackingValues}"
+                                              binding="#{viewScope.trackingCategoryForm.trackingValueTable}"
+                                              partialTriggers="::b6 ::b7" rowSelection="single" varStatus="vs">
+                                        <af:column sortable="false" headerText="" align="start" id="c3"
+                                                   width="20">
+                                            <af:inputText value="#{vs.index+1}" id="it3"
+                                                          readOnly="true"/>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="Tracking Values" align="start" id="c1"
+                                                   width="300">
+                                            <af:inputText value="#{row.value}" id="it4"
+                                                          readOnly="#{not pageFlowScope.editMode}"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelHeader>
+                        </f:facet>
+                        <f:facet name="false">
+                            <af:spacer width="10" height="10" id="s1"/>
+                        </f:facet>
+                    </af:switcher>
+                </af:panelGroupLayout>
+            </f:facet>
+        </af:panelSplitter>
+        <f:facet name="toolbar">
+            <af:toolbar id="t6">
+                <af:button text="Done" id="b5" action="done" rendered="#{not pageFlowScope.editMode}"/>
+            </af:toolbar>
+        </f:facet>
+    </af:panelHeader>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+        <af:dialog id="d1"
+                   dialogListener="#{viewScope.trackingCategoryForm.handleDeleteCategoryConfirmationDialogReturn}"
+                   title="Warning!!!">
+            <af:outputText value="This action cannot be undone. \\nYou will not be able to generate reports with this given category: #{viewScope.trackingCategoryForm.selectedTrackingCategory.name}"
+                           id="ot2"/>
+        </af:dialog>
+    </af:popup>
+</ui:composition>

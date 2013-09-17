@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless(name = "ConfirmationRegisterFacade", mappedName = "MyPIS-MyPISService-ConfirmationRegisterFacade")
-public class ConfirmationRegisterFacadeBean extends AbstractMutiTenantFacade<ConfirmationRegister>{
+public class ConfirmationRegisterFacadeBean extends AbstractMultiTenantFacade<ConfirmationRegister>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")

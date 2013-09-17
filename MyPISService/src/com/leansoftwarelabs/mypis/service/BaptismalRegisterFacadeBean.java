@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 @Local
 @Stateless(name = "BaptismalRegisterFacade", mappedName = "MyPIS-MyPISService-BaptismalRegisterFacade")
-public class BaptismalRegisterFacadeBean extends AbstractMutiTenantFacade<BaptismalRegister>{
+public class BaptismalRegisterFacadeBean extends AbstractMultiTenantFacade<BaptismalRegister>{
     @Resource
     SessionContext sessionContext;
     @PersistenceContext(unitName = "MyPISService")

@@ -6,9 +6,9 @@
     version="2.0">
     <namespace>http://leansoftwarelabs.com/ext/security</namespace>
     <function>
-        <description>My description</description>
         <function-name>hasPermission</function-name>
         <function-class>com.leansoftwarelabs.ext.shiro.SecurityContext</function-class>
         <function-signature>boolean hasPermission(java.lang.String)</function-signature>
     </function>
+
 </facelet-taglib>

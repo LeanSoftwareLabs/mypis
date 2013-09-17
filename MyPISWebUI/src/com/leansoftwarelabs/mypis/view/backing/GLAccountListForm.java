@@ -6,6 +6,7 @@ import com.leansoftwarelabs.adf.query.QueryModelImpl;
 import com.leansoftwarelabs.ext.adf.EventHandler;
 import com.leansoftwarelabs.mypis.domain.BaptismalRegister;
 import com.leansoftwarelabs.mypis.domain.GLAccount;
+import com.leansoftwarelabs.mypis.domain.GLAccountType;
 import com.leansoftwarelabs.mypis.service.BaptismalRegisterFacadeBean;
 import com.leansoftwarelabs.mypis.service.GLAccountFacadeBean;
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
@@ -40,6 +41,7 @@ public class GLAccountListForm {
     private RichTable glAccountTable;
     private RichPopup glAccountDetailPopup;
     private RichRegion region;
+    private Map<String, GLAccountType> accountTypeItems;
 
     @PostConstruct
     public void init() {
@@ -148,7 +150,14 @@ public class GLAccountListForm {
     }
     
     public Map getAccountTypeItems(){
-        return GLAccount.AccountType.VALUES;
+        if(accountTypeItems == null){
+            accountTypeItems = new LinkedHashMap<String, GLAccountType>();
+            List<GLAccountType> accountTypes = getService().findAllGLAccountTypes();
+            for(GLAccountType type: accountTypes){
+                accountTypeItems.put(type.getName(),type);
+            }
+        }
+        return accountTypeItems;
     }
 
     public void setRegion(RichRegion region) {
