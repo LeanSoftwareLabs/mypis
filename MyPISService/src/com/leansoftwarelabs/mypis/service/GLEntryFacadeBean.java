@@ -44,8 +44,8 @@ public class GLEntryFacadeBean extends AbstractMultiTenantFacade<GLEntry> {
         StringBuilder b = new StringBuilder();
         b.append("select acct_code, IF(acct_code IS NULL, 'TOTAL', acct_name) as acct_name, sum(BeginningBalance) as BeginningBalance,");
         b.append(" sum(DEBIT) as DEBIT, sum(CREDIT) as CREDIT, COALESCE(sum(BeginningBalance),0)+ COALESCE(sum(DEBIT),0) - COALESCE(sum(CREDIT),0) as EndingBalance");
-        b.append(" from(select acct_code, acct_name, acct_type, sum(debit-credit) as BeginningBalance, 0 as DEBIT, 0 as CREDIT");
-        b.append(" from gl_trans_detail d left join gl_accounts a on (d.gl_account_id=a.gl_acct_id)");
+        b.append(" from(select acct_code, acct_name, acct_type, COALESCE(sum(debit),0)-COALESCE(sum(credit),0) as BeginningBalance, 0 as DEBIT, 0 as CREDIT");
+        b.append(" from gl_trans_detail d inner join gl_accounts a on (d.gl_account_id=a.gl_acct_id)");
         b.append(" inner join gl_trans_header h on (d.gl_trans_header_id=h.gl_trans_header_id)");
         b.append(" where reporting_date < ?1 ");
         b.append(" group by acct_code, acct_name, acct_type");
@@ -53,10 +53,10 @@ public class GLEntryFacadeBean extends AbstractMultiTenantFacade<GLEntry> {
         b.append(" select acct_code, acct_name, acct_type, 0 as BeginningBalance,");
         b.append(" sum(debit) as DEBIT,");
         b.append(" sum(credit) as CREDIT");
-        b.append(" from gl_trans_detail d left join gl_accounts a on (d.gl_account_id=a.gl_acct_id)");
+        b.append(" from gl_trans_detail d inner join gl_accounts a on (d.gl_account_id=a.gl_acct_id)");
         b.append(" inner join gl_trans_header h on (d.gl_trans_header_id=h.gl_trans_header_id)");
         b.append(" where h.tenant_id = ?2");
-        b.append(" and reporting_date between ?1 and 3?");
+        b.append(" and reporting_date between ?1 and ?3");
         b.append(" group by acct_code, acct_name, acct_type) tmp");
         b.append(" GROUP BY acct_code WITH ROLLUP");
 

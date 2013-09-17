@@ -21,30 +21,31 @@
                     <af:column sortable="false" id="c2" width="12" headerText="" colSpan="#{row[1] eq '-'?3:row[2] eq ''?4:row[2] eq '-'?3:1}" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
                         <af:outputText value="#{row[1] eq'-'?row[0]:row[2] eq ''|| row[2] eq '-'?row[1]:''}" id="ot2"/>
                     </af:column>
-                    <af:column sortable="false" headerText=" " id="c3" colSpan="#{row[3] eq '' ||row[3] eq '-'?2:1}" width="12" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:column sortable="false" headerText=" " id="c3" colSpan="#{row[3] eq '' ||row[3] eq '-'?2:1}" width="12" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}#{fn:substring(row[2],0,5) eq 'Total'?'background-color:#ffffef;':''}">
                         <af:outputText value="#{row[3] eq ''||row[3] eq '-'? row[2]:''}" id="ot3"/>
                     </af:column>
-                    <af:column sortable="false" headerText=" " id="c4" width="200" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:column sortable="false" headerText=" " id="c4" width="200" inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}#{fn:substring(row[2],0,5) eq 'Total'?'background-color:#ffffef;':''}">
                         <af:outputText value="#{row[3]}" id="ot4"/>
                     </af:column>
                     <af:column sortable="false" headerText="As of #{util:formatDate(viewScope.balanceSheetForm.reportDate,'yyyy-MM-dd')}" id="c5"
                                align="right"
-                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}#{fn:substring(row[2],0,5) eq 'Total'?'background-color:#ffffef;':''}">
                         <af:outputText value="#{row[5]}" id="ot5">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
                         </af:outputText>
                     </af:column>
                     <af:column sortable="false" headerText="As of #{util:formatDate(util:dateAdd(viewScope.balanceSheetForm.reportDate,1,-1),'yyyy-MM-dd')}" id="c6"
                                align="right"
-                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}#{fn:substring(row[2],0,5) eq 'Total'?'background-color:#ffffef;':''}"
                                rendered="#{viewScope.balanceSheetForm.comparative >0}">
                         <af:outputText value="#{row[6]}" id="ot6">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
                         </af:outputText>
                     </af:column>
-                    <af:column sortable="false" headerText="As of #{util:formatDate(util:dateAdd(viewScope.balanceSheetForm.reportDate,1,-2),'yyyy-MM-dd')}" id="c7"
-                               align="right"
-                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                    <af:column sortable="false"
+                               headerText="As of #{util:formatDate(util:dateAdd(viewScope.balanceSheetForm.reportDate,1,-2),'yyyy-MM-dd')}"
+                               id="c7" align="right"
+                               inlineStyle="#{row[1]eq'-'?'border-style:solid none solid none; border-color:Black;':''}#{fn:substring(row[2],0,5) eq 'Total'?'background-color:#ffffef;':''}"
                                rendered="#{viewScope.balanceSheetForm.comparative >1}">
                         <af:outputText value="#{row[7]}" id="ot7">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>

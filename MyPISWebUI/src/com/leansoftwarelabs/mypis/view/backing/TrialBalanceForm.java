@@ -79,5 +79,6 @@ public class TrialBalanceForm {
 
     public void runReport(ActionEvent actionEvent) {
         trialBalanceData = getService().getTrialBalanceData(startDate, endDate);
+        trialBalanceData.add(new Object[]{"",""});
     }
 }

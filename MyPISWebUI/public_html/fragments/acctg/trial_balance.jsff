@@ -1,58 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelBorderLayout id="pbl1">
-    <f:facet name="start"/>
-    <f:facet name="bottom"/>
-    <f:facet name="end"/>
-    <f:facet name="top">
-      <af:panelFormLayout id="pfl1" labelAlignment="top" fieldWidth="50" labelWidth="50" rows="1" maxColumns="3">
-        <af:inputDate label="Start Date" id="id1" value="#{viewScope.trialBalanceForm.startDate}" required="true"/>
-        <af:inputDate label="End Date" id="id2" value="#{viewScope.trialBalanceForm.endDate}" required="true"/>
-        <f:facet name="footer"/>
-        <af:panelGroupLayout id="pgl1" layout="vertical">
-          <af:spacer width="10" height="10" id="s1"/>
-          <af:button text="Run Report" id="b1" actionListener="#{viewScope.trialBalanceForm.runReport}"/>
-        </af:panelGroupLayout>
-      </af:panelFormLayout>
-    </f:facet>
-    <af:separator id="s2"/>
-    <af:spacer width="10" height="10" id="s3"/>
-    <af:panelHeader text="#{viewScope.trialBalanceForm.reportTitle}" id="ph1" partialTriggers="b1">
-      <f:facet name="context"/>
-      <f:facet name="menuBar"/>
-      <f:facet name="toolbar"/>
-      <f:facet name="legend"/>
-      <f:facet name="info"/>
-      <af:table value="#{viewScope.trialBalanceForm.trialBalanceData}" var="row" rowBandingInterval="0" id="t1"
-                rendered="#{viewScope.trialBalanceForm.trialBalanceData ne null}">
-        <af:column sortable="false" headerText="Account" id="c1" width="80">
-          <af:outputText value="#{row[0]}" id="ot1"/>
-        </af:column>
-        <af:column sortable="false" headerText="Account Description" id="c2" width="200">
-          <af:outputText value="#{row[1]}" id="ot2"/>
-        </af:column>
-        <af:column sortable="false" headerText="Opening" id="c3" align="right">
-          <af:outputText value="#{row[2]}" id="ot3">
-            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-          </af:outputText>
-        </af:column>
-        <af:column sortable="false" headerText="Debit" id="c4" align="right">
-          <af:outputText value="#{row[3]}" id="ot4">
-            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-          </af:outputText>
-        </af:column>
-        <af:column sortable="false" headerText="Credit" id="c5" align="right">
-          <af:outputText value="#{row[4]}" id="ot5">
-            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-          </af:outputText>
-        </af:column>
-        <af:column sortable="false" headerText="Closing" id="c6" align="right">
-          <af:outputText value="#{row[5]}" id="ot6">
-            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-          </af:outputText>
-        </af:column>
-      </af:table>
-    </af:panelHeader>
-  </af:panelBorderLayout>
+    <af:panelBorderLayout id="pbl1">
+        <f:facet name="start"/>
+        <f:facet name="bottom"/>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:panelFormLayout id="pfl1" labelAlignment="top" fieldWidth="50" labelWidth="50" rows="1" maxColumns="3">
+                <af:inputDate label="Start Date" id="id1" value="#{viewScope.trialBalanceForm.startDate}"
+                              required="true"/>
+                <af:inputDate label="End Date" id="id2" value="#{viewScope.trialBalanceForm.endDate}" required="true"/>
+                <f:facet name="footer"/>
+                <af:panelGroupLayout id="pgl1" layout="vertical">
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:button text="Run Report" id="b1" actionListener="#{viewScope.trialBalanceForm.runReport}"/>
+                </af:panelGroupLayout>
+            </af:panelFormLayout>
+        </f:facet>
+        <af:separator id="s2"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:panelHeader text="#{viewScope.trialBalanceForm.reportTitle}" id="ph1" partialTriggers="b1">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:table value="#{viewScope.trialBalanceForm.trialBalanceData}" var="row" rowBandingInterval="0" id="t1"
+                      rendered="#{viewScope.trialBalanceForm.trialBalanceData ne null}">
+                <af:column sortable="false" headerText="Account" id="c1" width="80"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[0]}" id="ot1"/>
+                </af:column>
+                <af:column sortable="false" headerText="Account Description" id="c2" width="200"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[1]}" id="ot2"/>
+                </af:column>
+                <af:column sortable="false" headerText="Opening" id="c3" align="right"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[2]}" id="ot3">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </af:outputText>
+                </af:column>
+                <af:column sortable="false" headerText="Debit" id="c4" align="right"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[3]}" id="ot4">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </af:outputText>
+                </af:column>
+                <af:column sortable="false" headerText="Credit" id="c5" align="right"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[4]}" id="ot5">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </af:outputText>
+                </af:column>
+                <af:column sortable="false" headerText="Closing" id="c6" align="right"
+                           inlineStyle="#{row[1]eq'TOTAL'?'border-style:solid none solid none; border-color:Black;':''}">
+                    <af:outputText value="#{row[5]}" id="ot6">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </af:outputText>
+                </af:column>
+            </af:table>
+        </af:panelHeader>
+    </af:panelBorderLayout>
 </ui:composition>
