@@ -118,7 +118,7 @@ public class GeneralLedgerEntryForm {
         } catch (ApplicationConstraintViolationException ce) {
             FormUtils.addFacesErrorMessage(ce.getViolations());
         } catch (ServiceException se) {
-
+            FormUtils.addFacesErrorMessage(se);
         }
 
     }
@@ -173,6 +173,16 @@ public class GeneralLedgerEntryForm {
         return glAccountLOVModel;
     }
 
+    public void postEntry(ActionEvent actionEvent) {
+        try {
+            entry = getService().postGLEntry(entry);
+            FormUtils.editing(false);
+        } catch (ApplicationConstraintViolationException ce) {
+            FormUtils.addFacesErrorMessage(ce.getViolations());
+        } catch (ServiceException se) {
+            FormUtils.addFacesErrorMessage(se);
+        }
+    }
 }
 
 

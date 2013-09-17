@@ -18,12 +18,12 @@
                               id="t1" varStatus="vs" rowSelection="single" columnSelection="multiple"
                               scrollPolicy="page" autoHeightRows="0" fetchSize="20"
                               binding="#{viewScope.generalLedgerForm.richTable}">
-                        <af:column sortable="false" headerText="My Reference" align="start" id="c1">
-                            <af:link text="#{row.myReference}" id="l1"
+                        <af:column sortable="false" headerText="Voucher" align="start" id="c2">
+                            <af:link text="#{row.serial gt 0? row.transType :'Draft'}##{row.serial gt 0?row.serial:''}" id="l1"
                                      actionListener="#{viewScope.generalLedgerForm.viewDetails}"/>
                         </af:column>
-                        <af:column sortable="false" headerText="Your Reference" align="start" id="c2">
-                            <af:outputText value="#{row.yourReference}" id="ot2"/>
+                        <af:column sortable="false" headerText="Reference" align="start" id="c1">
+                            <af:outputText value="#{row.myReference}" id="ot2"/>
                         </af:column>
                         <af:column sortable="false" headerText="Description" align="start" id="c3">
                             <af:outputText value="#{row.description}" id="ot3"/>
@@ -39,12 +39,6 @@
                         </af:column>
                         <af:column sortable="false" headerText="Status" align="start" id="c7">
                             <af:outputText value="#{row.status}" id="ot7"/>
-                        </af:column>
-                        <af:column sortable="false" headerText="Total Debit" align="start" id="c8">
-                            <af:outputText value="#{row.totalDebit}" id="ot8"/>
-                        </af:column>
-                        <af:column sortable="false" headerText="Total Credit" align="start" id="c9">
-                            <af:outputText value="#{row.totalCredit}" id="ot9"/>
                         </af:column>
                     </af:table>
                 </af:panelCollection>

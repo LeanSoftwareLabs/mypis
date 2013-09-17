@@ -28,13 +28,16 @@ import org.eclipse.persistence.annotations.PrivateOwned;
 @Table(name = "gl_trans_header")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GLEntry.findAll", query = "SELECT o FROM GLEntry o")})
+    @NamedQuery(name = "GLEntry.findNextSerial", query = "SELECT max(o.serial)+1 FROM GLEntry o WHERE o.tenantId = :tenantId and o.transType = :transType")})
 public class GLEntry implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "GL_TRANS_HEADER_ID")
     private Integer id;
+    @Column(name = "VOUCHER_SERIAL")
+    private Integer serial;
+        
     @Size(max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
@@ -62,9 +65,7 @@ public class GLEntry implements MultiTenant, Serializable {
     @Size(max = 20)
     @Column(name = "MY_TRANS_REF")
     private String myReference;
-    @Size(max = 20)
-    @Column(name = "YOUR_TRANS_REF")
-    private String yourReference;
+
     @Column(name = "TENANT_ID")
     private Integer tenantId;
     @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -98,6 +99,15 @@ public class GLEntry implements MultiTenant, Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+    public void setSerial(Integer serial) {
+        this.serial = serial;
+    }
+
+    public Integer getSerial() {
+        return serial;
     }
 
     public String getDescription() {
@@ -164,14 +174,7 @@ public class GLEntry implements MultiTenant, Serializable {
         this.myReference = myReference;
     }
 
-    public String getYourReference() {
-        return yourReference;
-    }
-
-    public void setYourReference(String yourReference) {
-        this.yourReference = yourReference;
-    }
-    
+  
     
 
     @XmlTransient

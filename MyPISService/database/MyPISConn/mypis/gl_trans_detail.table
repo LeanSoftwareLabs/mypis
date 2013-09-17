@@ -33,36 +33,6 @@
       </properties>
     </column>
     <column>
-      <name>AMOUNT</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">22</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
-          <typeName>DOUBLE</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>false</notNull>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>AMOUNT</name>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_trans_detail</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <type>COLUMN</type>
-          </value>
-        </entry>
-      </properties>
-    </column>
-    <column>
       <name>DESCRIPTION</name>
       <dataTypeUsage>
         <attributeValues>
@@ -166,7 +136,7 @@
           <typeName>INT</typeName>
         </dataTypeID>
       </dataTypeUsage>
-      <notNull>false</notNull>
+      <notNull>true</notNull>
       <properties>
         <entry>
           <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
@@ -182,98 +152,286 @@
         </entry>
       </properties>
     </column>
+    <column>
+      <name>DEBIT</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Long">0</value>
+          </entry>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">16</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>DECIMAL</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>DEBIT</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>CREDIT</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Long">0</value>
+          </entry>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">16</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>DECIMAL</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>CREDIT</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>SUB_ACCOUNT</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>SUB_ACCOUNT</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TRACKING1</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TRACKING1</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TRACKING2</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TRACKING2</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TRACKING3</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TRACKING3</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TRACKING4</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TRACKING4</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TRACKING5</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TRACKING5</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TENANT_ID</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>TENANT_ID</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>FK_gl_trans_detail_GL_ACCOUNT_ID</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>GL_ACCOUNT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>gl_trans_detail</name>
-            <schemaName>mypis</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>mypis</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <onDeleteAction>NO_ACTION</onDeleteAction>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>FK_gl_trans_detail_GL_ACCOUNT_ID</name>
-            <childObjectNames>
-              <childObjectName>GL_ACCOUNT_ID</childObjectName>
-            </childObjectNames>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_trans_detail</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <subType>FKConstraint</subType>
-            <type>CONSTRAINT</type>
-          </value>
-        </entry>
-      </properties>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>PRIMARY</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>gl_accounts</name>
-          <schemaName>mypis</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>mypis</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>FK_gl_trans_detail_GL_TRANS_HEADER_ID</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>GL_TRANS_HEADER_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>gl_trans_detail</name>
-            <schemaName>mypis</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>mypis</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <onDeleteAction>NO_ACTION</onDeleteAction>
-      <properties>
-        <entry>
-          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
-          <value class="oracle.javatools.db.ReferenceID">
-            <name>FK_gl_trans_detail_GL_TRANS_HEADER_ID</name>
-            <childObjectNames>
-              <childObjectName>GL_TRANS_HEADER_ID</childObjectName>
-            </childObjectNames>
-            <parent class="oracle.javatools.db.ReferenceID">
-              <name>gl_trans_detail</name>
-              <schemaName>mypis</schemaName>
-              <type>TABLE</type>
-            </parent>
-            <subType>FKConstraint</subType>
-            <type>CONSTRAINT</type>
-          </value>
-        </entry>
-      </properties>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>PRIMARY</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>gl_trans_header</name>
-          <schemaName>mypis</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>mypis</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
       <name>PRIMARY</name>
       <columnIDs>
@@ -309,6 +467,92 @@
       </properties>
     </constraint>
   </constraints>
+  <indexes>
+    <indexe>
+      <name>FK_gl_trans_detail_GL_ACCOUNT_ID</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>GL_ACCOUNT_ID</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>FK_gl_trans_detail_GL_ACCOUNT_ID</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+    <indexe>
+      <name>gl_trans_header_fk_idx</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>GL_TRANS_HEADER_ID</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>gl_trans_header_fk_idx</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+    <indexe>
+      <name>subsidiary_account_fk_idx</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>SUB_ACCOUNT</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>subsidiary_account_fk_idx</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>gl_trans_detail</name>
+              <schemaName>mypis</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>mypis</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>mypis</name>
+      </schema>
+    </indexe>
+  </indexes>
   <properties>
     <entry>
       <key>OfflineDBConstants.IMPORT_SOURCE_CONNECTION</key>
