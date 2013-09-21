@@ -2,3 +2,51 @@
 /**ADFFaces_Skin_File / DO NOT REMOVE**/
 @namespace af "http://xmlns.oracle.com/adf/faces/rich";
 @namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+.AFHeaderTextColor:alias {
+    color: #580C58; 
+}
+
+ActiveColor:alias {
+    color: #5D195D; 
+}
+
+.AFButtonGradientEndAc
+
+alias {
+    color: #5A1D5A; 
+}
+
+.AFBrandingBackgroundColor:alias {
+    color: #400940; 
+}
+
+ntEndColor:alias {
+    color: #A617A6; 
+}
+
+.AFButtonBorderBottomColor:alias {
+    color: #B644B6; 
+}
+
+.AFGlobalBackgroundColor:alias {
+    color: #4F0B4F; 
+}
+
+.AFGlobalTabDisabledColor:alias {
+    color: #AE4FAE; 
+}
+
+.AFGlobalTabBorderDisabledColor:alias {
+    color: #CA5CCA; 
+}
+
+af|messages::header-text
+{
+    display:none;
+}
+
+af|messages img
+{
+    display:none;
+}

@@ -12,39 +12,83 @@
                 <f:facet name="legend"/>
                 <f:facet name="info"/>
                 <af:table value="#{viewScope.incomeStatementForm.data}" var="row" rowBandingInterval="0" id="t1">
-                    <af:column sortable="false" headerText="" id="c1" colSpan="#{row[1] eq '' and row[2] eq ''?2:1}" width="12" inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
-                        <af:outputText value="#{row[0]}" id="ot1" inlineStyle="#{row[3] ne '-'?'font-weight:bold;':''}"/>
+                    <af:column sortable="false" headerText="" id="c1" colSpan="#{row[1] eq '' and row[2] eq ''?2:1}"
+                               width="12"
+                               inlineStyle="#{row[3]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+                        <af:outputText value="#{row[0]}" id="ot1" inlineStyle="#{row[3] ne -1?'font-weight:bold;':''}"/>
                     </af:column>
                     <af:column sortable="false" headerText="" id="c2"
-                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}"
+                               inlineStyle="#{row[3]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}"
                                width="200">
                         <af:outputText value="#{viewScope.incomeStatementForm.reportLevel>2?row[2]:row[1]}" id="ot2"/>
                     </af:column>
                     <!--<af:column sortable="false" headerText="" id="c3"
-                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
                         <af:outputText value="#{row[2]}" id="ot3"/>
                     </af:column>-->
                     <af:column sortable="false"
                                headerText="#{util:formatDate(viewScope.incomeStatementForm.startDate,'yyyy-MM-dd')} to #{util:formatDate(viewScope.incomeStatementForm.endDate,'yyyy-MM-dd')}"
                                id="c4" align="right"
-                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
-                        <af:outputText value="#{row[4]}" id="ot4">
-                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-                        </af:outputText>
+                               inlineStyle="#{row[3]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+                        <af:switcher defaultFacet="false" facetName="#{row[3]>0}">
+                            <f:facet name="true">
+                                <af:link id="l1" actionListener="#{viewScope.incomeStatementForm.viewAccountSummary}">
+                                    <f:attribute name="startDate" value="#{viewScope.incomeStatementForm.startDate}"/>
+                                    <f:attribute name="endDate" value="#{viewScope.incomeStatementForm.endDate}"/>
+                                    <f:attribute name="accountId" value="#{row[3]}"/>
+                                    <af:outputText value="#{row[4]}" id="ot4">
+                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                    </af:outputText>
+                                </af:link>
+                            </f:facet>
+                            <f:facet name="false">
+                                <af:outputText value="#{row[4]}" id="ot3">
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </af:outputText>
+                            </f:facet>
+                        </af:switcher>
                     </af:column>
                     <af:column sortable="false" headerText="#{viewScope.incomeStatementForm.comparative1Header}" id="c5"
                                align="right" rendered="#{viewScope.incomeStatementForm.periodComparative > 0}"
-                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                               inlineStyle="#{row[3]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+                        <af:switcher defaultFacet="false" facetName="#{row[3]>0}">
+                            <f:facet name="true">
+                                <af:link id="l2" actionListener="#{viewScope.incomeStatementForm.viewAccountSummary}">
+                                    <f:attribute name="startDate" value="#{viewScope.incomeStatementForm.getDateOnInterval(viewScope.incomeStatementForm.startDate,-1)}"/>
+                                    <f:attribute name="endDate" value="#{viewScope.incomeStatementForm.getDateOnInterval(viewScope.incomeStatementForm.endDate,-1)}"/>
+                                    <f:attribute name="accountId" value="#{row[3]}"/>
+                                    <af:outputText value="#{row[5]}" id="ot7">
+                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                    </af:outputText>
+                                </af:link>
+                            </f:facet>
+                        <f:facet name="false">
                         <af:outputText value="#{row[5]}" id="ot5">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
                         </af:outputText>
+                        </f:facet>
+                        </af:switcher>
                     </af:column>
                     <af:column sortable="false" headerText="#{viewScope.incomeStatementForm.comparative2Header}" id="c6"
                                align="right" rendered="#{viewScope.incomeStatementForm.periodComparative > 1}"
-                               inlineStyle="#{row[3]eq'-'?'border-style:solid none solid none; border-color:Black;':''}">
+                               inlineStyle="#{row[3]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+                         <af:switcher defaultFacet="false" facetName="#{row[3]>0}">
+                            <f:facet name="true">
+                                <af:link id="l3" actionListener="#{viewScope.incomeStatementForm.viewAccountSummary}">
+                                    <f:attribute name="startDate" value="#{viewScope.incomeStatementForm.getDateOnInterval(viewScope.incomeStatementForm.startDate,-2)}"/>
+                                    <f:attribute name="endDate" value="#{viewScope.incomeStatementForm.getDateOnInterval(viewScope.incomeStatementForm.endDate,-2)}"/>
+                                    <f:attribute name="accountId" value="#{row[3]}"/>
+                                    <af:outputText value="#{row[6]}" id="ot8">
+                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                    </af:outputText>
+                                </af:link>
+                            </f:facet>
+                        <f:facet name="false">
                         <af:outputText value="#{row[6]}" id="ot6">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
                         </af:outputText>
+                        </f:facet>
+                        </af:switcher>
                     </af:column>
                 </af:table>
             </af:panelHeader>

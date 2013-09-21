@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="#{viewScope.accountDetailForm.account.code}:#{viewScope.accountDetailForm.account.name} Detail" id="ph1"
+                      visible="#{viewScope.accountDetailForm.data ne null}" partialTriggers="b1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{viewScope.accountDetailForm.data}" var="row" rowBandingInterval="0" id="t1">
+          <af:column sortable="false" headerText="Reporting Date" id="c1">
+            <af:outputText value="#{row[0]}" id="ot1"/>
+          </af:column>
+          <af:column id="c2" headerText="Trans Type" width="30">
+            <af:outputText value="#{row[1]}" id="ot2"/>
+          </af:column>
+          <af:column id="c5" headerText="Voucher No" width="70">
+            <af:outputText value="#{row[1]}#{row[2] ne ''?'-':''}#{row[2]}" id="ot5"/>
+          </af:column>
+          <af:column id="c6" headerText="Reference" width="80">
+            <af:outputText value="#{row[3]}" id="ot6"/>
+          </af:column>
+          <af:column id="c7" headerText="Description" width="200">
+            <af:outputText value="#{row[4]}" id="ot7"/>
+          </af:column>
+          <af:column sortable="false" headerText="Debit" id="c3" align="right" inlineStyle="#{row[1]eq ''?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+            <af:outputText value="#{row[5]}" id="ot3">
+              <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortable="false" headerText="Credit" id="c4" align="right" inlineStyle="#{row[1]eq ''?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+            <af:outputText value="#{row[6]}" id="ot4">
+              <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+            </af:outputText>
+          </af:column>
+        </af:table>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+   <f:facet name="top">
+      <af:panelGroupLayout id="pgl2" layout="vertical">
+        <af:panelFormLayout id="pfl1" labelAlignment="top" rows="1" maxColumns="8" fieldWidth="50" labelWidth="50">
+          <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1"
+                                value="#{viewScope.accountDetailForm.account}"
+                                model="#{viewScope.accountDetailForm.glAccountLOVModel}"
+                                converter="#{viewScope.accountDetailForm.glAccountLOVModel.converter}"
+                                autoSubmit="true" required="true"/>
+          <af:inputDate label="From" id="id1" value="#{viewScope.accountDetailForm.startDate}"/>
+          <af:inputDate label="To" id="id2" value="#{viewScope.accountDetailForm.endDate}"/>
+          <af:panelGroupLayout id="pgl1" layout="vertical">
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:button text="Run Report" id="b1" actionListener="#{viewScope.accountDetailForm.runReport}"/>
+          </af:panelGroupLayout>
+        </af:panelFormLayout>
+        <af:separator id="s1"/>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

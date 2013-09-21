@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="account-summary">
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
+    <input-parameter-definition id="__4">
+      <name>accountId</name>
+      <value>#{pageFlowScope.accountId}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>startDate</name>
+      <value>#{pageFlowScope.startDate}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>endDate</name>
+      <value>#{pageFlowScope.endDate}</value>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>accountSummaryForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.AccountSummaryForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="account_summary">
+      <page>/fragments/acctg/account_summary.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>gatePassed</from-outcome>
+        <to-activity-id>account_summary</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

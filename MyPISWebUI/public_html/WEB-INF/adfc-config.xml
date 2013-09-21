@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <view id="login">
-    <page>/login.jsf</page>
-  </view>
-  <control-flow-rule id="__3">
-    <from-activity-id>*</from-activity-id>
-    <control-flow-case id="__4">
-      <from-outcome>logout</from-outcome>
-      <to-activity-id>login</to-activity-id>
-    </control-flow-case>
-  </control-flow-rule>
-  <managed-bean id="__1">
-    <managed-bean-name>launcher</managed-bean-name>
-    <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.Launcher</managed-bean-class>
-    <managed-bean-scope>view</managed-bean-scope>
-  </managed-bean>
-  <managed-bean id="__2">
-    <managed-bean-name>loginForm</managed-bean-name>
-    <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.LoginForm</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
-  </managed-bean>
-  <managed-bean id="__5">
-    <managed-bean-name>taskFlowGateway</managed-bean-name>
-    <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.TaskFlowGateway</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
-  </managed-bean>
+    <view id="login">
+        <page>/login.jsf</page>
+    </view>
+    <control-flow-rule id="__3">
+        <from-activity-id>*</from-activity-id>
+        <control-flow-case id="__4">
+            <from-outcome>logout</from-outcome>
+            <to-activity-id>login</to-activity-id>
+        </control-flow-case>
+    </control-flow-rule>
+    <managed-bean id="__1">
+        <managed-bean-name>launcher</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.Launcher</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+        <managed-bean-name>loginForm</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.LoginForm</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__5">
+        <managed-bean-name>taskFlowGateway</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.TaskFlowGateway</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+        <managed-bean-name>services</managed-bean-name>
+        <managed-bean-class>java.util.HashMap</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <map-entries>
+            <map-entry>
+                <key>glAccountFacade</key>
+                <value>#{glAccountFacade}</value>
+            </map-entry>
+            <map-entry>
+                <key>glEntryFacade</key>
+                <value>#{glEntryFacade}</value>
+            </map-entry>
+        </map-entries>
+    </managed-bean>
+    <managed-bean id="__7">
+        <managed-bean-name>glAccountFacade</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.ext.ServiceProvider</managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <managed-property id="__8">
+            <property-name>jndiNamespace</property-name>
+            <value>java:comp/env/ejb/local/GLAccountFacade</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean id="__9">
+        <managed-bean-name>glEntryFacade</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.ext.ServiceProvider</managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <managed-property id="__10">
+            <property-name>jndiNamespace</property-name>
+            <value>java:comp/env/ejb/local/GLEntryFacade</value>
+        </managed-property>
+    </managed-bean>
 </adfc-config>

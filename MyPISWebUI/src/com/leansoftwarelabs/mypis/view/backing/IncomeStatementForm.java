@@ -3,15 +3,25 @@ package com.leansoftwarelabs.mypis.view.backing;
 import com.leansoftwarelabs.ext.jsf.UtilFunctions;
 import com.leansoftwarelabs.mypis.service.GLEntryFacadeBean;
 
+import com.leansoftwarelabs.mypis.view.util.FormUtils;
+
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
+import java.util.Map;
+
+import java.util.Random;
+
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 
 import javax.naming.CannotProceedException;
@@ -102,8 +112,8 @@ public class IncomeStatementForm {
     public Date getEndDate() {
         return endDate;
     }
-
-    public String getComparative1Header() {
+    
+    public Date getDateOnInterval(Date date, int comparativeUnit){
         int myInterval = -1;
         int unit = 1;
         if ("YEAR".equals(getInterval())) {
@@ -114,8 +124,12 @@ public class IncomeStatementForm {
             myInterval = 6;
             unit = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays();
         }
-        Date myStartDate = UtilFunctions.dateAdd(this.startDate, myInterval, -unit);
-        Date myEndDate = UtilFunctions.dateAdd(this.endDate, myInterval, -unit);
+        return UtilFunctions.dateAdd(date, myInterval, unit * comparativeUnit);
+    }
+
+    public String getComparative1Header() {
+        Date myStartDate = getDateOnInterval(this.startDate, -1);
+        Date myEndDate = getDateOnInterval(this.endDate, -1);
         StringBuilder b = new StringBuilder();
         b.append(UtilFunctions.formatDate(myStartDate, "yyyy-MM-dd"));
         b.append(" to ");
@@ -124,19 +138,8 @@ public class IncomeStatementForm {
     }
 
     public String getComparative2Header() {
-        int myInterval = -1;
-        int unit = 1;
-        if ("YEAR".equals(getInterval())) {
-            myInterval = 1;
-        } else if ("MONTH".equals(getInterval())) {
-            myInterval = 2;
-        } else {
-            myInterval = 6;
-            unit = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays();
-        }
-        unit = unit * 2;
-        Date myStartDate = UtilFunctions.dateAdd(this.startDate, myInterval, -unit);
-        Date myEndDate = UtilFunctions.dateAdd(this.endDate, myInterval, -unit);
+        Date myStartDate = getDateOnInterval(this.startDate, -2);
+        Date myEndDate = getDateOnInterval(this.endDate, -2);
         StringBuilder b = new StringBuilder();
         b.append(UtilFunctions.formatDate(myStartDate, "yyyy-MM-dd"));
         b.append(" to ");
@@ -191,7 +194,7 @@ public class IncomeStatementForm {
             if (!latestSubGroup.equalsIgnoreCase(subGroup)) {
                 if (!"".equals(latestSubGroup)) {
                     data.add(new Object[] {
-                             "Total " + latestSubGroup, "", "", "-", subGroupTotal, comparative1SGT, comparative2SGT });
+                             "Total " + latestSubGroup, "", "", -1, subGroupTotal, comparative1SGT, comparative2SGT });
                     if ("Revenue".equalsIgnoreCase(latestSubGroup)) {
                         revenue = subGroupTotal;
                         revenueC1 = comparative1SGT;
@@ -202,7 +205,7 @@ public class IncomeStatementForm {
                         costC1 = comparative1SGT;
                         costC2 = comparative2SGT;
                         data.add(new Object[] {
-                                 "Gross Profit", "", "", "-", revenue.subtract(cost), revenueC1.subtract(costC1),
+                                 "Gross Profit", "", "", -1, revenue.subtract(cost), revenueC1.subtract(costC1),
                                  revenueC2.subtract(costC2),
                         });
                     }
@@ -212,7 +215,7 @@ public class IncomeStatementForm {
                         expensesC1 = comparative1SGT;
                         expensesC2 = comparative2SGT;
                         data.add(new Object[] {
-                                 "Operating Profit", "", "", "-", revenue.subtract(cost).subtract(expenses),
+                                 "Operating Profit", "", "", -1, revenue.subtract(cost).subtract(expenses),
                                  revenueC1.subtract(costC1).subtract(expensesC1),
                                  revenueC2.subtract(costC2).subtract(expensesC2)
                         });
@@ -238,13 +241,32 @@ public class IncomeStatementForm {
             comparative1TypeTotal = comparative2TypeTotal.add(comparative2);
         }
         data.add(new Object[] {
-                 "Total " + latestSubGroup, "", "", "-", subGroupTotal, comparative1SGT, comparative2SGT });
+                 "Total " + latestSubGroup, "", "", -1, subGroupTotal, comparative1SGT, comparative2SGT });
         data.add(emptyRow);
         data.add(new Object[] {
-                 "Net Income", "", "", "-", revenue.subtract(cost).subtract(expenses).subtract(subGroupTotal),
+                 "Net Income", "", "", -1, revenue.subtract(cost).subtract(expenses).subtract(subGroupTotal),
                  revenueC1.subtract(costC1).subtract(expensesC1).subtract(comparative1SGT),
                  revenueC2.subtract(costC2).subtract(expensesC2).subtract(comparative2SGT)
         });
         data.add(emptyRow);
     }
+
+    public void viewAccountSummary(ActionEvent actionEvent) {
+        UIComponent comp = actionEvent.getComponent();
+        Date startDate = (Date) comp.getAttributes().get("startDate");
+        Date endDate = (Date) comp.getAttributes().get("endDate");
+        Integer accountId = (Integer) comp.getAttributes().get("accountId");
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("title", "Account Summary");
+        payload.put("taskFlowId", "/WEB-INF/taskflows/acctg/account-summary.xml#account-summary");
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("accountId", accountId);
+        parameters.put("endDate", endDate);
+        parameters.put("startDate", startDate);
+        parameters.put("KEY", UUID.randomUUID());//always new tab
+        payload.put("parameters", parameters);
+        payload.put("newTab", true);
+        FormUtils.raiseEvent("launchActivity", payload);
+    }
+    
 }

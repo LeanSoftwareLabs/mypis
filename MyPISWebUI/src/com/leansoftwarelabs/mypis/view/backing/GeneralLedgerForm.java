@@ -4,6 +4,7 @@ import com.leansoftwarelabs.adf.query.AttributeDef;
 import com.leansoftwarelabs.adf.query.QueryModelImpl;
 import com.leansoftwarelabs.mypis.domain.GLEntry;
 import com.leansoftwarelabs.mypis.service.GLEntryFacadeBean;
+import com.leansoftwarelabs.mypis.view.util.FormUtils;
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
 import com.leansoftwarelabs.trinidad.model.LazyDataModel;
 

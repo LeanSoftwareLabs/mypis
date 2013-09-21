@@ -1,42 +1,43 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
-    <af:document title="login.jsf" id="d1" initialFocusId="username">
+    <af:document title="p.i.s.  login" id="d1" initialFocusId="username" largeIconSource="/images/pis_icon.png" smallIconSource="/images/pis_icon.png">
         <af:form id="f1" defaultCommand="log">
             <af:panelBorderLayout id="pbl2">
                 <f:facet name="start"/>
                 <f:facet name="bottom"/>
-                <f:facet name="end">
-                    <af:spacer width="50" height="10" id="s4"/>
-                </f:facet>
+                <f:facet name="end"/>
                 <f:facet name="top">
-                    <af:spacer width="10" height="50" id="s3"/>
-                </f:facet>
-                <f:facet name="innerEnd">
-                    <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
-                        <af:panelGroupLayout id="pgl1">
-                            <af:image source="/images/MyPIS_logo.png" id="i1"/>
-                        </af:panelGroupLayout>
-                        <af:spacer width="10" height="30" id="s2"/>
-                        <af:panelFormLayout id="pfl1">
-                            <af:messages id="m1" inline="true"/>
-                            <af:inputText label="User Name" id="username" value="#{loginForm.userName}"
-                                          clientComponent="true"/>
-                            <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"/>
-                            <af:selectBooleanCheckbox label="Remember Me" id="rememberMe"
-                                                      value="#{loginForm.remember}"/>
-                            <f:facet name="footer">
-                                <af:panelBorderLayout id="pbl1">
-                                    <f:facet name="end">
-                                        <af:button text="Login" id="log" partialSubmit="false"
-                                                   action="#{loginForm.login}"/>
-                                    </f:facet>
-                                    <af:spacer width="10" height="10" id="s1"/>
-                                </af:panelBorderLayout>
-                            </f:facet>
-                        </af:panelFormLayout>
+                    <af:panelGroupLayout id="pgl1" inlineStyle="background-color:#400940;" styleClass="AFStretchWidth"
+                                         halign="center" layout="vertical">
+                        <af:image source="/images/pis_logo.png" id="i1" inlineStyle="max-width: 300px"/>
                     </af:panelGroupLayout>
                 </f:facet>
+                <f:facet name="innerEnd"/>
+                <f:facet name="innerTop">
+                    <af:spacer width="10" height="20" id="s2"/>
+                </f:facet>
+                <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                   <af:messages id="m1" inline="true"/>
+                    <af:panelFormLayout id="pfl1" labelAlignment="top">
+                        <af:inputText label="User Name" id="username" value="#{loginForm.userName}"
+                                      clientComponent="true"/>
+                        <af:spacer width="10" height="5" id="s3"/>
+                        <af:inputText label="Password" id="password" secret="true" value="#{loginForm.password}"/>
+                        <!--<af:selectBooleanCheckbox label="Remember Me" id="rememberMe" value="#{loginForm.remember}"/>-->
+                        <f:facet name="footer">
+                            <af:panelBorderLayout id="pbl1">
+                                <f:facet name="end">
+                                    <af:button text="Login" id="log" partialSubmit="false" action="#{loginForm.login}"/>
+                                </f:facet>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <f:facet name="top">
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                </f:facet>
+                            </af:panelBorderLayout>
+                        </f:facet>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
             </af:panelBorderLayout>
         </af:form>
     </af:document>

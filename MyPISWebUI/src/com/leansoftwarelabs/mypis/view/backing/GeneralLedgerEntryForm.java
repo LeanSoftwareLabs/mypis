@@ -12,6 +12,8 @@ import com.leansoftwarelabs.mypis.service.ApplicationConstraintViolationExceptio
 import com.leansoftwarelabs.mypis.service.GLAccountFacadeBean;
 import com.leansoftwarelabs.mypis.service.GLEntryFacadeBean;
 import com.leansoftwarelabs.mypis.service.ServiceException;
+import com.leansoftwarelabs.mypis.view.util.AttributeDefMapProviderUtil;
+import com.leansoftwarelabs.mypis.view.util.FormUtils;
 import com.leansoftwarelabs.trinidad.model.FilterableCollectionModel;
 import com.leansoftwarelabs.trinidad.model.JpqlLazyDataModel;
 import com.leansoftwarelabs.view.utils.ADFUtils;
@@ -51,7 +53,6 @@ public class GeneralLedgerEntryForm {
     private GLEntryFacadeBean service;
     private RichTable entryLineTable;
     private ListOfValuesModel glAccountLOVModel;
-    
     private GLAccountFacadeBean glAccountFacade;
 
     public GLEntryFacadeBean getService() {
@@ -154,14 +155,7 @@ public class GeneralLedgerEntryForm {
 
     public ListOfValuesModel getGlAccountLOVModel() {
         if (glAccountLOVModel == null) {
-            Map<String, AttributeDef> attributes = new LinkedHashMap<String, AttributeDef>();
-            attributes.put("code", new AttributeDef("code", String.class, null, AttributeDef.INPUT_TEXT));
-            attributes.put("name", new AttributeDef("name", String.class, null, AttributeDef.INPUT_TEXT));
-            attributes.put("description", new AttributeDef("description", String.class, null, AttributeDef.INPUT_TEXT));
-            attributes.put("dashboard", new AttributeDef("dashboard", Boolean.class, null, AttributeDef.CHECK_BOX));
-            attributes.put("expenseClaims",
-                           new AttributeDef("expenseClaims", Boolean.class, null, AttributeDef.CHECK_BOX));
-            attributes.put("payments", new AttributeDef("payments", Boolean.class, null, AttributeDef.CHECK_BOX));
+            Map<String, AttributeDef> attributes = AttributeDefMapProviderUtil.getGLAccountAttributeDefMap();
             QueryModelImpl queryModel = new QueryModelImpl("GLAccountQuery", attributes, null, null);
             FilterableCollectionModel collectionModel = new JpqlLazyDataModel("GLAccount", 20) {
                 protected List queryByRange(String jpqlStmt, int first, int pageSize) {
