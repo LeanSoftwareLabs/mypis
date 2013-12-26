@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="dashboard">
+    <template-reference>
+      <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
+      <id>mypis-task-flow-template</id>
+    </template-reference>
+    <managed-bean id="__5">
+      <managed-bean-name>dashboardForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.DashboardForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="dashboard">
+      <page>/fragments/acctg/dashboard.jsff</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>gateway</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>gatePassed</from-outcome>
+        <to-activity-id>dashboard</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -26,7 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "gl_accounts")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GLAccount.findAll", query = "SELECT o FROM GLAccount o")
+    @NamedQuery(name = "GLAccount.findAll", query = "SELECT o FROM GLAccount o"),
+    @NamedQuery(name = "GLAccount.findCashAndBankAccounts", query = "select o from GLAccount o where o.tenantId = :tenantId and o.type.name in('cash', 'bank')")
 })
 public class GLAccount implements MultiTenant, Serializable {
     private static final long serialVersionUID = 1L;

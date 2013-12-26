@@ -1,83 +1,133 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
-  <af:panelStretchLayout id="psl1" topHeight="50px">
-    <f:facet name="bottom"/>
-    <f:facet name="center">
-      <af:panelHeader text="#{viewScope.accountSummaryForm.account.code}:#{viewScope.accountSummaryForm.account.name} Monthly Summary" id="ph1"
-                      visible="#{viewScope.accountSummaryForm.data ne null}" partialTriggers="b1">
-        <f:facet name="context"/>
-        <f:facet name="menuBar"/>
-        <f:facet name="toolbar"/>
-        <f:facet name="legend"/>
-        <f:facet name="info"/>
-        <af:panelGroupLayout id="pgl3" layout="scroll">
-          <dvt:lineGraph id="graph1" subType="LINE_VERT_ABS"
-                         tabularData="#{viewScope.accountSummaryForm.lineGraphData}" dynamicResize="DYNAMIC_SIZE"
-                         styleClass="AFStretchWidth" inlineStyle="height:200px;">
-            <dvt:background>
-              <dvt:specialEffects/>
-            </dvt:background>
-            <dvt:graphPlotArea/>
-            <dvt:seriesSet>
-              <dvt:series/>
-            </dvt:seriesSet>
-            <dvt:o1Axis/>
-            <dvt:y1Axis/>
-            <dvt:legendArea rendered="false"/>
-            <dvt:y1MajorTick tickStyle="GS_NONE"/>
-          </dvt:lineGraph>
-          <af:table value="#{viewScope.accountSummaryForm.data}" var="row" rowBandingInterval="0" id="t1">
-            <af:column sortable="false" headerText="Period" id="c1" width="150"
-                       inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
-              <af:switcher defaultFacet="false" facetName="#{row[0]> 0}" id="s3">
-                <f:facet name="true">
-                  <af:link id="l1" actionListener="#{viewScope.accountSummaryForm.viewAccountDetail}">
-                    <f:attribute name="year" value="#{row[0]}"/>
-                    <f:attribute name="month" value="#{row[1]}"/>
-                    <af:outputText value="#{row[2]}" id="ot1"/>
-                  </af:link>
-                </f:facet>
-                <f:facet name="false">
-                  <af:outputText value="#{row[2]}" id="ot2"/>
-                </f:facet>
-              </af:switcher>
-            </af:column>
-            <af:column sortable="false" headerText="Debit" id="c3" align="right"
-                       inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
-              <af:outputText value="#{row[3]}" id="ot3">
-                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-              </af:outputText>
-            </af:column>
-            <af:column sortable="false" headerText="Credit" id="c4" align="right"
-                       inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
-              <af:outputText value="#{row[4]}" id="ot4">
-                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-              </af:outputText>
-            </af:column>
-          </af:table>
-        </af:panelGroupLayout>
-      </af:panelHeader>
-    </f:facet>
-    <f:facet name="start"/>
-    <f:facet name="end"/>
-    <f:facet name="top">
-      <af:panelGroupLayout id="pgl2" layout="vertical">
-        <af:panelFormLayout id="pfl1" labelAlignment="top" rows="1" maxColumns="8" fieldWidth="50" labelWidth="50">
-          <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1"
-                                value="#{viewScope.accountSummaryForm.account}"
-                                model="#{viewScope.accountSummaryForm.glAccountLOVModel}"
-                                converter="#{viewScope.accountSummaryForm.glAccountLOVModel.converter}"
-                                autoSubmit="true" required="true"/>
-          <af:inputDate label="From" id="id1" value="#{viewScope.accountSummaryForm.startDate}"/>
-          <af:inputDate label="To" id="id2" value="#{viewScope.accountSummaryForm.endDate}"/>
-          <af:panelGroupLayout id="pgl1" layout="vertical">
-            <af:spacer width="10" height="10" id="s2"/>
-            <af:button text="Run Report" id="b1" actionListener="#{viewScope.accountSummaryForm.runReport}"/>
-          </af:panelGroupLayout>
-        </af:panelFormLayout>
-        <af:separator id="s1"/>
-      </af:panelGroupLayout>
-    </f:facet>
-  </af:panelStretchLayout>
+    <af:panelStretchLayout id="psl1" topHeight="50px">
+        <f:facet name="bottom"/>
+        <f:facet name="center">
+            <af:panelHeader text="#{viewScope.accountSummaryForm.account.code}:#{viewScope.accountSummaryForm.account.name} Monthly Summary"
+                            id="ph1" visible="#{viewScope.accountSummaryForm.data ne null}" partialTriggers="b1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                    <!--<dvt:lineGraph id="graph1" subType="LINE_VERT_ABS"
+                                   tabularData="#{viewScope.accountSummaryForm.lineGraphData}"
+                                   dynamicResize="DYNAMIC_SIZE" styleClass="AFStretchWidth" inlineStyle="height:200px;">
+                        <dvt:background>
+                            <dvt:specialEffects/>
+                        </dvt:background>
+                        <dvt:graphPlotArea/>
+                        <dvt:seriesSet>
+                            <dvt:series/>
+                        </dvt:seriesSet>
+                        <dvt:o1Axis/>
+                        <dvt:y1Axis/>
+                        <dvt:legendArea rendered="false"/>
+                        <dvt:y1MajorTick tickStyle="GS_NONE"/>
+                    </dvt:lineGraph>-->
+                    <dvt:comboGraph id="graph1" subType="COMBINATION_VERT_ABS"
+                                    tabularData="#{viewScope.accountSummaryForm.lineGraphData}"
+                                    dynamicResize="DYNAMIC_SIZE" styleClass="AFStretchWidth"
+                                    inlineStyle="height:200px;">
+                        <dvt:background>
+                            <dvt:specialEffects/>
+                        </dvt:background>
+                        <dvt:graphPlotArea/>
+                        <dvt:seriesSet defaultMarkerType="MT_BAR">
+                            <dvt:series index="0" markerType="MT_LINE"/>
+                        </dvt:seriesSet>
+                        <dvt:o1Axis/>
+                        <dvt:y1Axis/>
+                        <dvt:legendArea rendered="false"/>
+                        <dvt:y1MajorTick tickStyle="GS_NONE"/>
+                    </dvt:comboGraph>
+                    <af:table value="#{viewScope.accountSummaryForm.data}" var="row" rowBandingInterval="0" id="t1">
+                        <af:column sortable="false" headerText="Period" id="c1" width="150"
+                                   inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}">
+                            <af:switcher defaultFacet="false" facetName="#{row[0]> 0}" id="s3">
+                                <f:facet name="true">
+                                    <af:link id="l1" actionListener="#{viewScope.accountSummaryForm.viewAccountDetail}">
+                                        <f:attribute name="year" value="#{row[0]}"/>
+                                        <f:attribute name="month" value="#{row[1]}"/>
+                                        <af:outputText value="#{row[2]}" id="ot1"/>
+                                    </af:link>
+                                </f:facet>
+                                <f:facet name="false">
+                                    <af:outputText value="#{row[2]}" id="ot2"/>
+                                </f:facet>
+                            </af:switcher>
+                        </af:column>
+                        <af:column sortable="false" headerText="Debit" id="c3" align="center"
+                                   inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}text-align:right;"
+                                   width="80">
+                            <af:outputText value="#{row[3]}" id="ot3">
+                                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortable="false" headerText="Credit" id="c4" align="center"
+                                   inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}text-align:right;"
+                                   width="80">
+                            <af:outputText value="#{row[4]}" id="ot4">
+                                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column id="c2" headerText="Amount" inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}text-align:right;"
+                                   width="80" align="center">
+                            <af:outputText value="#{row[5]}" id="ot6">
+                                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:forEach items="#{viewScope.accountSummaryForm.extraHeadings}" var="var" varStatus="vs">
+                            <af:column id="cr${vs.index}" headerText="#{var[1]}" align="center" width="70"
+                                       inlineStyle="#{row[0]eq -1?'border-style:solid none solid none; border-color:Green; border-width:thin;':''}text-align:right;">
+                                <af:outputText value="#{row[4+vs.index+1]}" id="ot5">
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:forEach>
+                    </af:table>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+        </f:facet>
+        <f:facet name="start"/>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgl2" layout="vertical">
+                <af:panelFormLayout id="pfl1" labelAlignment="top" rows="1" maxColumns="8" fieldWidth="50"
+                                    labelWidth="50">
+                    <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1"
+                                          value="#{viewScope.accountSummaryForm.account}"
+                                          model="#{viewScope.accountSummaryForm.glAccountLOVModel}"
+                                          converter="#{viewScope.accountSummaryForm.glAccountLOVModel.converter}"
+                                          autoSubmit="true" required="true"/>
+                    <af:inputDate label="From" id="id1" value="#{viewScope.accountSummaryForm.startDate}" columns="10"/>
+                    <af:inputDate label="To" id="id2" value="#{viewScope.accountSummaryForm.endDate}" columns="10"/>
+                    <af:forEach items="#{viewScope.accountSummaryForm.trackingInfoList}" var="var" varStatus="vs">
+                        <af:selectOneChoice label="#{var[0].name}" id="soc${vs.index}" value="${var[1]}"
+                                            autoSubmit="true" required="${var[0].required}">
+                            <f:selectItem itemValue="#{null}" itemLabel="Do not Filter" id="si1"/>
+                            <f:selectItem itemValue="All" itemLabel="All #{var[0].name}" id="si4"/>
+                            <af:forEach items="#{var[0].trackingValues}" var="item">
+                                <f:selectItem itemValue="#{item.id}" itemLabel="#{item.value}" id="si2"/>
+                            </af:forEach>
+                            <f:selectItem itemValue="Undefined" itemLabel="Undefined" id="si3"/>
+                        </af:selectOneChoice>
+                    </af:forEach>
+                    <af:panelGroupLayout id="pgl1" layout="vertical">
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:toolbar id="t2">
+                            <af:group id="g1">
+                                <af:button text="Run Report" id="b1"
+                                           actionListener="#{viewScope.accountSummaryForm.runReport}"/>
+                            </af:group>
+                            <af:button text="Close" id="b2" action="done"/>
+                        </af:toolbar>
+                    </af:panelGroupLayout>
+                </af:panelFormLayout>
+                <af:separator id="s1"/>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
 </ui:composition>

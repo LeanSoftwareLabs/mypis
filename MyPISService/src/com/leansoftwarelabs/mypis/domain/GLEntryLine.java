@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,12 +18,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "gl_trans_detail")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "GLEntryLine.findAll", query = "SELECT g FROM GLEntryLine g")})
+@NamedQueries({ @NamedQuery(name = "GLEntryLine.findAll", query = "SELECT g FROM GLEntryLine g") })
 public class GLEntryLine implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GL_TRANS_DETAIL_ID")
     private Integer id;
     @NotNull
@@ -33,11 +34,16 @@ public class GLEntryLine implements Serializable {
     @JoinColumn(name = "GL_ACCOUNT_ID")
     @ManyToOne
     private GLAccount account;
-    @Column(name = "DEBIT")
-    private BigDecimal debit;
-    @Column(name = "CREDIT")
-    private BigDecimal credit;
-    
+
+    @Column(name = "QTY")
+    private Integer quantity;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
+    @Column(name = "AMOUNT")
+    private BigDecimal amount;
+
+
     @ManyToOne
     @JoinColumn(name = "GL_TRANS_HEADER_ID")
     private GLEntry entry;
@@ -91,19 +97,24 @@ public class GLEntryLine implements Serializable {
 
 
     public void setDebit(BigDecimal debit) {
-        this.debit = debit;
+        if (debit != null) {
+            this.amount = debit;
+        }
     }
 
     public BigDecimal getDebit() {
-        return debit == null? BigDecimal.ZERO: debit;
+        return getAmount().compareTo(BigDecimal.ZERO) > 0 ? getAmount() : null;
     }
+    
 
     public void setCredit(BigDecimal credit) {
-        this.credit = credit;
+        if (credit != null) {
+            this.amount = credit.negate();
+        }
     }
 
     public BigDecimal getCredit() {
-        return credit == null? BigDecimal.ZERO: credit;
+        return getAmount().compareTo(BigDecimal.ZERO) > 0 ? getAmount() : null;
     }
 
     public GLEntry getEntry() {
@@ -121,6 +132,42 @@ public class GLEntryLine implements Serializable {
 
     public SubAccount getSubAccount() {
         return subAccount;
+    }
+
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+
+    public void setAmount(BigDecimal amount) {
+        if (amount == null) {
+            return;
+        }
+        if (amount.compareTo(BigDecimal.ZERO) > 0) {
+            setDebit(amount);
+        } else {
+            setCredit(amount.abs());
+        }
+    }
+
+    public BigDecimal getAmount() {
+        if(amount == null){
+            return BigDecimal.ZERO;
+        }
+        return amount;
     }
 
 
@@ -164,24 +211,32 @@ public class GLEntryLine implements Serializable {
         return tracking5;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (this == object) {
+            return true;
+        }
         if (!(object instanceof GLEntryLine)) {
             return false;
         }
-        GLEntryLine other = (GLEntryLine) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        final GLEntryLine other = (GLEntryLine) object;
+        if (lineNo != other.lineNo) {
+            return false;
+        }
+        if (!(entry == null ? other.entry == null : entry.equals(other.entry))) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 37;
+        int result = 1;
+        result = PRIME * result + lineNo;
+        result = PRIME * result + ((entry == null) ? 0 : entry.hashCode());
+        return result;
     }
 
     @Override
@@ -189,6 +244,9 @@ public class GLEntryLine implements Serializable {
         return "count.domain.GLEntryLine[ id=" + id + " ]";
     }
 
-    
-    
+    public boolean isEmptyRow() {
+        return account == null && subAccount == null && amount == null;
+    }
+
+
 }

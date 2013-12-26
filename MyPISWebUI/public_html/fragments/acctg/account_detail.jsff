@@ -54,7 +54,12 @@
           <af:inputDate label="To" id="id2" value="#{viewScope.accountDetailForm.endDate}"/>
           <af:panelGroupLayout id="pgl1" layout="vertical">
             <af:spacer width="10" height="10" id="s2"/>
-            <af:button text="Run Report" id="b1" actionListener="#{viewScope.accountDetailForm.runReport}"/>
+            <af:toolbar id="t2">
+              <af:group id="g1">
+                <af:button text="Run Report" id="b1" actionListener="#{viewScope.accountDetailForm.runReport}"/>
+              </af:group>
+              <af:button text="Close" id="b2" action="done"/>
+            </af:toolbar>
           </af:panelGroupLayout>
         </af:panelFormLayout>
         <af:separator id="s1"/>

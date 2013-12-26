@@ -92,13 +92,14 @@ public class GLAccountListForm {
         GLAccount glAccount = (GLAccount) getGlAccountTable().getSelectedRowData();
         Integer accountId = glAccount.getAccountId();
         String title = "GL Account: " + glAccount.getCode();
-        launchActivity(accountId, title);
+        launchActivity(accountId, title, false);
     }
 
 
-    private void launchActivity(Integer accountId, String title) {
+    private void launchActivity(Integer accountId, String title, boolean editMode) {
         ADFUtils.getPageFlowScope().put("accountId", accountId);
         ADFUtils.getPageFlowScope().put("dialogTitle", title);
+        ADFUtils.getPageFlowScope().put("editMode", editMode);
         RichRegion region = getRegion();
         if (region != null) {
             getRegion().refresh(FacesContext.getCurrentInstance());
@@ -120,7 +121,7 @@ public class GLAccountListForm {
 
 
     public void create(ActionEvent ev) {
-        launchActivity(-1, "Create New GL Account");
+        launchActivity(-1, "Create New GL Account", true);
     }
 
 

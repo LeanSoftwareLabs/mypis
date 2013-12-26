@@ -3,6 +3,9 @@
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
         xmlns:security="http://leansoftwarelabs.com/ext/security">
     <af:document title="p.i.s." id="d1" largeIconSource="/images/pis_icon.png" smallIconSource="/images/pis_icon.png">
+      <af:clientListener method="initialize" type="load" />
+        <af:serverListener type="launchDashboard"
+                           method="#{viewScope.launcher.launchDashboard}" />
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:pageTemplate viewId="/templates/dynamicShell/shell.jsf" id="pt1" value="#{bindings.ptb1}">
@@ -41,8 +44,9 @@
                         <af:link text="Tracking" id="l19" actionListener="#{viewScope.launcher.launchTrackingCategories}"/>
                         <af:link text="Manage Contacts" id="l17"
                                  actionListener="#{viewScope.launcher.launchContactList}"/>
-                        <af:link text="Check Vouchers" id="l11"/>
-                        <af:link text="Enter New Journal Voucher" id="l13"/>
+                        <af:link text="Cash Voucher" id="l11" actionListener="#{viewScope.launcher.launchCashVoucher}"/>
+                        <af:link text="Journal Voucher" id="l13"
+                                 actionListener="#{viewScope.launcher.launchJournalVoucher}"/>
                         <af:link text="Fixed Assets" id="l12"/>
                         <af:link text="General Ledger" id="l8"
                                  actionListener="#{viewScope.launcher.launchGeneralLedger}"/>
@@ -67,7 +71,7 @@
                                                selected="#{viewScope.tabContext.selectedGlobalTabId eq 'registers'}"
                                                immediate="true"
                                                partialSubmit="true"/>
-                        <af:commandNavigationItem text="Accounting" id="acctg" actionListener="#{viewScope.tabContext.globalTabSelected}"
+                        <af:commandNavigationItem text="Accounting" id="acctg" actionListener="#{viewScope.launcher.accounting}"
                                                selected="#{viewScope.tabContext.selectedGlobalTabId eq 'acctg'}"
                                                immediate="true"
                                                partialSubmit="true"/>
@@ -117,5 +121,13 @@
                 <f:attribute name="tabContext" value="#{viewScope.tabContext}"/>
             </af:pageTemplate>
         </af:form>
+        <f:facet name="metaContainer">
+          <af:resource type="javascript">
+            function initialize(event) {
+                var source = event.getSource();
+                AdfCustomEvent.queue(source,"launchDashboard",{},false);
+            }
+          </af:resource>
+        </f:facet>
     </af:document>
 </f:view>

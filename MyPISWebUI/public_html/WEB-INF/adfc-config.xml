@@ -38,6 +38,10 @@
                 <key>glEntryFacade</key>
                 <value>#{glEntryFacade}</value>
             </map-entry>
+            <map-entry>
+                <key>trackingCategoryFacade</key>
+                <value>#{trackingCategoryFacade}</value>
+            </map-entry>
         </map-entries>
     </managed-bean>
     <managed-bean id="__7">
@@ -56,6 +60,15 @@
         <managed-property id="__10">
             <property-name>jndiNamespace</property-name>
             <value>java:comp/env/ejb/local/GLEntryFacade</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean id="__11">
+        <managed-bean-name>trackingCategoryFacade</managed-bean-name>
+        <managed-bean-class>com.leansoftwarelabs.ext.ServiceProvider</managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <managed-property id="__12">
+            <property-name>jndiNamespace</property-name>
+            <value>java:comp/env/ejb/local/TrackingCategoryFacade</value>
         </managed-property>
     </managed-bean>
 </adfc-config>

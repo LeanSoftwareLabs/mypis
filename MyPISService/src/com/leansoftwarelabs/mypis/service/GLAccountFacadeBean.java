@@ -37,4 +37,10 @@ public class GLAccountFacadeBean extends AbstractMultiTenantFacade<GLAccount>{
         Query query = em.createNamedQuery("GLAccountType.findAll");
         return query.getResultList();
     }
+    
+    public List<GLAccount> findCashAndBankAccounts(){
+        Query query = em.createNamedQuery("GLAccount.findCashAndBankAccounts");
+        query.setParameter("tenantId", getCurrentUser().getTenant().getTenantId());
+        return query.getResultList();
+    }
 }

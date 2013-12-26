@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <af:panelHeader text="#{viewScope.cashVoucherForm.cashVoucher.status} #{viewScope.cashVoucherForm.cashVoucher.transType}##{viewScope.cashVoucherForm.cashVoucher.serial}" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t2">
+        <af:button text="Edit" id="b1" rendered="#{not pageFlowScope.editMode and viewScope.cashVoucherForm.cashVoucher.status ne 'Posted'}"
+                   action="#{viewScope.cashVoucherForm.edit}"/>
+        <af:button text="Cancel" id="b2" rendered="#{pageFlowScope.editMode}"
+                   action="#{viewScope.cashVoucherForm.cancel}" immediate="true">
+          <af:resetActionListener/>
+        </af:button>
+        <af:button text="Post" id="b7" actionListener="#{viewScope.cashVoucherForm.postCashVoucher}" rendered="#{viewScope.cashVoucherForm.cashVoucher.status ne 'Posted'}"/>
+        <af:button text="Save as Draft" id="b3" rendered="#{pageFlowScope.editMode}"
+                    action="#{viewScope.cashVoucherForm.save}"/>
+        <af:button text="Close" id="b4" action="done" rendered="#{not pageFlowScope.editMode}"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+      <af:panelFormLayout id="pfl1" rows="2" maxColumns="2" fieldWidth="100" labelWidth="100">
+        <af:selectOneChoice label="Bank/Cash" value="#{viewScope.cashVoucherForm.cashVoucher.bankCashAccount}"
+                            id="soc1" required="true" disabled="#{not pageFlowScope.editMode}">
+          <f:selectItems value="#{viewScope.cashVoucherForm.bankCashItems}" id="si3"/>
+        </af:selectOneChoice>
+        <af:inputListOfValues label="Subsidiary Account" popupTitle="Search and Result Dialog" id="ilov2"
+                              value="#{viewScope.cashVoucherForm.cashVoucher.subAccount}"
+                              model="#{viewScope.subAccountListForm.subAccountLOVModel}"
+                              converter="#{viewScope.subAccountListForm.subAccountLOVModel.converter}"
+                              disabled="#{not pageFlowScope.editMode}" autoSubmit="true" required="true"/>
+        <af:inputText label="Reference" id="it1" value="#{viewScope.cashVoucherForm.cashVoucher.myReference}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputDate label="Trans Date" id="id1" value="#{viewScope.cashVoucherForm.cashVoucher.transDate}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+        <af:inputDate label="Reporting Date" id="id2" value="#{viewScope.cashVoucherForm.cashVoucher.reportingDate}"
+                      disabled="#{not pageFlowScope.editMode}"/>
+      </af:panelFormLayout>
+      <af:panelFormLayout id="pfl2" maxColumns="2" rows="1" fieldWidth="100" labelWidth="100">
+        <f:facet name="footer"/>
+        <af:inputText label="Description" id="it3" value="#{viewScope.cashVoucherForm.cashVoucher.description}"
+                      rows="1" disabled="#{not pageFlowScope.editMode}" columns="150"/>
+      </af:panelFormLayout>
+      <af:panelCollection id="pc1" featuresOff="viewMenu statusBar detach" styleClass="AFStretchWidth">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t3">
+            <af:button text="Add New Line" id="b5" actionListener="#{viewScope.cashVoucherForm.addLine}"
+                       rendered="#{pageFlowScope.editMode}"/>
+            <af:button text="Remove" id="b6" actionListener="#{viewScope.cashVoucherForm.removeLine}"
+                       rendered="#{pageFlowScope.editMode}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="statusbar"/>
+        <af:table value="#{viewScope.cashVoucherForm.cashVoucher.lineDetails}" var="row" rowBandingInterval="0" id="t1"
+                  binding="#{viewScope.cashVoucherForm.richTable}" rowSelection="single"
+                  partialTriggers="::b5 ::b6" varStatus="vs">
+          <af:column sortable="false" headerText="Line" align="end" id="c1" width="30" displayIndex="1">
+            <af:outputText value="#{row.setLineNo(vs.index + 1)}#{row.lineNo}" id="ot1"/>
+          </af:column>
+          <af:column sortable="false" headerText="Description" align="start" id="c3" width="200">
+            <af:inputText label="Description" value="#{row.description}" id="it4"
+                          readOnly="#{not pageFlowScope.editMode}"/>
+          </af:column>
+          <af:column sortable="false" headerText="GL Code" align="start" id="c2" width="150">
+            <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1" value="#{row.account}"
+                                  model="#{viewScope.cashVoucherForm.glAccountLOVModel}"
+                                  converter="#{viewScope.cashVoucherForm.glAccountLOVModel.converter}"
+                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+          </af:column>
+          <!--<af:column sortable="false" headerText="Sub Account" align="start" id="c7" width="150">
+            <af:inputListOfValues label="Subsidiary Account" popupTitle="Search and Result Dialog" id="ilov2" value="#{row.subAccount}"
+                                  model="#{viewScope.subAccountListForm.subAccountLOVModel}"
+                                  converter="#{viewScope.subAccountListForm.subAccountLOVModel.converter}"
+                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+          </af:column>-->
+          <af:column id="c5" headerText="Qty" width="35" align="right">
+            <af:inputText label="Qty" id="it2" value="#{row.quantity}" readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+          </af:column>
+          <af:column id="c6" headerText="Price" width="50" align="right">
+            <af:inputText label="Price" id="it5" value="#{row.price}" readOnly="#{not pageFlowScope.editMode}" autoSubmit="true">
+              <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+            </af:inputText>
+            <f:facet name="footer">
+              <af:outputText value="Total" id="ot3"/>
+            </f:facet>
+          </af:column>
+          <af:column sortable="false" headerText="Amount" align="right" id="c4" width="80">
+            <af:inputText label="Debit" value="#{row.debit}" id="it14" readOnly="#{not pageFlowScope.editMode}"
+                          autoSubmit="true">
+              <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+            </af:inputText>
+            <f:facet name="footer">
+              <af:outputText value="#{viewScope.cashVoucherForm.cashVoucher.total}" id="ot2" partialTriggers="it14">
+                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+              </af:outputText>
+            </f:facet>
+          </af:column>
+          <!--<af:column sortable="false" headerText="Credit" align="right" id="c6">
+            <af:inputText label="Credit" value="#{row.credit}" id="it5" readOnly="#{not pageFlowScope.editMode}">
+              <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+            </af:inputText>
+          </af:column>-->
+          <af:forEach items="#{viewScope.trackingCategoryForm.trackingCategoryList}" var="var" varStatus="vs">
+            <af:column id="cr${vs.index}" headerText="#{var.name}" >
+              <af:selectOneChoice label="#{var.name}" id="soc${vs.index}" value="${row[var.trackingField]}" readOnly="#{not pageFlowScope.editMode}"
+                                  autoSubmit="true" required="${var.required}">
+                 <f:selectItem itemValue="#{null}" itemLabel="" id="si1"/>
+                 <af:forEach items="#{var.trackingValues}" var="item">
+                   <f:selectItem itemValue="#{item.id}" itemLabel="#{item.value}" id="si2"/>
+                 </af:forEach>
+              </af:selectOneChoice>
+            </af:column>
+          </af:forEach>
+        </af:table>
+      </af:panelCollection>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</ui:composition>

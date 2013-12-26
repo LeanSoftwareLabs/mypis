@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+        <af:panelDashboard id="pd1" columns="3" rowHeight="250px">
+            <af:iterator id="i1" value="#{viewScope.dashboardForm.bankCashData}" var="row" varStatus="vs">
+                <af:panelBox text="#{row[0].name}" id="pb1">
+                    <dvt:lineGraph id="graph1" subType="LINE_VERT_ABS" tabularData="#{row[1]}"
+                                   inlineStyle="height:200px;" dynamicResize="DYNAMIC_SIZE" styleClass="AFStretchWidth">
+                        <dvt:background>
+                            <dvt:specialEffects/>
+                        </dvt:background>
+                        <dvt:graphPlotArea/>
+                        <dvt:seriesSet defaultMarkerShape="MS_CIRCLE" defaultMarkerColor="#ff0000"
+                                       markerDisplayed="true">
+                            <dvt:series/>
+                        </dvt:seriesSet>
+                        <dvt:o1Axis/>
+                        <dvt:y1Axis/>
+                        <dvt:legendArea rendered="false"/>
+                        <dvt:y1MajorTick/>
+                    </dvt:lineGraph>
+                <f:facet name="toolbar">
+                    <af:button text="button 1" id="b1"/>
+                </f:facet>
+            </af:panelBox>
+            </af:iterator>
+        </af:panelDashboard>
+</ui:composition>

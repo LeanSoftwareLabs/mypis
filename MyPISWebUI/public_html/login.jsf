@@ -10,7 +10,7 @@
                 <f:facet name="top">
                     <af:panelGroupLayout id="pgl1" inlineStyle="background-color:#400940;" styleClass="AFStretchWidth"
                                          halign="center" layout="vertical">
-                        <af:image source="/images/pis_logo.png" id="i1" inlineStyle="max-width: 300px"/>
+                        <af:image source="/images/pis_logo.png" id="i1" inlineStyle="max-height: 75px"/>
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="innerEnd"/>

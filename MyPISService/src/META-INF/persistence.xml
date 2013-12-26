@@ -15,8 +15,7 @@
         <class>com.leansoftwarelabs.mypis.domain.TrackingCategory</class>
         <class>com.leansoftwarelabs.mypis.domain.TrackingValue</class>
         <class>com.leansoftwarelabs.mypis.domain.GLAccountType</class>
-        <class>com.leansoftwarelabs.mypis.domain.Layout</class>
-        <class>com.leansoftwarelabs.mypis.domain.LayoutDetail</class>
+
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="java:/app/jdbc/jdbc/MyPISConnDS"/>
@@ -64,6 +63,12 @@
         <class>com.leansoftwarelabs.realm.domain.User</class>
         <class>com.leansoftwarelabs.realm.domain.RolePermission</class>
         <class>com.leansoftwarelabs.mypis.domain.BaptismalRegister</class>
+         <class>com.leansoftwarelabs.mypis.domain.GLAccount</class>
+        <class>com.leansoftwarelabs.mypis.domain.Sponsor</class>
+        <class>com.leansoftwarelabs.mypis.domain.SubAccount</class>
+        <class>com.leansoftwarelabs.mypis.domain.TrackingCategory</class>
+        <class>com.leansoftwarelabs.mypis.domain.TrackingValue</class>
+        <class>com.leansoftwarelabs.mypis.domain.GLAccountType</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mypis"/>

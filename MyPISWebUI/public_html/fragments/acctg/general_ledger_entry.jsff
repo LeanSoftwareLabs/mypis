@@ -55,7 +55,8 @@
             <af:inputListOfValues label="Account" popupTitle="Search and Result Dialog" id="ilov1" value="#{row.account}"
                                   model="#{viewScope.generalLedgerEntryForm.glAccountLOVModel}"
                                   converter="#{viewScope.generalLedgerEntryForm.glAccountLOVModel.converter}"
-                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"
+                                  required="#{not row.emptyRow}"/>
           </af:column>
           <af:column sortable="false" headerText="Description" align="start" id="c3" width="200">
             <af:inputText label="Description" value="#{row.description}" id="it4" readOnly="#{not pageFlowScope.editMode}"/>
@@ -64,7 +65,8 @@
             <af:inputListOfValues label="Subsidiary Account" popupTitle="Search and Result Dialog" id="ilov2" value="#{row.subAccount}"
                                   model="#{viewScope.subAccountListForm.subAccountLOVModel}"
                                   converter="#{viewScope.subAccountListForm.subAccountLOVModel.converter}"
-                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"/>
+                                  readOnly="#{not pageFlowScope.editMode}" autoSubmit="true"
+                                  required="#{not row.emptyRow}"/>
           </af:column>
           <af:column sortable="false" headerText="Debit" align="right" id="c4">
             <af:inputText label="Debit" value="#{row.debit}" id="it14" readOnly="#{not pageFlowScope.editMode}">

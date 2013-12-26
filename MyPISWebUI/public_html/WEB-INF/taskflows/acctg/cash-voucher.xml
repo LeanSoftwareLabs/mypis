@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="account-summary">
+  <task-flow-definition id="cash-voucher">
     <template-reference>
       <document>/WEB-INF/taskflows/mypis-task-flow-template.xml</document>
       <id>mypis-task-flow-template</id>
     </template-reference>
     <input-parameter-definition id="__4">
-      <name>accountId</name>
-      <value>#{pageFlowScope.accountId}</value>
-    </input-parameter-definition>
-    <input-parameter-definition id="__5">
-      <name>startDate</name>
-      <value>#{pageFlowScope.startDate}</value>
-    </input-parameter-definition>
-    <input-parameter-definition id="__6">
-      <name>endDate</name>
-      <value>#{pageFlowScope.endDate}</value>
+      <name>glEntryId</name>
+      <value>#{pageFlowScope.glEntryId}</value>
     </input-parameter-definition>
     <managed-bean id="__3">
-      <managed-bean-name>accountSummaryForm</managed-bean-name>
-      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.AccountSummaryForm</managed-bean-class>
+      <managed-bean-name>cashVoucherForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.CashVoucherForm</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
-    <managed-bean id="__7">
+    <managed-bean id="__5">
       <managed-bean-name>trackingCategoryForm</managed-bean-name>
       <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.TrackingCategoryForm</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
-    <view id="account_summary">
-      <page>/fragments/acctg/account_summary.jsff</page>
+    <managed-bean id="__6">
+      <managed-bean-name>subAccountListForm</managed-bean-name>
+      <managed-bean-class>com.leansoftwarelabs.mypis.view.backing.SubAccountListForm</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="cash_voucher">
+      <page>/fragments/acctg/cash_voucher.jsff</page>
     </view>
     <control-flow-rule id="__1">
-      <from-activity-id>gateway</from-activity-id>
+      <from-activity-id>*</from-activity-id>
       <control-flow-case id="__2">
         <from-outcome>gatePassed</from-outcome>
-        <to-activity-id>account_summary</to-activity-id>
+        <to-activity-id>cash_voucher</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

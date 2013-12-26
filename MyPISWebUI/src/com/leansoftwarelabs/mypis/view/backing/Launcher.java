@@ -10,6 +10,8 @@ import java.util.Random;
 
 import javax.faces.event.ActionEvent;
 
+import oracle.adf.view.rich.render.ClientEvent;
+
 import org.apache.shiro.SecurityUtils;
 
 public class Launcher {
@@ -86,5 +88,29 @@ public class Launcher {
     
     public void launchIncomeStatement(ActionEvent actionEvent) {
         launch("Income Statement", "/WEB-INF/taskflows/acctg/income-statement.xml#income-statement", null,false);
+    }
+    
+    public void launchJournalVoucher(ActionEvent actionEvent) {
+        Map<String, Object> parameterMap = new HashMap<String,Object>();
+        parameterMap.put("glEntryId", -1);
+        parameterMap.put("editMode", true);
+        launch("Journal Voucher", "/WEB-INF/taskflows/acctg/general-ledger-entry.xml#general-ledger-entry", parameterMap,true);
+    }
+    
+    public void launchCashVoucher(ActionEvent actionEvent) {
+        Map<String, Object> parameterMap = new HashMap<String,Object>();
+        parameterMap.put("glEntryId", -1);
+        parameterMap.put("editMode", true);
+        launch("Cash Voucher", "/WEB-INF/taskflows/acctg/cash-voucher.xml#cash-voucher", parameterMap,true);
+    }
+    
+    public void launchDashboard(ClientEvent ev) {
+//        if("acctg".equals(TabContext.getCurrentInstance().getSelectedGlobalTabId()))
+//        launch("Dashboard", "/WEB-INF/taskflows/acctg/dashboard.xml#dashboard", null, true);
+    }
+    
+    public void accounting(ActionEvent ev) {
+        TabContext.getCurrentInstance().globalTabSelected(ev);
+        launch("Dashboard", "/WEB-INF/taskflows/acctg/dashboard.xml#dashboard", null, true);
     }
 }

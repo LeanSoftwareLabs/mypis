@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "GLAccountType.findAll", query = "select o from GLAccountType o order by o.index") })
+@NamedQueries({ @NamedQuery(name = "GLAccountType.findAll", query = "select o from GLAccountType o order by o.index"), })
 @Table(name = "\"gl_account_types\"")
 public class GLAccountType implements Serializable {
     private static final long serialVersionUID = -6425519984202959968L;
@@ -23,6 +23,8 @@ public class GLAccountType implements Serializable {
     private String name;
     @Column(name = "type_sub_group", nullable = false)
     private String subGroup;
+    @Column(name = "normal_balance", nullable = false)
+    private String normalBalance;
 
     public GLAccountType() {
     }
@@ -64,6 +66,15 @@ public class GLAccountType implements Serializable {
 
     public void setSubGroup(String subGroup) {
         this.subGroup = subGroup;
+    }
+
+
+    public void setNormalBalance(String normalBalance) {
+        this.normalBalance = normalBalance;
+    }
+
+    public String getNormalBalance() {
+        return normalBalance;
     }
 
 

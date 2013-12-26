@@ -8,6 +8,7 @@
               activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
       <parameters>
         <parameter id="accountId" value="#{pageFlowScope.accountId}"/>
+        <parameter id="editMode" value="#{pageFlowScope.editMode}"/>
       </parameters>
     </taskFlow>
   </executables>

@@ -16,14 +16,14 @@ public class ServiceProvider<T> {
 
     public T getService() {
         if (service == null) {
-            if(jndiNamespace == null){
+            if (jndiNamespace == null) {
                 throw new RuntimeException("jndiNamespace not initialized");
             }
             try {
                 final Context context = new InitialContext();
-                service = (T)context.lookup(jndiNamespace);
+                service = (T) context.lookup(jndiNamespace);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw new RuntimeException(ex);
             }
         }
         return service;

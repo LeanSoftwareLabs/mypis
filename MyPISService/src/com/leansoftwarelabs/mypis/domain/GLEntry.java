@@ -93,6 +93,11 @@ public class GLEntry implements MultiTenant, Serializable {
         getLineList().remove(entryLine);
         entryLine.setEntry(null);   
     }
+    
+    public void removeGLEntryLine(int index){
+        GLEntryLine entryLine = getLineList().remove(index);
+        entryLine.setEntry(null);   
+    }
     public Integer getId() {
         return id;
     }
@@ -224,24 +229,13 @@ public class GLEntry implements MultiTenant, Serializable {
         this.tenantId = tenantId;
     }
     
-    public BigDecimal getComputedDebit(){
-        BigDecimal result = BigDecimal.ZERO;
-        for (GLEntryLine line : getLineList()){
-            result = result.add(line.getDebit());
-        }
-        return result;
-    }
-            
-    public BigDecimal getComputedCredit(){
-        BigDecimal result = BigDecimal.ZERO;
-        for (GLEntryLine line : getLineList()){
-            result = result.add(line.getCredit());
-        }
-        return result;
-    }        
     
     @AssertTrue(message = "Accounting Lines not Balance")
     public boolean isGLEntryLinesBalance(){
-        return getComputedDebit().compareTo(getComputedCredit()) == 0;
+        BigDecimal result = BigDecimal.ZERO;
+        for(GLEntryLine lineDetail: getLineList()){
+            result = result.add(lineDetail.getAmount());
+        }
+        return result.compareTo(BigDecimal.ZERO)== 0;
     }
 }

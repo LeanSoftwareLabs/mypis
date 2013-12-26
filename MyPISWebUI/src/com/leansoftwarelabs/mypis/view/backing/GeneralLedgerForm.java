@@ -48,22 +48,26 @@ public class GeneralLedgerForm {
         if (queryModel == null) {
             Map<String, AttributeDef> attributes = new LinkedHashMap<String, AttributeDef>();
             attributes.put("myReference", new AttributeDef("myReference", String.class, null, AttributeDef.INPUT_TEXT));
-            attributes.put("yourReference", new AttributeDef("yourReference", String.class, null, AttributeDef.INPUT_TEXT));
+            attributes.put("yourReference",
+                           new AttributeDef("yourReference", String.class, null, AttributeDef.INPUT_TEXT));
             attributes.put("description", new AttributeDef("description", String.class, null, AttributeDef.INPUT_TEXT));
             attributes.put("transDate", new AttributeDef("transDate", Date.class, null, AttributeDef.INPUT_DATE));
-            attributes.put("reportingDate", new AttributeDef("reportingDate", Date.class, null, AttributeDef.INPUT_DATE));
-            attributes.put("totalDebit", new AttributeDef("totalDebit", BigDecimal.class, null, AttributeDef.INPUT_TEXT));
-            attributes.put("totalCredit", new AttributeDef("totalCredit", BigDecimal.class, null, AttributeDef.INPUT_TEXT));
+            attributes.put("reportingDate",
+                           new AttributeDef("reportingDate", Date.class, null, AttributeDef.INPUT_DATE));
+            attributes.put("totalDebit",
+                           new AttributeDef("totalDebit", BigDecimal.class, null, AttributeDef.INPUT_TEXT));
+            attributes.put("totalCredit",
+                           new AttributeDef("totalCredit", BigDecimal.class, null, AttributeDef.INPUT_TEXT));
 
             queryModel = new QueryModelImpl("GLEntryQuery", attributes, null, null);
         }
         return queryModel;
     }
-    
+
     public void tableFilter(QueryEvent event) {
         this.lazyDataModel.setFilterCriteria(event.getDescriptor().getConjunctionCriterion());
     }
-    
+
     public LazyDataModel getLazyDataModel() {
         if (lazyDataModel == null) {
             lazyDataModel = new JpqlLazyDataModel("GLEntry", 20) {
@@ -82,18 +86,22 @@ public class GeneralLedgerForm {
     public RichTable getRichTable() {
         return richTable;
     }
-    
+
     public void viewDetails(ActionEvent ev) {
         GLEntry entry = (GLEntry) getRichTable().getSelectedRowData();
         Integer key = entry.getId();
         String title = entry.getMyReference();
-        launchActivity(key, title, false);
+        if ("PAY".equals(entry.getTransType())) {
+            launchActivity("/WEB-INF/taskflows/acctg/cash-voucher.xml#cash-voucher", key, title, false);
+        } else {
+            launchActivity("/WEB-INF/taskflows/acctg/general-ledger-entry.xml#general-ledger-entry", key, title, false);
+        }
     }
 
-    private void launchActivity(Integer key, String title, boolean editMode) {
+    private void launchActivity(String taskFlowId, Integer key, String title, boolean editMode) {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("title", title);
-        payload.put("taskFlowId", "/WEB-INF/taskflows/acctg/general-ledger-entry.xml#general-ledger-entry");
+        payload.put("taskFlowId", taskFlowId);
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("glEntryId", key);
         parameters.put("KEY", key);
@@ -104,7 +112,8 @@ public class GeneralLedgerForm {
     }
 
     public void create(ActionEvent ev) {
-        launchActivity(-1, "New GL Entry", true);
+        launchActivity("/WEB-INF/taskflows/acctg/general-ledger-entry.xml#general-ledger-entry", -1, "New GL Entry",
+                       true);
     }
 
 
